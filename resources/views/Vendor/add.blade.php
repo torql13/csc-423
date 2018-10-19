@@ -8,14 +8,17 @@
             <td> Vendor Code: </td>
             <td> <input type="text" name="vendorCode" id="vendorCode" /> </td>
         </tr>
+        <br/>
         <tr>
             <td> Vendor Name: </td>
             <td> <input type="text" name="vendorName" id="vendorName" /> </td>
         </tr>
+        <br/>
         <tr>
             <td> Address: </td>
             <td> <input type="text" name="vendorAddress" id="vendorAddress" /> </td>
         </tr>
+        <br/>
         <tr>
             <td> City: </td>
             <td> <input type="text" name="vendorCity" id="vendorCity" /> </td>
@@ -24,10 +27,12 @@
             <td> ZIP: </td>
             <td> <input type="text" name="vendorZip" id="vendorZip" size="5" /> </td>
         </tr>
+        <br/>
         <tr>
             <td> Phone: </td>
             <td> <input type="text" name="vendorPhone" id="vendorPhone" size="10"/> </td>
         </tr>
+        <br/>
         <tr>
             <td> <input type="submit" value="Submit" /> </td>
             <td> <input type="reset" value="Reset" /> </td>
