@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/add', 'VendorsController@addVendor')
+{
+    return view('Vendor.add');
+}
