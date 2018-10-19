@@ -8,6 +8,6 @@ class VendorsController extends Controller
 {
     public function addVendor()
     {
-       
+        return view('Vendor.add');
     }
 }

@@ -15,7 +15,4 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/add')
-{
-    return view('Vendor.add');
-}
+Route::get('/add', 'VendorsController@addVendor');
