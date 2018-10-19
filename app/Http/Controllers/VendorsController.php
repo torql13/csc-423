@@ -8,7 +8,6 @@ class VendorsController extends Controller
 {
     public function addVendor()
     {
-        $vendor = User::first();
-        return $vendor;
+       
     }
 }
