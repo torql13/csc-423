@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="addVendor">
-    <form action="" method="post" id="addVendorForm">
+    <form action="{{ action('VendorsController@insertNewVendor') }}" method="post" id="addVendorForm">
     <table align="center">
         <tr>
             <td> Vendor Code: </td>
