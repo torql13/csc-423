@@ -13,7 +13,7 @@ class RetailStore extends Migration
      */
     public function up()
     {
-        Schema::create('retailStore', function (Blueprint $table) {
+        Schema::create('RetailStore', function (Blueprint $table) {
             $table->increments('StoreId');
             $table->string('StoreCode')->unique();
             $table->string('StoreName');
@@ -33,6 +33,6 @@ class RetailStore extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('retailStore');
+        Schema::dropIfExists('RetailStore');
     }
 }
