@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/add', 'VendorsController@addVendorPage');
+Route::get('/addVendor', 'VendorsController@addVendorPage');
 
-Route::post('/add', array('as' => 'insert', 'uses' => 'VendorsController@insertNewVendor'));
+Route::post('/addVendor', array('as' => 'insert', 'uses' => 'VendorsController@insertNewVendor'));

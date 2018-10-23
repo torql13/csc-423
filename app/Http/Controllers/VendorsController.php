@@ -8,7 +8,7 @@ class VendorsController extends Controller
 {
     public function addVendorPage()
     {
-        return view('Vendor.add');
+        return view('Vendor.addVendor');
     }
 
     public function insertNewVendor()
