@@ -21,7 +21,7 @@
                         </tr>
                         @foreach ($vendorList as $vendor)
                         <tr>
-                            <td><a href="/vendor/viewVendor">{{$vendor->VendorCode}}</a></td>
+                            <td><a href="/vendor/viewVendor/{{$vendor->VendorId}}">{{$vendor->VendorCode}}</a></td>
                             <td>{{$vendor->VendorName}}</td>
                             <td>{{$vendor->ContactPerson}}</td>
                             <td><a href="/vendor/editVendor">Edit</a></td>

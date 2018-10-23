@@ -22,6 +22,11 @@ class VendorsController extends Controller
 
     }
 
+    public function viewVendor($id)
+    {
+        echo "test " . $id;
+    }
+
     public function addVendorPage()
     {
         return view('Vendor.addVendor');
