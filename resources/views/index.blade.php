@@ -14,7 +14,7 @@
           <h2 class="mt-3">Vendor</h2>
           <p>
             <ul>
-                <li></li>
+                <li><a href='/addVendor'>Add Vendor</a></li>
                 <li></li>
                 <li></li>
             </ul>

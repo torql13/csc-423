@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Vendor;
+use DB;
 
 class VendorsController extends Controller
 {
@@ -21,11 +22,12 @@ class VendorsController extends Controller
         $phone = $_POST['vendorPhone'];
         $contactPerson = $_POST['contactPerson'];
         $password = $_POST['password']; 
+        $vendorCode = $_POST['vendorCode'];
 
-        $my_SQL = DB::table('Vendors')->insert([
-            ['VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State', $state,
-             'Zip' => $zip, 'Phone' => $phone, 'ContactPerson' => $contactPerson, 'Password' => $password]
+        DB::table('vendors')->insert([
+            ['VendorCode'=> $vendorCode, 'VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
+            'Zip' => $zip, 'Phone' => $phone, 'ContactPerson' => $contactPerson, 'Password' => $password]
         ]);
-        return;
+        return view('index');
     }
 }

@@ -13,10 +13,9 @@ class Vendor extends Migration
      */
     public function up()
     {
-        Schema::create('Vendor', function (Blueprint $table) {
+        Schema::create('Vendors', function (Blueprint $table) {
             $table->increments('VendorId');
             $table->string('VendorCode')->unique();
-            $table->string('StoreName');
             $table->string('VendorName');
             $table->string('Address');
             $table->string('City');

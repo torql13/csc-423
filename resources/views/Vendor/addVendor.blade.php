@@ -5,6 +5,10 @@
     <form action="{{ action('VendorsController@insertNewVendor') }}" method="post" id="addVendorForm">
     <table align="center">
         <tr>
+            <td>Vendor Code: </td>
+            <td> <input type="text" name="vendorCode" id="vendorCode" /> </td>
+        </tr>
+        <tr>
             <td> Vendor Name: </td>
             <td> <input type="text" name="vendorName" id="vendorName" /> </td>
         </tr>
