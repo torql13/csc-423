@@ -13,6 +13,15 @@ class VendorsController extends Controller
 
         return view('index', compact('shortenVendorList'));
     }
+
+    public function allVendors()
+    {
+        $vendorList = DB::table('vendors')->simplePaginate(10);
+
+        return view('/Vendor/allVendors', compact('vendorList'));
+
+    }
+
     public function addVendorPage()
     {
         return view('Vendor.addVendor');
