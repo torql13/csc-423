@@ -7,6 +7,12 @@ use DB;
 
 class VendorsController extends Controller
 {
+    public function index()
+    {
+        $shortenVendorList = DB::table('vendors')->simplePaginate(5);
+
+        return view('index', compact('shortenVendorList'));
+    }
     public function addVendorPage()
     {
         return view('Vendor.addVendor');
@@ -28,6 +34,6 @@ class VendorsController extends Controller
             ['VendorCode'=> $vendorCode, 'VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
             'Zip' => $zip, 'Phone' => $phone, 'ContactPerson' => $contactPerson, 'Password' => $password]
         ]);
-        return view('index');
+        return redirect()->action('VendorsController@index');
     }
 }
