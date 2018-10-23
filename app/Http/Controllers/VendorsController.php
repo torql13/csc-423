@@ -9,14 +9,14 @@ class VendorsController extends Controller
 {
     public function index()
     {
-        $shortenVendorList = DB::table('vendors')->simplePaginate(5);
+        $shortenVendorList = DB::table('vendor')->simplePaginate(5);
 
         return view('index', compact('shortenVendorList'));
     }
 
     public function allVendors()
     {
-        $vendorList = DB::table('vendors')->simplePaginate(10);
+        $vendorList = DB::table('vendor')->simplePaginate(10);
 
         return view('/Vendor/allVendors', compact('vendorList'));
 
@@ -44,9 +44,9 @@ class VendorsController extends Controller
         $password = $_POST['password']; 
         $vendorCode = $_POST['vendorCode'];
 
-        DB::table('vendors')->insert([
+        DB::table('vendor')->insert([
             ['VendorCode'=> $vendorCode, 'VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
-            'Zip' => $zip, 'Phone' => $phone, 'ContactPerson' => $contactPerson, 'Password' => $password]
+            'Zip' => $zip, 'Phone' => $phone, 'ContactPersonName' => $contactPerson, 'Password' => $password]
         ]);
         return redirect()->action('VendorsController@index');
     }
