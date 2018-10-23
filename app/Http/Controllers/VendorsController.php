@@ -19,10 +19,12 @@ class VendorsController extends Controller
         $state = $_POST['vendorState'];
         $zip = $_POST['vendorZip'];
         $phone = $_POST['vendorPhone'];
+        $contactPerson = $_POST['contactPerson'];
+        $password = $_POST['password'];
 
         $my_SQL = DB::table('Vendors')->insert([
-            ['Name' => $name, 'Address' => $addr, 'City' => $city, 'State', $state,
-             'Zipcode' => $zip, 'Phone' => $phone]
+            ['VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State', $state,
+             'Zip' => $zip, 'Phone' => $phone, 'ContactPerson' => $contactPerson, 'Password' => $password]
         ]);
         return;
     }
