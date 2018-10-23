@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RetailStore extends Migration
+class CreateVendorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class RetailStore extends Migration
      */
     public function up()
     {
-        Schema::create('RetailStore', function (Blueprint $table) {
-            $table->increments('StoreId');
-            $table->string('StoreCode')->unique();
-            $table->string('StoreName');
+        Schema::create('vendor', function (Blueprint $table) {
+            $table->increments('VendorId');
+            $table->string('VendorCode')->unique();
+            $table->string('VendorName');
             $table->string('Address');
             $table->string('City');
             $table->string('State');
             $table->string('ZIP');
             $table->string('Phone');
-            $table->string('ManagerName');
+            $table->string('ContactPersonName');
+            $table->string('Password');
         });
     }
 
@@ -33,6 +34,6 @@ class RetailStore extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RetailStore');
+        Schema::dropIfExists('vendor');
     }
 }
