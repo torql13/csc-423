@@ -28,7 +28,7 @@
               </tr>
               @foreach ($shortenVendorList as $vendor)
                 <tr>
-                  <td><a href="{!! route('viewVendor', ['id'=>$vendor->VendorId]) !!}">{{$vendor->VendorCode}}</a></td>
+                  <td><a href="/vendor/view/{{$vendor->VendorId}}">{{$vendor->VendorCode}}</a></td>
                   <td>{{$vendor->VendorName}}</td>
                   <td>{{$vendor->ContactPersonName}}</td>
                   <td><a href="/vendor/editVendor">Edit</a></td>

@@ -22,14 +22,18 @@ class VendorsController extends Controller
 
     }
 
-    public function viewVendor($id)
+    public function deleteVendor($id)
     {
-        echo "test " . $id;
+        DB::table('vendor')->where('VendorId', $id)->delete();
+
+        return redirect()->action('VendorsController@allVendors');
     }
 
-    public function addVendorPage()
+    public function viewVendor($id)
     {
-        return view('Vendor.addVendor');
+        $indVendor = DB::table('vendor')->where('VendorId', $id)->first();
+
+        return view('/Vendor/viewVendor', compact('indVendor'));
     }
 
     public function insertNewVendor()
