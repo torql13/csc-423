@@ -60,7 +60,7 @@
                   <td><a href="/storeLocations/addLocation/{{'id'->StoreId}}">{{$storeLocation->StoreCode}}</a></td>
                   <td>{{$storeLocation->StoreName}}</td>
                   <td>{{$storeLocation->ManagerName}}</td>
-                  <td><a href="/storeLocations/editLocation/{{'id'->StoreId}}">Edit</a></td>
+                  <td><a href="/storeLocations/editLocation">Edit</a></td>
                   <td><a href="/storeLocations/deleteLocation/{{'id'->StoreId}}">Delete</a></td>
                 </tr>
               @endforeach
