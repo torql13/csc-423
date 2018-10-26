@@ -25,7 +25,7 @@
                             <td>{{$vendor->VendorName}}</td>
                             <td>{{$vendor->ContactPersonName}}</td>
                             <td><a href="/vendor/editVendor/{{$vendor->VendorId}}">Edit</a></td>
-                            <td><a href="/vendor/deleteVendor/{{$vendor->VendorId}}">Delete</a></td>
+                            <td><a href="/vendor/deleteVendor/{{$vendor->VendorId}}" onclick="confirmDelete()">Delete</a></td>
                         </tr>
                         @endforeach
                     </table>
@@ -34,4 +34,10 @@
             </div>
         </div>
     </div>
+    <script language="JavaScript" type="text/javascript">
+        function confirmDelete()
+        {
+            return confirm('Are you sure?');
+        }
+    </script>
 @stop
