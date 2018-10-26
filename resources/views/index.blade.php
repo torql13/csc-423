@@ -57,11 +57,11 @@
               </tr>
               @foreach ($shortenLocationList as $storeLocation)
                 <tr>
-                  <td><a href="StoreLocation/viewLocation/{{ 'id'->StoreId }}">{{$storeLocation->StoreCode}}</a></td>
+                  <td><a href="StoreLocation/view/{{ $storeLocation->StoreId }}">{{$storeLocation->StoreCode}}</a></td>
                   <td>{{$storeLocation->StoreName}}</td>
                   <td>{{$storeLocation->ManagerName}}</td>
-                  <td><a href="/storeLocations/editLocation">Edit</a></td>
-                  <td><a href="/storeLocations/deleteLocation/{{'id'->StoreId}}">Delete</a></td>
+                  <td><a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}">Edit</a></td>
+                  <td><a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}">Delete</a></td>
                 </tr>
               @endforeach
             </table>
