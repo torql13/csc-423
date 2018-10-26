@@ -21,11 +21,11 @@
                         </tr>
                         @foreach ($vendorList as $vendor)
                         <tr>
-                            <td><a href="/vendor/viewVendor/{{$vendor->VendorId}}">{{$vendor->VendorCode}}</a></td>
+                            <td><a href="/vendor/view/{{$vendor->VendorId}}">{{$vendor->VendorCode}}</a></td>
                             <td>{{$vendor->VendorName}}</td>
                             <td>{{$vendor->ContactPersonName}}</td>
-                            <td><a href="/vendor/editVendor">Edit</a></td>
-                            <td><a href="/vendor/deleteVendor">Delete</a></td>
+                            <td><a href="/vendor/editVendor/{{$vendor->VendorId}}">Edit</a></td>
+                            <td><a href="/vendor/deleteVendor/{{$vendor->VendorId}}">Delete</a></td>
                         </tr>
                         @endforeach
                     </table>

@@ -14,59 +14,19 @@
           <h2 class="mt-3">Vendor</h2>
           <p>
             <ul>
-                <li><a href='/vendor/addVendor'>Add Vendor</a></li>
+              <li><a href='/vendor/addVendor'>Add Vendor</a></li>
+              <li><a href="/vendor">Go To Vender Index Page</a></li>
             </ul>
           </p>
-          <p>
-            <table class="table table-bordered table-hover">
-              <tr>
-                <th>Vendor Code</th>
-                <th>Vendor Name</th>
-                <th>Contact</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-              @foreach ($shortenVendorList as $vendor)
-                <tr>
-                  <td><a href="{!! route('viewVendor', ['id'=>$vendor->VendorId]) !!}">{{$vendor->VendorCode}}</a></td>
-                  <td>{{$vendor->VendorName}}</td>
-                  <td>{{$vendor->ContactPersonName}}</td>
-                  <td><a href="/vendor/editVendor">Edit</a></td>
-                  <td><a href="{!! route('deleteVendor', ['id'=>$vendor->VendorId]) !!}">Delete</a></td>
-                </tr>
-              @endforeach
-            </table>
-          </p>
-          <p><a href="/vendor/allVendors">Click here to see all Vendors...</a></p>
         </div>
         <div class="col-md-12">
           <h2 class="mt-3">Stores</h2>
           <p>
             <ul>
                 <li><a href='/storeLocations/addLocation'>Add Store Location</a></li>
+                <li><a href="/storeLocations/">Go To Store Index</a></li>
             </ul>
           </p>
-          <p>
-            <table class="table table-bordered table-hover">
-              <tr>
-                <th>Store Code</th>
-                <th>Store Name</th>
-                <th>Manager</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-              @foreach ($shortenLocationList as $storeLocation)
-                <tr>
-                  <td><a href="StoreLocation/view/{{ $storeLocation->StoreId }}">{{$storeLocation->StoreCode}}</a></td>
-                  <td>{{$storeLocation->StoreName}}</td>
-                  <td>{{$storeLocation->ManagerName}}</td>
-                  <td><a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}">Edit</a></td>
-                  <td><a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}">Delete</a></td>
-                </tr>
-              @endforeach
-            </table>
-          </p>
-          <p><a href="/storeLocations/">Click here to see all Store Locations...</a></p>
         </div>
       </div>
       <div class="row">
