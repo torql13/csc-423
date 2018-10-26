@@ -37,6 +37,6 @@ Route::get('/storeLocations/editLocation', function(){
     return view('StoreLocation.editLocation');
 });
 
-Route::post('/storeLocation/editLocation', array('uses' => 'StoresController@updateLocation', 'as' => 'editLocation'));
+Route::post('/storeLocation/updateLocation', array('uses' => 'StoresController@updateLocation', 'as' => 'updateLocation'));
 
 Route::get('/storeLocations/deleteLocation/{id}', ['uses' => 'StoresController@deleteLocation', 'as' => 'deleteLocation']);
