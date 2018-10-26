@@ -10,8 +10,9 @@ class VendorsController extends Controller
     public function index()
     {
         $shortenVendorList = DB::table('vendor')->simplePaginate(5);
+        $shortenLocationList = DB::table('retail_store')->simplePaginate(5);
 
-        return view('index', compact('shortenVendorList'));
+        return view('index', compact('shortenVendorList', 'shortenLocationList'));
     }
 
     public function allVendors()
@@ -48,6 +49,12 @@ class VendorsController extends Controller
             ['VendorCode'=> $vendorCode, 'VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
             'Zip' => $zip, 'Phone' => $phone, 'ContactPersonName' => $contactPerson, 'Password' => $password]
         ]);
+        return redirect()->action('VendorsController@index');
+    }
+
+    public function deleteVendor($id)
+    {
+        DB::table('vendor')->where('VendorId', $id)->delete();
         return redirect()->action('VendorsController@index');
     }
 }
