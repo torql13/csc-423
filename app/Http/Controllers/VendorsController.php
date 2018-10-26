@@ -13,7 +13,6 @@ class VendorsController extends Controller
         $vendorList = DB::table('vendor')->simplePaginate(10);
 
         return view('/Vendor/index', compact('vendorList'));
-
     }
 
     public function deleteVendor($id)
