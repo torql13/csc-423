@@ -23,20 +23,12 @@ class StoresController extends Controller
         return view('StoreLocation.viewLocation', compact('storeLocation'));
     }
 
-    public function insertNewLocation()
+    public function insertNewLocation(Request $request)
     {
-        $name = $_POST['storeName'];
-        $addr = $_POST['storeAddress'];
-        $city = $_POST['storeCity'];
-        $state = $_POST['storeState'];
-        $zip = $_POST['storeZip'];
-        $phone = $_POST['storePhone'];
-        $manager = $_POST['manager'];
-        $storeCode = $_POST['storeCode'];
+        $store = $request->all();
 
-        DB::table('retail_store')->insert([
-            ['StoreCode'=> $storeCode, 'StoreName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
-            'Zip' => $zip, 'Phone' => $phone, 'ManagerName' => $manager]
+        DB::table('retail_store')->insert(['StoreCode' => $store['storeCode'], 'StoreName' => $store['storeName'], 'Address' => $store['storeAddress'], 'City' => $store['storeCity'],
+        'State' => $store['storeState'], 'ZIP' => $store['storeZip'], 'Phone' => $store['storePhone'], 'ManagerName' => $store['manager']
         ]);
         return redirect()->action('StoresController@storeIndex');
     }
