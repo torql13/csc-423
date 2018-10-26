@@ -18,7 +18,12 @@ Route::post('/vendor/addVendor', array('as' => 'insert', 'uses' => 'VendorsContr
 
 Route::get('/vendor/editVendor/{id}', ['uses' => 'VendorsController@editVendor', 'as' => 'editVendor']);
 
+Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsController@updateVendor'));
+
+Route::get('/item', 'InventoryItemsController@index');
+
 Route::get('/item/index', 'InventoryItemsController@index');
 
-Route::get('/item/addItem', 'InventoryItemsController@addInventoryItem');
-Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsController@updateVendor'));
+Route::get('/item/addItem', 'InventoryItemsController@getVendors');
+
+Route::post('/item/addItem', array('as' => 'insert', 'uses' => 'InventoryItemsController@insertNewItem'));
