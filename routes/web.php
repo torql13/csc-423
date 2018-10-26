@@ -33,7 +33,7 @@ Route::get('/storeLocations/addLocation', function(){
 
 Route::post('/storeLocation/addLocation', array('uses' => 'StoresController@insertNewLocation', 'as' => 'addLocation'));
 
-Route::get('/storeLocations/editLocation', function(){
+Route::get('/storeLocations/editLocation/{id}', function(){
     return view('StoreLocation.editLocation');
 });
 
