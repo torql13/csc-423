@@ -66,7 +66,7 @@
               @endforeach
             </table>
           </p>
-          <p><a href="/storeLocations/allLocations">Click here to see all Store Locations...</a></p>
+          <p><a href="/storeLocations/">Click here to see all Store Locations...</a></p>
         </div>
       </div>
       <div class="row">

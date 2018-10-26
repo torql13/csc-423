@@ -25,7 +25,7 @@ Route::get('/vendor/deleteVendor/{id}', ['uses' => 'VendorsController@deleteVend
 
 Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 
-Route::get('/storeLocations/allLocations', 'StoresController@allLocations');
+Route::get('/storeLocations/', 'StoresController@storeIndex');
 
 Route::get('/storeLocations/addLocation', function(){
     return view('StoreLocation.addLocation');

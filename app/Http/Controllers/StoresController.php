@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 class StoresController extends Controller
 {  
 
-    public function allLocations()
+    public function storeIndex()
     {
         $locationList = DB::table('retail_store')->simplePaginate(10);
 
-        return view('StoreLocation.allLocations', compact('locationList'));
+        return view('StoreLocation.storeIndex', compact('locationList'));
 
     }
 
@@ -30,20 +30,20 @@ class StoresController extends Controller
         $state = $_POST['storeState'];
         $zip = $_POST['storeZip'];
         $phone = $_POST['storePhone'];
-        $manager = $_POST['storeManager'];
+        $manager = $_POST['manager'];
         $storeCode = $_POST['storeCode'];
 
         DB::table('retail_store')->insert([
             ['StoreCode'=> $storeCode, 'StoreName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
             'Zip' => $zip, 'Phone' => $phone, 'ManagerName' => $manager]
         ]);
-        return redirect()->action('StoresController@allLocations');
+        return redirect()->action('StoresController@storeIndex');
     }
 
     public function deleteLocation($id)
     {
         DB::table('retail_store')->where('StoreId', $id)->delete();
-        return redirect()->action('StoresController@allLocations');
+        return redirect()->action('StoresController@storeIndex');
     }
 
     public function editLocation($id)
@@ -62,6 +62,6 @@ class StoresController extends Controller
         'State' => $store['storeState'], 'ZIP' => $store['storeZip'], 'Phone' => $store['storePhone'], 'ManagerName' => $store['manager']
         ]);
         
-        return redirect()->action('StoresController@allLocations');
+        return redirect()->action('StoresController@storeIndex');
     }
 }
