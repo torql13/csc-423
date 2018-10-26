@@ -10,6 +10,13 @@
         
                 <legend>Edit Vendor</legend>
 
+                <div class="form-row" style="visibility:hidden;position:absolute">
+                    <div class="form-group col-md-4">
+                        <label>Vendor Id</label>
+                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $indVendor->VendorId }}">
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Vendor Code</label>

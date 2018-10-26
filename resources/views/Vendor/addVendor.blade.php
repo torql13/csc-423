@@ -1,51 +1,84 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="addVendor">
-    <form action="{{ action('VendorsController@insertNewVendor') }}" method="post" id="addVendorForm">
-    <table align="center">
-        <tr>
-            <td>Vendor Code: </td>
-            <td> <input type="text" name="vendorCode" id="vendorCode" /> </td>
-        </tr>
-        <tr>
-            <td> Vendor Name: </td>
-            <td> <input type="text" name="vendorName" id="vendorName" /> </td>
-        </tr>
-        <br/>
-        <tr>
-            <td> Address: </td>
-            <td> <input type="text" name="vendorAddress" id="vendorAddress" /> </td>
-        </tr>
-        <br/>
-        <tr>
-            <td> City: </td>
-            <td> <input type="text" name="vendorCity" id="vendorCity" /> </td>
-            <td> State: </td>
-            <td> <input type="text" name="vendorState" id="vendorState" size="2" /> </td>
-            <td> ZIP: </td>
-            <td> <input type="text" name="vendorZip" id="vendorZip" size="5" /> </td>
-        </tr>
-        <br/>
-        <tr>
-            <td> Phone: </td>
-            <td> <input type="text" name="vendorPhone" id="vendorPhone" size="10"/> </td>
-        </tr>
-        <br/>
-        <tr>
-            <td> Contact: </td>
-            <td> <input type="text" name="contactPerson" id="contactPerson" /> </td>
-        </tr>
-        <br/>
-        <tr>
-            <td> Password: </td>
-            <td> <input type="text" name="password" id="password" /> </td>
-        </tr>
-        <br/>
-        <tr>
-            <td> <input type="submit" value="Submit" /> </td>
-            <td> <input type="reset" value="Reset" /> </td>
-        </tr>
-    </table>
-    </form>
+<div class="container mt-4">
+    <div class="well">
+    
+        <form action="{{ action('VendorsController@insertNewVendor') }}" method="post" id="addVendorForm">
+    
+            <fieldset>
+        
+                <legend>Add Vendor</legend>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Vendor Code</label>
+                        <input type="text" class="form-control" name="vendorCode" id="vendorCode">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Vendor Name</label>
+                        <input type="text" class="form-control" name="vendorName" id="vendorName"/>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Address</label>
+                        <input type="text" class="form-control" name="vendorAddress" id="vendorAddress">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>City</label>
+                        <input type="text" class="form-control" name="vendorCity" id="vendorCity">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>State</label>
+                        <input type="text" class="form-control" name="vendorState" id="vendorState">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Zip</label>
+                        <input type="text" class="form-control" name="vendorZip" id="vendorZip">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Phone</label>
+                        <input type="text" class="form-control" name="vendorPhone" id="vendorPhone">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Contact</label>
+                        <input type="text" class="form-control" name="contactPerson" id="contactPerson">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="password" id="password">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <input class="btn btn-primary" type="submit" value="Submit" />
+                    </div>
+                    <div class="form-group col-md-1">
+                        <input class="btn btn-secondary" type="reset" value="Reset" />
+                    </div>
+                </div>
+        
+            </fieldset>
+        </form>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/vendor/">Return to Vendor Index</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 @stop

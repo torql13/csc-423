@@ -34,11 +34,7 @@ class VendorsController extends Controller
     {
         $vendor = $request->all();
 
-        $vendorId = DB::table('vendor')->where('VendorCode', $vendor['vendorCode'])->pluck('VendorId');
-
-        echo $vendorId;
-
-        DB::table('vendor')->where('VendorId', $vendorId)
+        DB::table('vendor')->where('VendorId', $vendor['vendorId'])
             ->update(['VendorName' => $vendor['vendorName'], 'Address' => $vendor['vendorAddress'], 'City' => $vendor['vendorCity'],
             'State' => $vendor['vendorState'], 'Zip' => $vendor['vendorZip'], 'Phone' => $vendor['vendorPhone'], 
             'ContactPersonName' => $vendor['contactPerson'], 'Password' => $vendor['password']]);
@@ -53,22 +49,17 @@ class VendorsController extends Controller
         return view('/Vendor/viewVendor', compact('indVendor'));
     }
 
-    public function insertNewVendor()
+    public function insertNewVendor(Request $request)
     {
-        $name = $_POST['vendorName'];
-        $addr = $_POST['vendorAddress'];
-        $city = $_POST['vendorCity'];
-        $state = $_POST['vendorState'];
-        $zip = $_POST['vendorZip'];
-        $phone = $_POST['vendorPhone'];
-        $contactPerson = $_POST['contactPerson'];
-        $password = $_POST['password']; 
-        $vendorCode = $_POST['vendorCode'];
 
-        DB::table('vendor')->insert([
-            ['VendorCode'=> $vendorCode, 'VendorName' => $name, 'Address' => $addr, 'City' => $city, 'State' => $state,
-            'Zip' => $zip, 'Phone' => $phone, 'ContactPersonName' => $contactPerson, 'Password' => $password]
-        ]);
+        $newVendor = $request->all();
+
+        DB::table('vendor')->insert(
+            ['VendorCode' => $newVendor['vendorCode'], 'VendorName' => $newVendor['vendorName'], 'Address' => $newVendor['vendorAddress'], 'City' => $newVendor['vendorCity'],
+        'State' => $newVendor['vendorState'], 'Zip' => $newVendor['vendorZip'], 'Phone' => $newVendor['vendorPhone'], 
+        'ContactPersonName' => $newVendor['contactPerson'], 'Password' => $newVendor['password']]
+        );
+
         return redirect()->action('VendorsController@index');
     }
 }
