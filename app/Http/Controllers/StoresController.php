@@ -19,7 +19,8 @@ class StoresController extends Controller
 
     public function viewLocation($id)
     {
-        echo "test " . $id;
+        $storeLocation = DB::table('retail_store')->where('StoreId', $id)->first();       
+        return view('StoreLocation.viewLocation', compact('storeLocation'));
     }
 
     public function insertNewLocation()
@@ -48,8 +49,7 @@ class StoresController extends Controller
 
     public function editLocation($id)
     {
-        $storeLocation = DB::table('retail_store')->where('StoreId', $id)->first();
-                
+        $storeLocation = DB::table('retail_store')->where('StoreId', $id)->first();       
         return view('StoreLocation.editLocation', compact('storeLocation'));
     }
 

@@ -21,7 +21,7 @@
                         </tr>
                         @foreach ($locationList as $storeLocation)
                         <tr>
-                            <td><a href="/storeLocations/viewLocation/{{$storeLocation->StoreId}}">{{$storeLocation->StoreCode}}</a></td>
+                            <td><a href="/storeLocations/view/{{$storeLocation->StoreId}}">{{$storeLocation->StoreCode}}</a></td>
                             <td>{{$storeLocation->StoreName}}</td>
                             <td>{{$storeLocation->ManagerName}}</td>
                             <td><a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}">Edit</a></td>
