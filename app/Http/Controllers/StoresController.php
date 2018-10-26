@@ -48,14 +48,13 @@ class StoresController extends Controller
 
     public function editLocation($id)
     {
-        //$location = retail_store::find($id);
+        $location = DB::table('retail_store')->find($id)-first();
                 
-        return view('StoreLocation.editLocation');
+        return view('StoreLocation.editLocation', compact('location'));
     }
 
-    public function updateLocation($id)
+    public function updateLocation(Request $request, $id);
     {
-        DB::table('retail_store')->where('StoreId', $id)->update();
-        return redirect()->action('StoresController@allLocations');
+        
     }
 }

@@ -6,7 +6,7 @@
     <table align="center">
         <tr>
             <td>Store Code: </td>
-            <td> <input type="text" name="storeCode" id="storeCode" value="{{ old('storeCode') }}" /> </td>
+            <td> <input type="text" name="storeCode" id="storeCode" value="{{ location->StoreCode }}" /> </td>
         </tr>
         <tr>
             <td> Store Name: </td>
@@ -38,7 +38,7 @@
         </tr>
         <br/>
         <tr>
-            <td> <input type="submit" value="Submit" onclick="{{$request->flash()}}"/> </td>
+            <td> <input type="submit" value="Submit" /> </td>
             <td> <input type="reset" value="Reset" /> </td>
         </tr>
     </table>
