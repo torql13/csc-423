@@ -20,3 +20,7 @@ Route::get('/vendor/view/{id}', ['uses' => 'VendorsController@viewVendor', 'as' 
 Route::get('/vendor/addVendor', 'VendorsController@addVendorPage');
 
 Route::post('/vendor/addVendor', array('as' => 'insert', 'uses' => 'VendorsController@insertNewVendor'));
+
+Route::get('/item/index', 'InventoryItemsController@index');
+
+Route::get('/item/addItem', 'InventoryItemsController@addInventoryItem');
