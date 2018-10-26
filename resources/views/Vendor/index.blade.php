@@ -24,7 +24,7 @@
                             <td><a href="/vendor/view/{{$vendor->VendorId}}">{{$vendor->VendorCode}}</a></td>
                             <td>{{$vendor->VendorName}}</td>
                             <td>{{$vendor->ContactPersonName}}</td>
-                            <td><a href="/vendor/editVendor">Edit</a></td>
+                            <td><a href="/vendor/editVendor/{{$vendor->VendorId}}">Edit</a></td>
                             <td><a href="/vendor/deleteVendor/{{$vendor->VendorId}}">Delete</a></td>
                         </tr>
                         @endforeach

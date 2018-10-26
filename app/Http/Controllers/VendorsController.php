@@ -3,22 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Vendor;
+use Illuminate\Http\Request;
 use DB;
 
 class VendorsController extends Controller
 {
     public function index()
     {
-        $shortenVendorList = DB::table('vendor')->simplePaginate(5);
-
-        return view('index', compact('shortenVendorList'));
-    }
-
-    public function allVendors()
-    {
         $vendorList = DB::table('vendor')->simplePaginate(10);
 
-        return view('/Vendor/allVendors', compact('vendorList'));
+        return view('/Vendor/index', compact('vendorList'));
 
     }
 
@@ -26,7 +20,30 @@ class VendorsController extends Controller
     {
         DB::table('vendor')->where('VendorId', $id)->delete();
 
-        return redirect()->action('VendorsController@allVendors');
+        return redirect()->action('VendorsController@index');
+    }
+
+    public function editVendor($id)
+    {
+        $indVendor = DB::table('vendor')->where('VendorId', $id)->first();
+        
+        return view('/Vendor/editVendor', compact('indVendor'));
+    }
+
+    public function updateVendor(Request $request)
+    {
+        $vendor = $request->all();
+
+        $vendorId = DB::table('vendor')->where('VendorCode', $vendor['vendorCode'])->pluck('VendorId');
+
+        echo $vendorId;
+
+        DB::table('vendor')->where('VendorId', $vendorId)
+            ->update(['VendorName' => $vendor['vendorName'], 'Address' => $vendor['vendorAddress'], 'City' => $vendor['vendorCity'],
+            'State' => $vendor['vendorState'], 'Zip' => $vendor['vendorZip'], 'Phone' => $vendor['vendorPhone'], 
+            'ContactPersonName' => $vendor['contactPerson'], 'Password' => $vendor['password']]);
+        
+        return redirect()->action('VendorsController@index');
     }
 
     public function viewVendor($id)
