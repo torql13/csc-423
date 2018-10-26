@@ -10,10 +10,9 @@ class VendorsController extends Controller
 {
     public function index()
     {
-        $shortenVendorList = DB::table('vendor')->simplePaginate(5);
-        $shortenLocationList = DB::table('retail_store')->simplePaginate(5);
+        $vendorList = DB::table('vendor')->simplePaginate(10);
 
-        return view('index', compact('shortenVendorList', 'shortenLocationList'));
+        return view('/Vendor/index', compact('vendorList'));
     }
 
     public function deleteVendor($id)
