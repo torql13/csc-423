@@ -4,7 +4,7 @@
 <div class="container mt-4">
     <div class="well">
     
-        <form action="{{ action('VendorsController@updateVendor') }}" method="post" id="addVendorForm">
+        <form action="{{ action('VendorsController@updateVendor') }}" method="post" id="updateVendorForm">
     
             <fieldset>
         
