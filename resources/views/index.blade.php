@@ -20,6 +20,15 @@
           </p>
         </div>
         <div class="col-md-12">
+          <h2 class="mt-3">Inventory Items</h2>
+          <p>
+            <ul>
+              <li><a href='/item/addItem'>Add Inventory Item</a></li>
+              <li><a href="/item">Go To Inventory Items Index Page</a></li>
+            </ul>
+          </p>
+        </div>
+        <div class="col-md-12">
           <h2 class="mt-3">Store Functions</h2>
           <p>
             <ul>
