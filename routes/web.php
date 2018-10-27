@@ -27,3 +27,9 @@ Route::get('/item/index', 'InventoryItemsController@index');
 Route::get('/item/addItem', 'InventoryItemsController@getVendors');
 
 Route::post('/item/addItem', array('as' => 'insert', 'uses' => 'InventoryItemsController@insertNewItem'));
+
+Route::get('item/editItem/{id}', 'InventoryItemsController@editItem');
+
+Route::post('/item/updateItem', array('as' => 'update', 'uses' => 'InventoryItemsController@updateItem'));
+
+Route::get('/item/deleteItem/{id}', ['uses' => 'InventoryItemsController@deleteItem', 'as' => 'deleteItem']);
