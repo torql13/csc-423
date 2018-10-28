@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="mt-3">All Locations</h2>
+                <h2 class="mt-3">All Stores</h2>
                 <p>
                     <ul>
                         <li><a href='/storeLocations/addLocation'>Add Location</a></li>

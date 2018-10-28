@@ -78,4 +78,11 @@ class InventoryItemsController extends Controller
 
         return redirect()->action('InventoryItemsController@index');
     }
+
+    public function viewItem($id)
+    {
+        $indItem = DB::table('inventory_item')->where('ItemId', $id)->first();
+
+        return view('/InventoryItem/viewItem', compact('indItem'));
+    }
 }

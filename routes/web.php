@@ -34,6 +34,8 @@ Route::post('/item/updateItem', array('as' => 'update', 'uses' => 'InventoryItem
 
 Route::get('/item/deleteItem/{id}', ['uses' => 'InventoryItemsController@deleteItem', 'as' => 'deleteItem']);
 
+Route::get('/item/viewItem/{id}', ['uses' => 'InventoryItemsController@viewItem', 'as' => 'viewItem']);
+
 Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');

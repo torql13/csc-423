@@ -1,28 +1,23 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h3 class="mt-12"> Information for {{ $storeLocation->StoreName}} </h3>
-            <table name="addressTable">
-                <tr>
-                    <th> Store Code: </th> <td> {{ $storeLocation->StoreCode }} </td>
-                </tr>
-                <tr>
-                    <th> Address: </th> <td> {{ $storeLocation->Address}} </td> 
-                </tr>
-                <tr>
-                    <td></td> <td> {{ $storeLocation->City }}, {{ $storeLocation->State}} {{$storeLocation->ZIP }} </td>
-                </tr>
-                <tr> 
-                    <th> Phone: </th> <td> {{ $storeLocation->Phone }} </td>
-                </tr>
-                <tr>
-                    <th> Manager: </th> <td> {{ $storeLocation->ManagerName}} </td>
-                </tr>
-            </table>
+    <div class="container mt-4">
+        <div class="well">
+            <div class="row">
+                <h3 class="mt-3">Information for {{ $storeLocation->StoreName}}</h3>
+            </div>
+            <div class="row">
+                <p><strong>Store Code: </strong>{{ $storeLocation->StoreCode }}</p>
+            </div>
+            <div class="row">
+                <p><strong>Address: </strong>{{ $storeLocation->Address}}, {{ $storeLocation->State }}, {{ $storeLocation->ZIP }}</p>
+            </div>
+            <div class="row">
+                <p><strong>Phone: </strong>{{ $storeLocation->Phone }}</p>
+            </div>
+            <div class="row">
+                <p><strong>Manager: </strong>{{ $storeLocation->ManagerName}}</p>
+            </div>
         </div>
     </div>
-</div>
 @stop

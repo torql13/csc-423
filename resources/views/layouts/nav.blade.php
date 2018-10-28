@@ -13,10 +13,10 @@
             <a class="nav-link" href="/vendor">Vendor</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/item">Inventory Items</a>
+            <a class="nav-link" href="/item">Items</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/storeLocations">Store Locations</a>
+            <a class="nav-link" href="/storeLocations">Stores</a>
           </li>
         </ul>
       </div>
