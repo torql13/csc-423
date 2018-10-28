@@ -29,12 +29,11 @@
           </p>
         </div>
         <div class="col-md-12">
-          <h2 class="mt-3">Store Functions</h2>
+          <h2 class="mt-3">Stores</h2>
           <p>
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><a href='/storeLocations/addLocation'>Add Store Location</a></li>
+                <li><a href="/storeLocations/">Go To Store Index</a></li>
             </ul>
           </p>
         </div>
