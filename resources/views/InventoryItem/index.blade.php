@@ -25,7 +25,7 @@
                             <td>{{$item->Size}}</td>
                             <td>{{$item->ItemRetail}}</td>
                             <td><a href="/item/editItem/{{$item->ItemId}}">Edit</a></td>
-                            <td><a href="/item/deleteItem/{{$item->ItemId}}">Delete</a></td>
+                            <td><a href="/item/deleteItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
                         </tr>
                         @endforeach
                     </table>
