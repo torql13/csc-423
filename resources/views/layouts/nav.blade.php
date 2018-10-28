@@ -10,7 +10,13 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/vendor/">Vendor</a>
+            <a class="nav-link" href="/vendor">Vendor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/item">Inventory Items</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/storeLocations">Store Locations</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/storeLocations/">Stores</a>
