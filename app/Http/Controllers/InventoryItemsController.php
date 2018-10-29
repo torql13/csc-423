@@ -82,7 +82,8 @@ class InventoryItemsController extends Controller
     public function viewItem($id)
     {
         $indItem = DB::table('inventory_item')->where('ItemId', $id)->first();
+        $vendors = DB::table('vendor')->get();
 
-        return view('/InventoryItem/viewItem', compact('indItem'));
+        return view('/InventoryItem/viewItem', compact('indItem', 'vendors'));
     }
 }

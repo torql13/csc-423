@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container mt-4">
+<div class="container mt-4 offset-md-3">
     <div class="well">
     
         <form action="{{ action('VendorsController@updateVendor') }}" method="post" id="updateVendorForm">
@@ -70,17 +70,16 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-1">
+                    <div class="btn-toolbar col-md-5">
                         <input class="btn btn-primary" type="submit" value="Submit" />
-                    </div>
-                    <div class="form-group col-md-1">
+                        &nbsp;
                         <input class="btn btn-secondary" type="reset" value="Reset" />
                     </div>
                 </div>
         
             </fieldset>
         </form>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-4">
                 <a href="/vendor/">Return to Vendor Index</a>
             </div>
