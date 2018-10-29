@@ -70,7 +70,7 @@
                     <div class="btn-toolbar col-md-5">
                         <input class="btn btn-primary" type="submit" value="Submit" />
                         &nbsp;
-                        <input class="btn btn-secondary" type="reset" value="Reset" />
+                        <input class="btn btn-secondary" onclick="resetForms()" type="reset" value="Reset" />
                     </div>
                 </div>
         
