@@ -43,7 +43,7 @@
 			var stateRegex = /^[A-Za-z]{2}$/;
 			var zipRegex = /^[0-9]{5}$/;
 			var phoneRegex = /^[0-9]{10}$/;
-			var contactPersonNameRegex = /^[A-Z-a-z-']+$/;
+			var contactPersonNameRegex = /^[A-Z-a-z-'\s]+$/;
 			var passwordRegex = /^[A-Za-z0-9\.,@]{5,20}$/;
 
             if(!vendorCodeRegex.test($('#vendorCode').val()))
@@ -105,7 +105,7 @@
             valid = true;
 
             var descriptionRegex =  /^[A-Za-z]{1,25}$/;
-			var sizeRegex = /^[A-Za-z0-9]{1,10}$/;
+			var sizeRegex = /^[A-Za-z0-9\s]{1,10}$/;
 			var divDepCatRegex = /^[A-Za-z0-9',\s\.-]+$/;
 			var costRegex = /^[0-9\.,]{1,10}$/;
 			var retailRegex = /^[0-9\.,]{1,10}$/;
@@ -171,7 +171,7 @@
 			var stateRegex = /^[A-Za-z]{2}$/;
 			var zipRegex = /^[0-9]{5}$/;
 			var phoneRegex = /^[0-9]{10}$/;
-			var managerRegex = /^[A-Z-a-z-']+$/;
+			var managerRegex = /^[A-Z-a-z-'\s]+$/;
 			
             if(!storeCodeRegex.test($('#storeCode').val()))
             {
