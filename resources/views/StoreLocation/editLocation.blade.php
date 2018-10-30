@@ -4,7 +4,7 @@
 <div class="container mt-4 offset-md-3">
     <div class="well">
     
-        <form action="{{ action('StoresController@updateLocation') }}" method="post" id="editLocationForm">
+        <form action="{{ action('StoresController@updateLocation') }}" onsubmit='return validateFormRetailStore()' method="post" id="editLocationForm">
     
             <fieldset>
         
