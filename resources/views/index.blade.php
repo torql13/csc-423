@@ -1,64 +1,64 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="jumbotron">
-        <div class="container">
-        <h1 class="display-3">Nanno's Foods</h1>
-        <p>Random Shit</p>
-        </div>
-    </div>
+  <div class="jumbotron">
+      <div class="container">
+      <h1 class="display-3">Nanno's Foods</h1>
+      <p>Nanno's Foods is a system that is meant to help executives manage their inventory items, 
+      order more from vendors, and generate reports</p>
+      </div>
+  </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2 class="mt-3">Vendor</h2>
-          <p>
-            <ul>
-              <li><a href='/vendor/addVendor'>Add Vendor</a></li>
-              <li><a href="/vendor">Go To Vender Index Page</a></li>
-            </ul>
-          </p>
-        </div>
-        <div class="col-md-12">
-          <h2 class="mt-3">Inventory Items</h2>
-          <p>
-            <ul>
-              <li><a href='/item/addItem'>Add Inventory Item</a></li>
-              <li><a href="/item">Go To Inventory Items Index Page</a></li>
-            </ul>
-          </p>
-        </div>
-        <div class="col-md-12">
-          <h2 class="mt-3">Stores</h2>
-          <p>
-            <ul>
-                <li><a href='/storeLocations/addLocation'>Add Store Location</a></li>
-                <li><a href="/storeLocations/">Go To Store Index</a></li>
-            </ul>
-          </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Vendor</h2>
+            <p class="card-text">
+              Supplies Inventory Items to Retail Stores
+              <ul>
+                <li><a href="/vendor/addVendor">Add a Vendor</a></li>
+              </ul>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/vendor/" class="btn btn-primary">Vendor Index</a>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h2 class="mt-3">Process</h2>
-          <p>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Inventory Item</h2>
+            <p class="card-text">
+            Items supplied by the Vendors that go to Retails Stores
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+              <li><a href="/item/addItem">Add an Inventory Item</a></li>
             </ul>
-          </p>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/item/" class="btn btn-primary">Inventoy Item Index</a>
+          </div>
         </div>
-        <div class="col-md-12">
-          <h2 class="mt-3">Reports</h2>
-          <p>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Retail Store</h2>
+            <p class="card-text">
+            The entity that recieves Inventory Items from Vendors and also orders more Inventory Items when running low
             <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+              <li><a href="/storeLocations/addLocation">Add a Retail Store</a></li>
             </ul>
-          </p>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/storeLocations/" class="btn btn-primary">Retail Store Index</a>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 @stop
