@@ -36,6 +36,12 @@ Route::get('/item/deleteItem/{id}', ['uses' => 'InventoryItemsController@deleteI
 
 Route::get('/item/viewItem/{id}', ['uses' => 'InventoryItemsController@viewItem', 'as' => 'viewItem']);
 
+Route::get('/order', 'OrdersController@index');
+
+Route::get('/order/newOrder', 'OrdersController@getVendorsAndStores');
+
+Route::post('/order/newOrder', array('as' => 'insert', 'uses' => 'OrdersController@createNewOrder'));
+
 Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');
