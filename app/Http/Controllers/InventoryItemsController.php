@@ -10,7 +10,7 @@ class InventoryItemsController extends Controller
 {
     public function index()
     {
-        $items = DB::table('inventory_item')->simplePaginate(10);
+        $items = InventoryItem::simplePaginate(10);
 
         return view('InventoryItem/index', compact('items'));
     }
@@ -26,7 +26,7 @@ class InventoryItemsController extends Controller
     {
         $newItem = $request->all();
         
-        DB::table('inventory_item')->insert(
+        InventoryItem::insert(
             [
                 'Description' => $newItem['description'],
                 'Size' => $newItem['size'],
@@ -45,7 +45,7 @@ class InventoryItemsController extends Controller
 
     public function editItem($id)
     {
-        $item = DB::table('inventory_item')->where('ItemId', $id)->first();
+        $item = InventoryItem::where('ItemId', $id)->first();
         $vendors = DB::table('vendor')->get();
 
         return view('/InventoryItem/editItem', compact('item', 'vendors'));
@@ -55,7 +55,7 @@ class InventoryItemsController extends Controller
     {
         $item = $request->all();
 
-        DB::table('inventory_item')->where('ItemId', $item['itemId'])->update(
+        InventoryItem::where('ItemId', $item['itemId'])->update(
             [
                 'Description' => $item['description'],
                 'Size' => $item['size'],
@@ -74,14 +74,14 @@ class InventoryItemsController extends Controller
 
     public function deleteItem($id)
     {
-        DB::table('inventory_item')->where('ItemId', $id)->delete();
+        InventoryItem::where('ItemId', $id)->delete();
 
         return redirect()->action('InventoryItemsController@index');
     }
 
     public function viewItem($id)
     {
-        $indItem = DB::table('inventory_item')->where('ItemId', $id)->first();
+        $indItem = InventoryItem::where('ItemId', $id)->first();
         $vendors = DB::table('vendor')->get();
 
         return view('/InventoryItem/viewItem', compact('indItem', 'vendors'));

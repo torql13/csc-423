@@ -10,21 +10,21 @@ class VendorsController extends Controller
 {
     public function index()
     {
-        $vendorList = DB::table('vendor')->where('Status', 'Active')->simplePaginate(10);
+        $vendorList = Vendor::where('Status', 'Active')->simplePaginate(10);
 
         return view('/Vendor/index', compact('vendorList'));
     }
 
     public function inactiveIndex()
     {
-        $vendorList = DB::table('vendor')->where('Status', 'Inactive')->simplePaginate(10);
+        $vendorList = Vendor::where('Status', 'Inactive')->simplePaginate(10);
         
         return view('/Vendor/inactiveIndex', compact('vendorList'));
     }
 
     public function deleteVendor($id)
     {
-        DB::table('vendor')->where('VendorId', $id)->update([
+        Vendor::where('VendorId', $id)->update([
             'Status' => 'Inactive'
         ]);
 
@@ -33,7 +33,7 @@ class VendorsController extends Controller
 
     public function restoreVendor($id)
     {
-        DB::table('vendor')->where('VendorId', $id)->update([
+        Vendor::where('VendorId', $id)->update([
             'Status' => 'Active'
         ]);
 
@@ -42,7 +42,7 @@ class VendorsController extends Controller
 
     public function editVendor($id)
     {
-        $indVendor = DB::table('vendor')->where('VendorId', $id)->first();
+        $indVendor = Vendor::where('VendorId', $id)->first();
         
         return view('/Vendor/editVendor', compact('indVendor'));
     }
@@ -51,7 +51,7 @@ class VendorsController extends Controller
     {
         $vendor = $request->all();
 
-        DB::table('vendor')->where('VendorId', $vendor['vendorId'])
+        Vendor::where('VendorId', $vendor['vendorId'])
             ->update([
                 'VendorName' => $vendor['vendorName'],
                 'Address' => $vendor['vendorAddress'],
@@ -69,7 +69,7 @@ class VendorsController extends Controller
 
     public function viewVendor($id)
     {
-        $indVendor = DB::table('vendor')->where('VendorId', $id)->first();
+        $indVendor = Vendor::where('VendorId', $id)->first();
 
         return view('/Vendor/viewVendor', compact('indVendor'));
     }
@@ -79,7 +79,7 @@ class VendorsController extends Controller
 
         $newVendor = $request->all();
 
-        DB::table('vendor')->insert([
+        Vendor::insert([
             'VendorCode' => $newVendor['vendorCode'],
             'VendorName' => $newVendor['vendorName'],
             'Address' => $newVendor['vendorAddress'],

@@ -11,7 +11,7 @@ class StoresController extends Controller
 
     public function storeIndex()
     {
-        $locationList = DB::table('retail_store')->simplePaginate(10);
+        $locationList = StoreLocation::simplePaginate(10);
 
         return view('StoreLocation.storeIndex', compact('locationList'));
 
@@ -19,7 +19,7 @@ class StoresController extends Controller
 
     public function viewLocation($id)
     {
-        $storeLocation = DB::table('retail_store')->where('StoreId', $id)->first();       
+        $storeLocation = StoreLocation::where('StoreId', $id)->first();       
         return view('StoreLocation.viewLocation', compact('storeLocation'));
     }
 
@@ -27,21 +27,28 @@ class StoresController extends Controller
     {
         $store = $request->all();
 
-        DB::table('retail_store')->insert(['StoreCode' => $store['storeCode'], 'StoreName' => $store['storeName'], 'Address' => $store['storeAddress'], 'City' => $store['storeCity'],
-        'State' => $store['storeState'], 'ZIP' => $store['storeZip'], 'Phone' => $store['storePhone'], 'ManagerName' => $store['manager']
+        StoreLocation::insert([
+            'StoreCode' => $store['storeCode'],
+            'StoreName' => $store['storeName'],
+            'Address' => $store['storeAddress'],
+            'City' => $store['storeCity'],
+            'State' => $store['storeState'],
+            'ZIP' => $store['storeZip'],
+            'Phone' => $store['storePhone'],
+            'ManagerName' => $store['manager']
         ]);
         return redirect()->action('StoresController@storeIndex');
     }
 
     public function deleteLocation($id)
     {
-        DB::table('retail_store')->where('StoreId', $id)->delete();
+        StoreLocation::where('StoreId', $id)->delete();
         return redirect()->action('StoresController@storeIndex');
     }
 
     public function editLocation($id)
     {
-        $storeLocation = DB::table('retail_store')->where('StoreId', $id)->first();       
+        $storeLocation = StoreLocation::where('StoreId', $id)->first();       
         return view('StoreLocation.editLocation', compact('storeLocation'));
     }
 
@@ -49,9 +56,16 @@ class StoresController extends Controller
     {
         $store = $request->all();
 
-        DB::table('retail_store')->where('StoreId', $store['storeId'])
-        ->update(['StoreCode' => $store['storeCode'], 'StoreName' => $store['storeName'], 'Address' => $store['storeAddress'], 'City' => $store['storeCity'],
-        'State' => $store['storeState'], 'ZIP' => $store['storeZip'], 'Phone' => $store['storePhone'], 'ManagerName' => $store['manager']
+        StoreLocation::where('StoreId', $store['storeId'])
+        ->update([
+            'StoreCode' => $store['storeCode'],
+            'StoreName' => $store['storeName'],
+            'Address' => $store['storeAddress'],
+            'City' => $store['storeCity'],
+            'State' => $store['storeState'],
+            'ZIP' => $store['storeZip'],
+            'Phone' => $store['storePhone'],
+            'ManagerName' => $store['manager']
         ]);
         
         return redirect()->action('StoresController@storeIndex');
