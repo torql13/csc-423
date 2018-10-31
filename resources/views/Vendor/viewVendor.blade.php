@@ -53,6 +53,13 @@
             </div>
 
             <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Status</label>
+                    <input type="text" class="form-control" value="{{ $indVendor->Status }}" disabled>
+                </div>
+            </div>
+
+            <div class="form-row">
                 <div class="btn-toolbar col-md-5">
                     <a href="/vendor/editVendor/{{ $indVendor->VendorId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
                     &nbsp;
