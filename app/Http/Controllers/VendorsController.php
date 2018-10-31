@@ -89,7 +89,6 @@ class VendorsController extends Controller
             'Phone' => $newVendor['vendorPhone'], 
             'ContactPersonName' => $newVendor['contactPerson'],
             'Password' => $newVendor['password'],
-            'Status' => 'Active'
         ]);
 
         return redirect()->action('VendorsController@index');

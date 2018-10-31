@@ -10,6 +10,8 @@ class InventoryItem extends Model
     protected $table = 'inventory_item';
     //define name of primary key field for model's associated table
     protected $primaryKey = 'ItemId';
+    //disable timestamps
+    public $timestamps = false;
 
     /**
      * gets the vendor owning this inventory item

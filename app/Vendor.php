@@ -10,6 +10,8 @@ class Vendor extends Model
     protected $table = 'vendor';
     //define name of primary key field for model's associated table
     protected $primaryKey = 'VendorId';
+    //turn off timestamp
+    public $timestamps = false;
 
     /**
      * gets the inventory items that belong to a vendor

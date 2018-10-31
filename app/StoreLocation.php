@@ -10,4 +10,6 @@ class StoreLocation extends Model
     protected $table = 'retail_store';
     //define name of primary key field for model's associated table
     protected $primaryKey = 'StoreId';
+    //disable timestamps
+    public $timestamps = false;
 }

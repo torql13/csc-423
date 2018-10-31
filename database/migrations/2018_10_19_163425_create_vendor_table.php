@@ -24,7 +24,7 @@ class CreateVendorTable extends Migration
             $table->string('Phone');
             $table->string('ContactPersonName');
             $table->string('Password');
-            $table->string('Status');
+            $table->string('Status')->default("Active");
         });
     }
 
