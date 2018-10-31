@@ -20,7 +20,7 @@ Route::get('/vendor/editVendor/{id}', ['uses' => 'VendorsController@editVendor',
 
 Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsController@updateVendor'));
 
-Route::get('/item', 'InventoryItemsController@index');
+Route::get('/item/', 'InventoryItemsController@index');
 
 Route::get('/item/index', 'InventoryItemsController@index');
 

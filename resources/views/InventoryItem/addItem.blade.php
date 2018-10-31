@@ -78,7 +78,7 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item">Return to Item Index</a>
+                <a href="/item/">Return to Item Index</a>
             </div>
         </div>
     </div>

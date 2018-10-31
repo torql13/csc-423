@@ -65,7 +65,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>Vendor</label>
-                        <select name="vendorId" id="vendorId" default="{{$item->VendorId}}">
+                        <select name="vendorId" id="vendorId">
                         @foreach($vendors as $vendor)
                             @if($vendor->VendorId === $item->VendorId)
                                 <option value="{{$vendor->VendorId}}" selected>{{$vendor->VendorName}}</option>
@@ -89,7 +89,7 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item">Return to Item Index</a>
+                <a href="/item/">Return to Item Index</a>
             </div>
         </div>
     </div>
