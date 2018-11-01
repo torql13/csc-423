@@ -39,7 +39,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="/item/" class="btn btn-primary">Inventoy Item Index</a>
+            <a href="/item/" class="btn btn-primary">Inventory Item Index</a>
           </div>
         </div>
       </div>

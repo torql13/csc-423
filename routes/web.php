@@ -6,6 +6,10 @@ Route::get('/',function(){
 
 Route::get('/vendor/', 'VendorsController@index');
 
+Route::get('/vendor/index', 'VendorsController@index');
+
+Route::get('/vendor/inactiveIndex', 'VendorsController@inactiveIndex');
+
 Route::get('/vendor/view/{id}', ['uses' => 'VendorsController@viewVendor', 'as' => 'viewVendor']);
 
 Route::get('/vendor/addVendor',function(){
@@ -14,13 +18,15 @@ Route::get('/vendor/addVendor',function(){
 
 Route::get('/vendor/deleteVendor/{id}', ['uses' => 'VendorsController@deleteVendor', 'as' => 'deleteVendor']);
 
+Route::get('/vendor/restoreVendor/{id}', ['uses' => 'VendorsController@restoreVendor', 'as' => 'restoreVendor']);
+
 Route::post('/vendor/addVendor', array('as' => 'insert', 'uses' => 'VendorsController@insertNewVendor'));
 
 Route::get('/vendor/editVendor/{id}', ['uses' => 'VendorsController@editVendor', 'as' => 'editVendor']);
 
 Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsController@updateVendor'));
 
-Route::get('/item', 'InventoryItemsController@index');
+Route::get('/item/', 'InventoryItemsController@index');
 
 Route::get('/item/index', 'InventoryItemsController@index');
 

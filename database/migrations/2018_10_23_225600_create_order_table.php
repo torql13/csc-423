@@ -19,7 +19,7 @@ class CreateOrderTable extends Migration
             $table->unsignedInteger('StoreId');
             $table->dateTime('DateTimeOfOrder');
             $table->string('Status');
-            $table->dateTime('DateTimeOfFulfillment');
+            $table->dateTime('DateTimeOfFulfillment')->nullable();
 
             $table->foreign('VendorId')->references('VendorId')->on('vendor');
             $table->foreign('StoreId')->references('StoreId')->on('retail_store');

@@ -27,8 +27,15 @@ class StoresController extends Controller
     {
         $store = $request->all();
 
-        StoreLocation::insert(['StoreCode' => $store['storeCode'], 'StoreName' => $store['storeName'], 'Address' => $store['storeAddress'], 'City' => $store['storeCity'],
-        'State' => $store['storeState'], 'ZIP' => $store['storeZip'], 'Phone' => $store['storePhone'], 'ManagerName' => $store['manager']
+        StoreLocation::insert([
+            'StoreCode' => $store['storeCode'],
+            'StoreName' => $store['storeName'],
+            'Address' => $store['storeAddress'],
+            'City' => $store['storeCity'],
+            'State' => $store['storeState'],
+            'ZIP' => $store['storeZip'],
+            'Phone' => $store['storePhone'],
+            'ManagerName' => $store['manager']
         ]);
         return redirect()->action('StoresController@storeIndex');
     }
@@ -49,9 +56,16 @@ class StoresController extends Controller
     {
         $store = $request->all();
 
-        StoreLaction::where('StoreId', $store['storeId'])
-        ->update(['StoreCode' => $store['storeCode'], 'StoreName' => $store['storeName'], 'Address' => $store['storeAddress'], 'City' => $store['storeCity'],
-        'State' => $store['storeState'], 'ZIP' => $store['storeZip'], 'Phone' => $store['storePhone'], 'ManagerName' => $store['manager']
+        StoreLocation::where('StoreId', $store['storeId'])
+        ->update([
+            'StoreCode' => $store['storeCode'],
+            'StoreName' => $store['storeName'],
+            'Address' => $store['storeAddress'],
+            'City' => $store['storeCity'],
+            'State' => $store['storeState'],
+            'ZIP' => $store['storeZip'],
+            'Phone' => $store['storePhone'],
+            'ManagerName' => $store['manager']
         ]);
         
         return redirect()->action('StoresController@storeIndex');
