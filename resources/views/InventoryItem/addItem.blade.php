@@ -4,7 +4,7 @@
 <div class="container mt-4 offset-md-3">
     <div class="well">
     
-        <form action="{{ action('InventoryItemsController@insertNewItem') }}" method="post" id="addItemForm">
+        <form action="{{ action('InventoryItemsController@insertNewItem') }}" onsubmit='return validateFormItem()' method="post" id="addItemForm">
     
             <fieldset>
         
@@ -78,7 +78,7 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item">Return to Item Index</a>
+                <a href="/item/">Return to Item Index</a>
             </div>
         </div>
     </div>

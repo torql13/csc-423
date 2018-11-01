@@ -4,7 +4,7 @@
 <div class="container mt-4 offset-md-3">
     <div class="well">
     
-        <form action="{{ action('VendorsController@updateVendor') }}" method="post" id="updateVendorForm">
+        <form action="{{ action('VendorsController@updateVendor') }}" onsubmit='return validateFormVendor()' method="post" id="updateVendorForm">
     
             <fieldset>
         
@@ -63,7 +63,17 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-4">
+                        <label>Status</label><br />
+                        @if($indVendor->Status === "Active")
+                            <input type="radio" name="status" value="Active" checked> Active 
+                            <input type="radio" name="status" value="Inactive"> Inactive 
+                        @else
+                            <input type="radio" name="status" value="Active"> Active 
+                            <input type="radio" name="status" value="Inactive" checked> Inactive 
+                        @endif
+                    </div>
+                    <div class="form-group col-md-4">
                         <label>Password</label>
                         <input type="text" class="form-control" name="password" id="password" value="{{ $indVendor->Password }}">
                     </div>
@@ -81,7 +91,11 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/vendor/">Return to Vendor Index</a>
+                @if($indVendor->Status === "Active")
+                    <a href="/vendor/">Return to Active Vendors</a>
+                @else
+                    <a href="/vendor/inactiveIndex">Return to Inactive Vendors</a>
+                @endif
             </div>
         </div>
     </div>

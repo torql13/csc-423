@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="mt-3">Active Vendors</h2>
+                <h2 class="mt-3">Inactive Vendors</h2>
                 <p>
                     <ul>
                         <li><a href='/vendor/addVendor'>Add Vendor</a></li>
-                        <li><a href='/vendor/inactiveIndex'>Manage Inactive Vendors</a></li>
+                        <li><a href='/vendor/'>Manage Active Vendors</a></li>
                     </ul>
                 </p>
                 <p>
@@ -18,7 +18,7 @@
                             <th>Vendor Name</th>
                             <th>Contact</th>
                             <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Restore</th>
                         </tr>
                         @foreach ($vendorList as $vendor)
                         <tr>
@@ -26,7 +26,7 @@
                             <td>{{$vendor->VendorName}}</td>
                             <td>{{$vendor->ContactPersonName}}</td>
                             <td><a href="/vendor/editVendor/{{$vendor->VendorId}}">Edit</a></td>
-                            <td><a href="/vendor/deleteVendor/{{$vendor->VendorId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/vendor/restoreVendor/{{$vendor->VendorId}}" onclick="return confirm('Are you sure?');">Restore</a></td>
                         </tr>
                         @endforeach
                     </table>
