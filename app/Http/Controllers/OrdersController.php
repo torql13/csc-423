@@ -17,7 +17,7 @@ class OrdersController extends Controller
 
     public function getVendorsAndStores()
     {
-        $vendors = Vendor::get();//->where('Status', 'Active');
+        $vendors = Vendor::get()->where('Status', 'Active');
         $stores = StoreLocation::get();
 
         return view('Order/newOrder', compact('vendors', 'stores'));
