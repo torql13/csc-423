@@ -34,4 +34,11 @@
             </div>
         </div>
     </div>
+    <script>
+        if(<?php echo Session::get('emptyVendor') ?>)
+        {
+            alert("Cannot add an Inventory Item. There are no active Vendors.");
+            <?php Session::forget('emptyVendor'); ?>
+        }
+    </script>
 @stop

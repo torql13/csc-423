@@ -17,8 +17,12 @@ class InventoryItemsController extends Controller
 
     public function getVendors()
     {
-        $vendors = DB::table('vendor')->get();
-
+        $vendors = DB::table('vendor')->where('Status', 'Active')->get();
+        if(!$vendors->count())
+        {
+            session(['emptyVendor' => '1']);
+            return $this->index();
+        }
         return view('InventoryItem/addItem', compact('vendors'));
     }
 
