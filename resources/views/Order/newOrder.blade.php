@@ -34,10 +34,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label>Date and Time of Order</label>
-                        <input type="text" class="form-control" name="dateTimeOfOrder" id="dateTimeOfOrder" />
-                    </div>
-                    <div class="form-group col-md-4">
                         <label>Status</label>
                         <input type="text" class="form-control" name="status" id="status" value="Pending" disabled />
                     </div>

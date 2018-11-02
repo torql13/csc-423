@@ -52,6 +52,10 @@ Route::get('/order/deleteOrder/{id}', ['uses' => 'OrdersController@deleteOrder',
 
 Route::get('/order/viewOrder/{id}', ['uses' => 'OrdersController@viewOrder', 'as' => 'viewOrder']);
 
+Route::get('/order/orderDetails/addOrderDetails', 'OrderDetailsController@getOrderAndItems');
+
+Route::post('/order/orderDetails/addOrderDetails', array('as' => 'insert', 'uses' => 'OrderDetailsController@insertOrderDetails'));
+
 Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');

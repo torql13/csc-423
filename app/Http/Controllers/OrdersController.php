@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use Illuminate\Http\Request;
 use DB;
+use DateTime;
 
 class OrdersController extends Controller
 {
@@ -26,17 +27,22 @@ class OrdersController extends Controller
     public function createNewOrder(Request $request)
     {
         $newOrder = $request->all();
+        $now = new DateTime();
         
         Order::insert(
             [
                 'VendorId' => $newOrder['vendorId'],
                 'StoreId' => $newOrder['storeId'],
-                'DateTimeOfOrder' => $newOrder['dateTimeOfOrder'],
+                'DateTimeOfOrder' => $now,
                 'Status' => 'Pending'
             ]
         );
 
-        return redirect()->action('OrdersController@index');
+        $vendorId = $newOrder['vendorId'];
+        $items = DB::table('inventory_item')->get()->where('VendorId', $vendorId);
+        $order = Order::get()->last();
+        return view('Order/addOrderDetails', compact('vendorId', 'items', 'order'));
+        //return redirect()->action('OrderDetailsController@getOrderAndItems');
     }
 
     public function editOrder($id)
@@ -54,11 +60,11 @@ class OrdersController extends Controller
 
         Order::where('OrderId', $order['orderId'])->update(
             [
-                'VendorId' => $newOrder['vendorId'],
-                'StoreId' => $newOrder['storeId'],
-                'DateTimeOfOrder' => $newOrder['dateTimeOfOrder'],
+                'VendorId' => $order['vendorId'],
+                'StoreId' => $order['storeId'],
+                'DateTimeOfOrder' => $order['dateTimeOfOrder'],
                 'Status' => 'Pending',
-                'DateTimeOfFulfillment' => $newOrder['dateTimeOfFullfilment']
+                'DateTimeOfFulfillment' => $order['dateTimeOfFullfilment']
             ]
         );
         
