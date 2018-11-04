@@ -18,7 +18,7 @@ class InventoryItemsController extends Controller
     public function inactiveIndex()
     {
         $items = InventoryItem::where('Status', 'Inactive')->whereHas('vendor', function($query){
-            $query->where('Status', 'like', 'Active');
+            $query->where('Status', 'Active');
         })->simplePaginate(10);
         
         return view('InventoryItem/inactiveIndex', compact('items'));
@@ -58,8 +58,8 @@ class InventoryItemsController extends Controller
 
     public function editItem($id)
     {
-        $item = InventoryItem::where('ItemId', $id)->first();
-        if(!$item || ($item->vendor->Status === 'Inactive'))
+        $item = InventoryItem::where('ItemId', $id)->firstOrFail();
+        if($item->vendor->Status === 'Inactive')
         {
             session(['noItem' => '1']);
             return redirect()->action('InventoryItemsController@index');
@@ -93,8 +93,11 @@ class InventoryItemsController extends Controller
 
     public function deleteItem($id)
     {
-        $item = InventoryItem::where('ItemId', $id)->first();
-        if(!$item || ($item->Status === "Inactive"))
+        $item = InventoryItem::where([
+            ['ItemId', $id],
+            ['Status', 'Active']
+        ])->firstOrFail();
+        if($item->vendor->Status === "Inactive")
         {
             session(['noItem' => '1']);
             return redirect()->action('InventoryItemsController@index');
@@ -109,15 +112,18 @@ class InventoryItemsController extends Controller
 
     public function restoreItem($id)
     {
-        //get item matching the id given
-        $item = InventoryItem::where('ItemId', $id)->first();
+        //get item matching the id given or 404 if no match
+        $item = InventoryItem::where([
+            ['ItemId', $id],
+            ['Status', 'Inactive']
+        ])->firstOrFail();
         //if item doesn't exist, write noItem as true into session and redirect to index;
         //   an alert will be shown
-        if(!$item)
+        /*if(!$item)
         {
             session(['noItem' => '1']);
             return redirect()->action('InventoryItemsController@index');
-        }
+        }*/
 
         //get the vendor the item belongs to via model link
         $vendor = $item->vendor;
@@ -139,7 +145,13 @@ class InventoryItemsController extends Controller
 
     public function viewItem($id)
     {
-        $indItem = InventoryItem::where('ItemId', $id)->first();
+        $indItem = InventoryItem::where('ItemId', $id)->firstOrFail();
+        if($indItem->vendor->Status === 'Inactive')
+        {
+            session(['noItem' => '1']);
+            return redirect()->action('InventoryItemsController@index');
+        }
+
         $vendors = DB::table('vendor')->get();
 
         return view('/InventoryItem/viewItem', compact('indItem', 'vendors'));
