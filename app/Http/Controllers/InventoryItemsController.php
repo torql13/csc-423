@@ -156,4 +156,21 @@ class InventoryItemsController extends Controller
 
         return view('/InventoryItem/viewItem', compact('indItem', 'vendors'));
     }
+    
+    public function searchActive(Request $request)
+    {
+        $search = $request->input('search');
+
+        $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['Status', 'Active']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['Status', 'Active']
+            ])
+            ->paginate(10);
+
+        return view('InventoryItem/index', compact('items'));
+    }
 }

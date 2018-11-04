@@ -12,6 +12,20 @@
                     </ul>
                 </p>
                 <p>
+                    <form action="{{ action('InventoryItemsController@searchActive') }}" method="get" id="searchForm">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Search Inventory Items by Id or Description:</label>
+                                    <input type="text" class="form-control" name="search" id="search">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                    </form>
+                </p>
+                <p>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Id</th>

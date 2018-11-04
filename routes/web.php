@@ -46,6 +46,8 @@ Route::get('/item/restoreItem/{id}', ['uses' => 'InventoryItemsController@restor
 
 Route::get('/item/viewItem/{id}', ['uses' => 'InventoryItemsController@viewItem', 'as' => 'viewItem']);
 
+Route::get('/item/searchActive', 'InventoryItemsController@searchActive');
+
 Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');
