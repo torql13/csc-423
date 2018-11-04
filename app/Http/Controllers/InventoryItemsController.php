@@ -10,9 +10,18 @@ class InventoryItemsController extends Controller
 {
     public function index()
     {
-        $items = InventoryItem::simplePaginate(10);
+        $items = InventoryItem::where('Status', 'Active')->simplePaginate(10);
 
         return view('InventoryItem/index', compact('items'));
+    }
+
+    public function inactiveIndex()
+    {
+        $items = InventoryItem::where('Status', 'Inactive')->whereHas('vendor', function($query){
+            $query->where('Status', 'like', 'Active');
+        })->simplePaginate(10);
+        
+        return view('InventoryItem/inactiveIndex', compact('items'));
     }
 
     public function getVendors()
@@ -50,7 +59,12 @@ class InventoryItemsController extends Controller
     public function editItem($id)
     {
         $item = InventoryItem::where('ItemId', $id)->first();
-        $vendors = DB::table('vendor')->get();
+        if(!$item || ($item->vendor->Status === 'Inactive'))
+        {
+            session(['noItem' => '1']);
+            return redirect()->action('InventoryItemsController@index');
+        }
+        $vendors = DB::table('vendor')->where('Status', 'Active')->get();
 
         return view('/InventoryItem/editItem', compact('item', 'vendors'));
     }
@@ -69,7 +83,8 @@ class InventoryItemsController extends Controller
                 'ItemCost' => $item['cost'],
                 'ItemRetail' => $item['retail'], 
                 'ImageFileName' => $item['imgFileName'],
-                'VendorId' => $item['vendorId']
+                'VendorId' => $item['vendorId'],
+                'Status' => $item['status']
             ]
         );
         
@@ -78,7 +93,46 @@ class InventoryItemsController extends Controller
 
     public function deleteItem($id)
     {
-        InventoryItem::where('ItemId', $id)->delete();
+        $item = InventoryItem::where('ItemId', $id)->first();
+        if(!$item || ($item->Status === "Inactive"))
+        {
+            session(['noItem' => '1']);
+            return redirect()->action('InventoryItemsController@index');
+        }
+
+        InventoryItem::where('ItemId', $id)->update([
+            'Status' => 'Inactive'
+        ]);
+
+        return redirect()->action('InventoryItemsController@index');
+    }
+
+    public function restoreItem($id)
+    {
+        //get item matching the id given
+        $item = InventoryItem::where('ItemId', $id)->first();
+        //if item doesn't exist, write noItem as true into session and redirect to index;
+        //   an alert will be shown
+        if(!$item)
+        {
+            session(['noItem' => '1']);
+            return redirect()->action('InventoryItemsController@index');
+        }
+
+        //get the vendor the item belongs to via model link
+        $vendor = $item->vendor;
+
+        //if the vendor for this item is inactive, write noItem as true into session and 
+        //   redirect to index; an alert will be shown
+        if($vendor->Status === 'Inactive')
+        {
+            session(['noItem' => '1']);
+            return redirect()->action('InventoryItemsController@index');
+        }
+
+        InventoryItem::where('ItemId', $id)->update([
+            'Status' => 'Active'
+        ]);
 
         return redirect()->action('InventoryItemsController@index');
     }
