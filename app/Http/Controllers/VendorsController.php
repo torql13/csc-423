@@ -10,7 +10,14 @@ class VendorsController extends Controller
 {
     public function index()
     {
-        $vendorList = Vendor::where('Status', 'Active')->simplePaginate(10);
+        if(request()->has('sort'))
+        {
+            $vendorList = Vendor::where('Status', 'Active')->orderBy(request('sort'), 'ASC')->simplePaginate(10);
+        }
+        else
+        {
+            $vendorList = Vendor::where('Status', 'Active')->simplePaginate(10);
+        }
 
         return view('/Vendor/index', compact('vendorList'));
     }
