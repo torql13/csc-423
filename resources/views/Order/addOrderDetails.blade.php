@@ -19,16 +19,23 @@
                     </div>
                 </div>
 
+                <div class="form-row" style="visibility:hidden;position:absolute">
+                    <div class="form-group col-md-4">
+                        <label>Number of Items</label>
+                        <input type="text" class="form-control" name="numItems" id="numItems" value="1">
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>items</label>
-                        <select name="itemId" id="itemId">
+                        <select name="itemId0" id="itemId0">
                         @foreach($items as $item):
                             <option value="{{$item->ItemId}}">{{$item->Description}}</option>
                         @endforeach
                         </select>
                         <label>Quantity</label>
-                        <input type="text" name="quantity" id="quantity" />
+                        <input type="text" name="quantity0" id="quantity0" />
                     </div>
                 </div>
 
@@ -61,6 +68,7 @@
 </div>
 
 <script type="text/javascript">
+    var numItems = 1;
     function addItems()
     {
         console.log("test")
@@ -68,14 +76,18 @@
                 '<div class="form-row">' +
                     '<div class="form-group col-md-8">' +
                         '<label>Item</label>' +
-                            '<select name="item" id="item">' +
+                            '<select name="itemId' + numItems + '" id="itemId' + numItems + '">' +
                                 '@foreach($items as $item):' +
                                  '<option value="{{$item->ItemId}}">{{$item->Description}}</option>' + 
                                 '@endforeach' +
                             '</select>' +
+                            '<label>Quantity</label>' + 
+                            '<input type="text" name="quantity' + numItems + '" id="quantity' + numItems + '" />' +
                     '</div>' + 
                 '</div>'
             );
+            numItems++;
+            document.getElementById('numItems').value = numItems;
     }   
 </script>
 @stop

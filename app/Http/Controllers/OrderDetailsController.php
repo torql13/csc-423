@@ -20,14 +20,19 @@ class OrderDetailsController extends Controller
     public function insertOrderDetails(Request $request)
     {
         $details = $request->all();
-        OrderDetail::insert(
+        //start working on loop to add all the items to the order
+        $orderId = $details['orderId'];
+        $count = $details['numItems'];
+        for ($i = 0; $i < $count; $i++)
+        {
+            OrderDetail::insert(
             [
                 'OrderId' => $details['orderId'],
-                'ItemId' => $details['itemId'], 
-                'QuantityOrdered' => $details['quantity']
+                'ItemId' => $details['itemId'.$i], 
+                'QuantityOrdered' => $details['quantity'.$i]
             ]
-        );
-
+            );
+        }
         return redirect()->action('OrdersController@index');
     }
 
