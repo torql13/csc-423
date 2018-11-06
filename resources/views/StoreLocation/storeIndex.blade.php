@@ -14,8 +14,8 @@
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Store Code</th>
-                            <th>Store Name</th>
-                            <th>Manager</th>
+                            <th><a href="/storeLocations/?sort=StoreName">Store Name</a></th>
+                            <th><a href="/storeLocations/?sort=ManagerName">Manager</a></th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
