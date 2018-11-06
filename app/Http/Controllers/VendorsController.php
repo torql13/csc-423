@@ -8,6 +8,8 @@ use DB;
 
 class VendorsController extends Controller
 {
+    private $ss = "ThisTotallyIsntASecret";
+
     public function index()
     {
         $vendorList = Vendor::where('Status', 'Active')->simplePaginate(10);
@@ -80,7 +82,7 @@ class VendorsController extends Controller
                 'Zip' => $vendor['vendorZip'],
                 'Phone' => $vendor['vendorPhone'], 
                 'ContactPersonName' => $vendor['contactPerson'],
-                'Password' => $vendor['password'],
+                // 'Password' => $vendor['password'],
                 'Status' => $vendor['status']
             ]);
         
@@ -99,6 +101,8 @@ class VendorsController extends Controller
 
         $newVendor = $request->all();
 
+        $hashedPass = $this->hashPassword($newVendor['password']);
+
         Vendor::insert([
             'VendorCode' => $newVendor['vendorCode'],
             'VendorName' => $newVendor['vendorName'],
@@ -108,9 +112,16 @@ class VendorsController extends Controller
             'Zip' => $newVendor['vendorZip'],
             'Phone' => $newVendor['vendorPhone'], 
             'ContactPersonName' => $newVendor['contactPerson'],
-            'Password' => $newVendor['password'],
+            'Password' => $hashedPass
         ]);
 
         return redirect()->action('VendorsController@index');
+    }
+
+    private function hashPassword($plainTextPass)
+    {
+        $initialhash = sha1($plainTextPass);
+        $finalhash = sha1($initialhash.$this->ss);
+        return $finalhash;
     }
 }

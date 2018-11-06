@@ -73,10 +73,10 @@
                             <input type="radio" name="status" value="Inactive" checked> Inactive 
                         @endif
                     </div>
-                    <div class="form-group col-md-4">
+                    <!-- <div class="form-group col-md-4">
                         <label>Password</label>
                         <input type="text" class="form-control" name="password" id="password" value="{{ $indVendor->Password }}">
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-row">
