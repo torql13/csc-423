@@ -13,7 +13,7 @@
                 <p>
                     <table class="table table-bordered table-hover">
                         <tr>
-                            <th>Description</th>
+                            <th><a href="/item/?sort=Description">Description</a></th>
                             <th>Size</th>
                             <th>Retail</th>
                             <th>Edit</th>

@@ -10,7 +10,14 @@ class InventoryItemsController extends Controller
 {
     public function index()
     {
-        $items = InventoryItem::simplePaginate(10);
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::orderBy(request('sort'), 'ASC')->simplePaginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::simplePaginate(10);
+        }
 
         return view('InventoryItem/index', compact('items'));
     }
