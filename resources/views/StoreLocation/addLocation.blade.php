@@ -57,7 +57,7 @@
 
                 <div class="form-row">
                     <div class="btn-toolbar col-md-5">
-                        <input class="btn btn-primary" type="submit" value="Submit" />
+                        <input class="btn btn-primary" onclick="this.disabled=true;this.form.submit();" type="submit" value="Submit" />
                         &nbsp;
                         <input class="btn btn-secondary" onclick="resetForms()" type="reset" value="Reset" />
                     </div>

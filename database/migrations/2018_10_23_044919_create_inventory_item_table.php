@@ -24,6 +24,7 @@ class CreateInventoryItemTable extends Migration
             $table->string('ItemRetail');
             $table->string('ImageFileName');
             $table->unsignedInteger('VendorId');
+            $table->string('Status')->default('Active');
             $table->foreign('VendorId')->references('VendorId')->on('vendor');
         });
     }
