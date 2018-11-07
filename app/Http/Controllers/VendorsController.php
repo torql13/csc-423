@@ -8,8 +8,6 @@ use DB;
 
 class VendorsController extends Controller
 {
-    private $ss = "ThisTotallyIsntASecret";
-
     public function index()
     {
         if(request()->has('sort'))
@@ -116,7 +114,7 @@ class VendorsController extends Controller
 
         $newVendor = $request->all();
 
-        $hashedPass = $this->hashPassword($newVendor['password']);
+        $hashedPass = hashPassword($newVendor['password']);
 
         Vendor::insert([
             'VendorCode' => $newVendor['vendorCode'],
@@ -133,17 +131,15 @@ class VendorsController extends Controller
         return redirect()->action('VendorsController@index');
     }
 
-    private function hashPassword($plainTextPass)
-    {
-        $initialhash = sha1($plainTextPass);
-        $finalhash = sha1($initialhash.$this->ss);
-        return $finalhash;
-    }
-
     public function changePassword(Request $request)
     {
         $newVendor = $request->all();
 
-        echo $newVendor['vendorId'] . " " . $newVendor['oldPass'] . " " . $newVendor['newPass'];
+        $storedPass = Vendor::where('VendorId', $newVendor['vendorId'])->pluck('Password')[0];
+        
+        if($this->hashPassword($newVendor['oldPass']) == $storedPass)
+            echo $newVendor['vendorId'] . " " . $this->hashPassword($newVendor['newPass']);
+        else
+            return redirect("vendor/changePassword/" . $newVendor['vendorId']);
     }
 }

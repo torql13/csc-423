@@ -10,4 +10,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    private $ss = "ThisTotallyIsntASecret";
+
+    public function hashPassword($plainTextPass)
+    {
+        $initialhash = sha1($plainTextPass);
+        $finalhash = sha1($initialhash.$this->ss);
+        return $finalhash;
+    }
 }
