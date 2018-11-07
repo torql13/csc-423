@@ -124,4 +124,11 @@ class VendorsController extends Controller
         $finalhash = sha1($initialhash.$this->ss);
         return $finalhash;
     }
+
+    public function changePassword(Request $request)
+    {
+        $newVendor = $request->all();
+
+        echo $newVendor['vendorId'] . " " . $newVendor['oldPass'] . " " . $newVendor['newPass'];
+    }
 }

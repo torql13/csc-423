@@ -26,7 +26,11 @@ Route::get('/vendor/editVendor/{id}', ['uses' => 'VendorsController@editVendor',
 
 Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsController@updateVendor'));
 
-Route::get('/vendor/passwordChange', 'VendorsController@changePassword');
+Route::post('/vendor/updatePassword', array('as' => 'update', 'uses' => 'VendorsController@changePassword'));
+
+Route::get('/vendor/changePassword/{id}', function($vendorId){
+    return view('Vendor.changePassword', compact('vendorId'));
+});
 
 Route::get('/item/', 'InventoryItemsController@index');
 

@@ -63,7 +63,7 @@
                 <div class="btn-toolbar col-md-5">
                     <a href="/vendor/editVendor/{{ $indVendor->VendorId }}" class="btn btn-secondary">Edit</a>
                     &nbsp;
-                    <a href="/vendor/updatePassword/" class="btn btn-secondary">Change Password</a>
+                    <a href="/vendor/changePassword/{{ $indVendor->VendorId }}" class="btn btn-secondary">Change Password</a>
                     &nbsp;
                     <a href="/vendor/deleteVendor/{{ $indVendor->VendorId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</a>
                 </div>
