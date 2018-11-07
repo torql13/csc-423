@@ -18,6 +18,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/storeLocations">Stores</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/order">Orders</a>
+          </li>
         </ul>
       </div>
     </nav>

@@ -11,7 +11,14 @@ class StoresController extends Controller
 
     public function storeIndex()
     {
-        $locationList = StoreLocation::simplePaginate(10);
+        if(request()->has('sort'))
+        {
+            $locationList = StoreLocation::orderBy(request('sort'), 'ASC')->simplePaginate(10);
+        }
+        else
+        {
+            $locationList = StoreLocation::simplePaginate(10);
+        }
 
         return view('StoreLocation.storeIndex', compact('locationList'));
 
