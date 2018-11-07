@@ -24,7 +24,15 @@ class VendorsController extends Controller
 
     public function inactiveIndex()
     {
-        $vendorList = Vendor::where('Status', 'Inactive')->simplePaginate(10);
+
+        if(request()->has('sort'))
+        {
+            $vendorList = Vendor::where('Status', 'Inactive')->orderBy(request('sort'), 'ASC')->simplePaginate(10);
+        }
+        else
+        {
+            $vendorList = Vendor::where('Status', 'Inactive')->simplePaginate(10);
+        }
         
         return view('/Vendor/inactiveIndex', compact('vendorList'));
     }
