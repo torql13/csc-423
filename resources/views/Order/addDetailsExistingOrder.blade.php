@@ -6,7 +6,7 @@
 <div class="container mt-4 offset-md-3">
     <div class="well">
     
-        <form action="{{ action('OrderDetailsController@insertOrderAndDetails') }}" method="post" id="addOrderDetailsForm">
+        <form action="{{ action('OrderDetailsController@updateDetailsExistingOrder') }}" method="post" id="addOrderDetailsForm">
     
             <fieldset>
         
@@ -21,15 +21,15 @@
 
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
-                        <label>VendorId</label>
-                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $newOrder['vendorId'] }}">
+                        <label>OrderId</label>
+                        <input type="text" class="form-control" name="orderId" id="orderId" value="{{ $order->OrderId }}">
                     </div>
                 </div>
 
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
-                        <label>StoreId</label>
-                        <input type="text" class="form-control" name="storeId" id="storeId" value="{{ $newOrder['storeId'] }}">
+                        <label>VendorId</label>
+                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $vendorId }}">
                     </div>
                 </div>
 

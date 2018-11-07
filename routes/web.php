@@ -48,15 +48,11 @@ Route::get('/order/newOrder', 'OrdersController@getVendorsAndStores');
 
 Route::post('/order/newOrder', array('as' => 'insert', 'uses' => 'OrdersController@createNewOrder'));
 
-Route::get('/order/deleteOrder/{id}', ['uses' => 'OrdersController@deleteOrder', 'as' => 'deleteOrder']);
+Route::post('/order/orderDetails/addOrderDetails', array('as' => 'insert', 'uses' => 'OrderDetailsController@insertOrderAndDetails'));
 
-Route::get('/order/viewOrder/{id}', ['uses' => 'OrdersController@viewOrder', 'as' => 'viewOrder']);
+Route::get('/order/addDetailsExistingOrder/{id}', 'OrderDetailsController@addDetailsExistingOrder');
 
-Route::get('/order/orderDetails/addOrderDetails', 'OrderDetailsController@getOrderAndItems');
-
-Route::post('/order/orderDetails/addOrderDetails', array('as' => 'insert', 'uses' => 'OrderDetailsController@insertOrderDetails'));
-
-Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
+Route::post('/order/updateDetailsExistingOrder', array('as' => 'update', 'uses' => 'OrderDetailsController@updateDetailsExistingOrder'));
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');
 

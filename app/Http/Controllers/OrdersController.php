@@ -28,33 +28,25 @@ class OrdersController extends Controller
     {
         $newOrder = $request->all();
         $now = new DateTime();
-        
-        Order::insert(
-            [
-                'VendorId' => $newOrder['vendorId'],
-                'StoreId' => $newOrder['storeId'],
-                'DateTimeOfOrder' => $now,
-                'Status' => 'Pending'
-            ]
-        );
+
 
         $vendorId = $newOrder['vendorId'];
         $items = DB::table('inventory_item')->get()->where('VendorId', $vendorId);
-        $order = Order::get()->last();
-        return view('Order/addOrderDetails', compact('vendorId', 'items', 'order'));
+        //$order = Order::get()->last();
+        return view('Order/addOrderDetails', compact('vendorId', 'items', 'newOrder'));
         //return redirect()->action('OrderDetailsController@getOrderAndItems');
     }
 
-    public function editOrder($id)
+    /* public function editOrder($id)
     {
         $order = Order::where('OrderId', $id)->first();
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
         $stores = DB::table('retail_store')->get();
 
         return view('/Order/editOrder', compact('order', 'vendors', 'stores'));
-    }
+    } */
 
-    public function updateOrder(Request $request)
+    /* public function updateOrder(Request $request)
     {
         $order = $request->all();
 
@@ -66,24 +58,25 @@ class OrdersController extends Controller
                 'Status' => 'Pending',
                 'DateTimeOfFulfillment' => $order['dateTimeOfFullfilment']
             ]
-        );
+        ); 
         
         return redirect()->action('OrdersController@index');
-    }
+    }*/
 
-    public function deleteOrder($id)
+    /* public function deleteOrder($id)
     {
         Order::where('OrderId', $id)->delete();
 
         return redirect()->action('OrdersController@index');
-    }
+    } */
 
-    public function viewOrder($id)
+    /* public function viewOrder($id)
     {
         $indOrder = Order::where('OrderId', $id)->first();
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
         $stores = DB::table('retail_store')->get();
+        $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
 
-        return view('/Order/viewOrder', compact('indOrder', 'vendors', 'stores'));
-    }
+        return view('/Order/viewOrder/', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
+    } */
 }

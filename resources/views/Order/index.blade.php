@@ -16,16 +16,14 @@
                             <th>OrderId</th>
                             <th>DateTimeOfOrder</th>
                             <th>Status</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Add Items to Order</th>
                         </tr>
                         @foreach ($orders as $order)
                         <tr>
-                            <td><a href="/order/viewOrder/{{$order->OrderId}}">{{$order->OrderId}}</a></td>
+                            <td>{{$order->OrderId}}</td>
                             <td>{{$order->DateTimeOfOrder}}</td>
                             <td>{{$order->Status}}</td>
-                            <td><a href="/order/editOrder/{{$order->OrderId}}">Edit</a></td>
-                            <td><a href="/order/deleteOrder/{{$order->OrderId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/order/addDetailsExistingOrder/{{$order->OrderId}}" >Add to Order</a></td>
                         </tr>
                         @endforeach
                     </table>
