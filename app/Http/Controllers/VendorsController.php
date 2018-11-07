@@ -31,18 +31,38 @@ class VendorsController extends Controller
 
     public function deleteVendor($id)
     {
+        $vendor = Vendor::find($id);
+
         Vendor::where('VendorId', $id)->update([
             'Status' => 'Inactive'
         ]);
+
+        foreach($vendor->items as $item)
+        {
+            //set each item belonging to vendor to 'Inactive' in Status field
+            DB::table('inventory_item')->where('VendorId', $id)->update([
+                'Status' => 'Inactive'
+            ]);
+        }
 
         return redirect()->action('VendorsController@index');
     }
 
     public function restoreVendor($id)
     {
+        $vendor = Vendor::find($id);
+
         Vendor::where('VendorId', $id)->update([
             'Status' => 'Active'
         ]);
+
+        foreach($vendor->items as $item)
+        {
+            //set each item belonging to vendor to 'Active' in Status field
+            DB::table('inventory_item')->where('VendorId', $id)->update([
+                'Status' => 'Active'
+            ]);
+        }
 
         return redirect()->action('VendorsController@index');
     }

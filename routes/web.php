@@ -30,6 +30,8 @@ Route::get('/item/', 'InventoryItemsController@index');
 
 Route::get('/item/index', 'InventoryItemsController@index');
 
+Route::get('/item/inactiveIndex', 'InventoryItemsController@inactiveIndex');
+
 Route::get('/item/addItem', 'InventoryItemsController@getVendors');
 
 Route::post('/item/addItem', array('as' => 'insert', 'uses' => 'InventoryItemsController@insertNewItem'));
@@ -40,9 +42,21 @@ Route::post('/item/updateItem', array('as' => 'update', 'uses' => 'InventoryItem
 
 Route::get('/item/deleteItem/{id}', ['uses' => 'InventoryItemsController@deleteItem', 'as' => 'deleteItem']);
 
+Route::get('/item/restoreItem/{id}', ['uses' => 'InventoryItemsController@restoreItem', 'as' => 'restoreItem']);
+
 Route::get('/item/viewItem/{id}', ['uses' => 'InventoryItemsController@viewItem', 'as' => 'viewItem']);
 
-Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
+Route::get('/order', 'OrdersController@index');
+
+Route::get('/order/newOrder', 'OrdersController@getVendorsAndStores');
+
+Route::post('/order/newOrder', array('as' => 'insert', 'uses' => 'OrdersController@createNewOrder'));
+
+Route::post('/order/orderDetails/addOrderDetails', array('as' => 'insert', 'uses' => 'OrderDetailsController@insertOrderAndDetails'));
+
+Route::get('/order/addDetailsExistingOrder/{id}', 'OrderDetailsController@addDetailsExistingOrder');
+
+Route::post('/order/updateDetailsExistingOrder', array('as' => 'update', 'uses' => 'OrderDetailsController@updateDetailsExistingOrder'));
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');
 
