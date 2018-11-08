@@ -77,3 +77,9 @@ Route::get('/storeLocations/editLocation/{id}', 'StoresController@editLocation')
 Route::post('/storeLocation/updateLocation', array('uses' => 'StoresController@updateLocation', 'as' => 'updateLocation'));
 
 Route::get('/storeLocations/deleteLocation/{id}', ['uses' => 'StoresController@deleteLocation', 'as' => 'deleteLocation']);
+
+Route::get('/login', function(){
+    return view('login');
+});
+
+Route::post('/login', array('as' => 'login', 'uses' => 'VendorsController@login'));

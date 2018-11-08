@@ -22,5 +22,10 @@
             <a class="nav-link" href="/order">Orders</a>
           </li>
         </ul>
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item">
+            <a href="/login"><i class="material-icons" style="font-size:36px;color:white;">person</i></a>
+          </li>
+        </ul>
       </div>
     </nav>

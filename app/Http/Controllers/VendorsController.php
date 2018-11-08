@@ -95,9 +95,9 @@ class VendorsController extends Controller
                 'Zip' => $vendor['vendorZip'],
                 'Phone' => $vendor['vendorPhone'], 
                 'ContactPersonName' => $vendor['contactPerson'],
-                // 'Password' => $vendor['password'],
                 'Status' => $vendor['status']
-            ]);
+            ]
+        );
         
         return redirect()->action('VendorsController@index');
     }
@@ -114,7 +114,7 @@ class VendorsController extends Controller
 
         $newVendor = $request->all();
 
-        $hashedPass = hashPassword($newVendor['password']);
+        $hashedPass = $this->hashPassword($newVendor['password']);
 
         Vendor::insert([
             'VendorCode' => $newVendor['vendorCode'],
@@ -138,8 +138,47 @@ class VendorsController extends Controller
         $storedPass = Vendor::where('VendorId', $newVendor['vendorId'])->pluck('Password')[0];
         
         if($this->hashPassword($newVendor['oldPass']) == $storedPass)
-            echo $newVendor['vendorId'] . " " . $this->hashPassword($newVendor['newPass']);
+        {
+            Vendor::where('VendorId', $newVendor['vendorId'])
+                ->update([
+                    'Password' => $this->hashPassword($newVendor['newPass'])
+                ]
+            );
+            return redirect()->action('VendorsController@index');
+        }
         else
+        {
             return redirect("vendor/changePassword/" . $newVendor['vendorId']);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $loginData = $request->all();
+
+        $hashedPass = $this->hashPassword($loginData['password']);
+
+        $record = Vendor::where('VendorCode', $loginData['vendorCode'])
+            ->where('Password', $hashedPass)
+            ->first();
+
+        if(count($record))
+        {
+            //$request->session()->put('VendorId', $record->VendorId);
+            session([
+                'VendorId' => $record->VendorId,
+                'VendorCode' => $record->VendorCode,
+                'Password' => $record->Password
+            ]);
+            echo session('VendorId');
+
+            //temperary so I dont overfill the session
+            $request->session()->flush();
+        }
+        else
+        {
+            $errorMessage = "Username or Password is incorrect";
+            return view('/login', compact('errorMessage'));
+        }
     }
 }

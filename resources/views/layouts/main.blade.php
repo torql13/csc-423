@@ -16,6 +16,7 @@
     @include('layouts.nav')
     @yield('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript">
 
         $('input').on('click', function(){

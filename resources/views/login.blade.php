@@ -3,31 +3,29 @@
 @section('content')
 <div class="container mt-4 offset-md-3">
     <div class="well">
+        @if(isset($errorMessage))
+            <div class="alert alert-danger col-md-4" role="alert">
+                {{$errorMessage}}
+            </div>
+        @endif
     
-        <form action="{{ action('VendorsController@changePassword') }}" method="post" id="changePassword">
+        <form action="{{ action('VendorsController@login') }}" method="post" id="login">
     
             <fieldset>
         
-                <legend>Change Password</legend>
+                <legend>Login</legend>
 
-                <div class="form-row" style="visibility:hidden;position:absolute">
+                <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label>Vendor Id</label>
-                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $vendorId }}">
+                        <label>Vendor Code</label>
+                        <input type="text" class="form-control" name="vendorCode" id="vendorCode">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label>Old Password</label>
-                        <input type="password" class="form-control" name="oldPass" id="oldPass">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>New Password</label>
-                        <input type="password" class="form-control" name="newPass" id="newPass">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
                 </div>
 
@@ -41,7 +39,7 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/vendor/">Return to Vendors</a>
+                <a href="/">Return to Index</a>
             </div>
         </div>
     </div>
