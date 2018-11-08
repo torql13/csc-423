@@ -10,16 +10,42 @@ class InventoryItemsController extends Controller
 {
     public function index()
     {
-        $items = InventoryItem::where('Status', 'Active')->simplePaginate(10);
-
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where('inventory_item.Status', 'Active')
+                ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+                ->orderBy(request('sort'), 'ASC')
+                ->simplePaginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where('Status', 'Active')->simplePaginate(10);
+        }
+        
         return view('InventoryItem/index', compact('items'));
     }
 
     public function inactiveIndex()
     {
-        $items = InventoryItem::where('Status', 'Inactive')->whereHas('vendor', function($query){
-            $query->where('Status', 'Active');
-        })->simplePaginate(10);
+
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where('inventory_item.Status', 'Inactive')
+                ->whereHas('vendor', function($query){
+                    $query->where('Status', 'Active');
+                })
+                ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+                ->orderBy(request('sort'), 'ASC')
+                ->simplePaginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where('Status', 'Inactive')
+            ->whereHas('vendor', function($query){
+                $query->where('Status', 'Active');
+            })
+            ->simplePaginate(10);
+        }
         
         return view('InventoryItem/inactiveIndex', compact('items'));
     }

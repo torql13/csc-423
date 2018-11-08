@@ -15,10 +15,8 @@
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Id</th>
-                            <th>Description</th>
-                            <th>Size</th>
-                            <th>Retail</th>
-                            <th>Vendor</th>
+                            <th><a href="/item/inactiveIndex?sort=Description">Description</a></th>
+                            <th><a href="/item/inactiveIndex?sort=VendorName">Vendor</a></th>
                             <th>Edit</th>
                             <th>Restore</th>
                         </tr>
@@ -26,8 +24,6 @@
                         <tr>
                             <td><a href="/item/viewItem/{{$item->ItemId}}">{{$item->ItemId}}</a></td>
                             <td>{{$item->Description}}</td>
-                            <td>{{$item->Size}}</td>
-                            <td>{{$item->ItemRetail}}</td>
                             <td>{{$item->vendor->VendorName}}
                             <td><a href="/item/editItem/{{$item->ItemId}}">Edit</a></td>
                             <td><a href="/item/restoreItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');">Restore</a></td>

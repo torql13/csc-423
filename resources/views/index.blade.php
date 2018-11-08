@@ -59,6 +59,22 @@
           </div>
         </div>
       </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Orders</h2>
+            <p class="card-text">
+            Manage Orders from Stores to be delivered
+            <ul>
+              <li><a href="/order/newOrder">Create a new Order</a></li>
+            </ul>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/order/" class="btn btn-primary">Order Index</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 @stop

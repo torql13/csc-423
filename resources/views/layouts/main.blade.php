@@ -223,6 +223,61 @@
             return true;
         }
 
+        function validateFormOrder()
+        {
+            valid = true;
+
+            var quantityRegex =  /^\d+$/;
+			
+            if(!quantityRegex.test($('#quantity0').val()))
+            {
+                valid = false;
+                $('#description').addClass('error');
+            }
+            if(!sizeRegex.test($('#size').val()))
+            {
+                valid = false;
+                $('#size').addClass('error');
+            }
+            if(!divDepCatRegex.test($('#division').val()))
+            {
+                valid = false;
+                $('#division').addClass('error');
+            }
+            if(!divDepCatRegex.test($('#department').val()))
+            {
+                valid = false;
+                $('#department').addClass('error');
+            }
+            if(!divDepCatRegex.test($('#category').val()))
+            {
+                valid = false;
+                $('#category').addClass('error');
+            }
+            if(!costRegex.test($('#cost').val()))
+            {
+                valid = false;
+                $('#cost').addClass('error');
+            }
+            if(!retailRegex.test($('#retail').val()))
+            {
+                valid = false;
+                $('#retail').addClass('error');
+            }
+            if(!imgFileRegex.test($('#imgFileName').val()))
+            {
+                valid = false;
+                $('#imgFileName').addClass('error');
+            }
+
+            if(!valid)
+            {
+                alert('Please fill in fields in required format.')
+                return false;
+            }
+            return true;
+        }
+        
     </script>
 </body>
 </html>

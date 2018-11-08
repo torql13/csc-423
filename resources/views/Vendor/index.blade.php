@@ -15,8 +15,8 @@
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Vendor Code</th>
-                            <th>Vendor Name</th>
-                            <th>Contact</th>
+                            <th><a href="/vendor/?sort=VendorName">Vendor Name</a></th>
+                            <th><a href="/vendor/?sort=ContactPersonName">Contact</a></th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
