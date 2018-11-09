@@ -20,4 +20,12 @@ class Vendor extends Model
     {
         return $this->hasMany('App\InventoryItem', 'VendorId', 'VendorId');
     }
+
+    /**
+     * gets the orders that belong to a vendor
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order', 'VendorId', 'VendorId');
+    }
 }

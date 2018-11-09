@@ -19,4 +19,20 @@ class Order extends Model
     {
         return $this->hasMany('App\OrderDetail', 'OrderId', 'OrderId');
     }
+
+    /**
+     * gets the store location that the order is shipped to (order belongs to)
+     */
+    public function store()
+    {
+        return $this->belongsTo('App\StoreLocation', 'StoreId', 'StoreId');
+    }
+
+    /**
+     * gets the vendor that the order is being shipped by (order belongs to)
+     */
+    public function vendor()
+    {
+        return $this->belongsTo('App\Vendor', 'VendorId', 'VendorId');
+    }
 }

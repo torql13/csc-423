@@ -12,4 +12,12 @@ class StoreLocation extends Model
     protected $primaryKey = 'StoreId';
     //disable timestamps
     public $timestamps = false;
+
+    /**
+     * gets the orders that belong to a store location
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order', 'StoreId', 'StoreId');
+    }
 }
