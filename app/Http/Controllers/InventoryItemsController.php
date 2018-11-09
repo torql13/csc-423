@@ -21,8 +21,11 @@ class InventoryItemsController extends Controller
         {
             $items = InventoryItem::where('Status', 'Active')->simplePaginate(10);
         }
+
+        //empty string placeholder for search
+        $search = "";
         
-        return view('InventoryItem/index', compact('items'));
+        return view('InventoryItem/index', compact('items', 'search'));
     }
 
     public function inactiveIndex()
@@ -47,7 +50,10 @@ class InventoryItemsController extends Controller
             ->simplePaginate(10);
         }
         
-        return view('InventoryItem/inactiveIndex', compact('items'));
+        //empty string placeholder for search
+        $search = "";
+
+        return view('InventoryItem/inactiveIndex', compact('items', 'search'));
     }
 
     public function getVendors()
@@ -187,16 +193,84 @@ class InventoryItemsController extends Controller
     {
         $search = $request->input('search');
 
-        $items = InventoryItem::where([
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where([
                 ['Description', 'like', '%' . $search . '%'],
-                ['Status', 'Active']
+                ['inventory_item.Status', 'Active']
             ])
             ->orWhere([
                 ['ItemId', 'like', '%' . $search . '%'],
-                ['Status', 'Active']
+                ['inventory_item.Status', 'Active']
             ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->orderBy(request('sort'), 'ASC')
             ->paginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->paginate(10);
+        }
+        return view('InventoryItem/index', compact('items', 'search'));
+    }
 
-        return view('InventoryItem/index', compact('items'));
+    public function searchInactive(Request $request)
+    {
+        $search = $request->input('search');
+
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->orderBy(request('sort'), 'ASC')
+            ->paginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->paginate(10);
+        }
+
+        return view('InventoryItem/inactiveIndex', compact('items', 'search'));
     }
 }

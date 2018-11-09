@@ -19,7 +19,9 @@ class VendorsController extends Controller
             $vendorList = Vendor::where('Status', 'Active')->simplePaginate(10);
         }
 
-        return view('/Vendor/index', compact('vendorList'));
+        $search = "";
+
+        return view('/Vendor/index', compact('vendorList', 'search'));
     }
 
     public function inactiveIndex()
@@ -34,7 +36,9 @@ class VendorsController extends Controller
             $vendorList = Vendor::where('Status', 'Inactive')->simplePaginate(10);
         }
         
-        return view('/Vendor/inactiveIndex', compact('vendorList'));
+        $search = "";
+
+        return view('/Vendor/inactiveIndex', compact('vendorList', 'search'));
     }
 
     public function deleteVendor($id)
@@ -127,5 +131,71 @@ class VendorsController extends Controller
         ]);
 
         return redirect()->action('VendorsController@index');
+    }
+
+    public function searchActive(Request $request)
+    {
+        $search = $request->input('search');
+
+        if(request()->has('sort'))
+        {
+            $vendorList = Vendor::where([
+                ['VendorName', 'like', '%' . $search . '%'],
+                ['Status', 'Active']
+            ])
+            ->orWhere([
+                ['VendorCode', 'like', '%' . $search . '%'],
+                ['Status', 'Active']
+            ])
+            ->orderBy(request('sort'), 'ASC')
+            ->paginate(10);
+        }
+        else
+        {
+            $vendorList = Vendor::where([
+                ['VendorName', 'like', '%' . $search . '%'],
+                ['Status', 'Active']
+            ])
+            ->orWhere([
+                ['VendorCode', 'like', '%' . $search . '%'],
+                ['Status', 'Active']
+            ])
+            ->paginate(10);
+        }
+
+        return view('Vendor/index', compact('vendorList', 'search'));
+    }
+
+    public function searchInactive(Request $request)
+    {
+        $search = $request->input('search');
+
+        if(request()->has('sort'))
+        {
+            $vendorList = Vendor::where([
+                ['VendorName', 'like', '%' . $search . '%'],
+                ['Status', 'Inactive']
+            ])
+            ->orWhere([
+                ['VendorCode', 'like', '%' . $search . '%'],
+                ['Status', 'Inactive']
+            ])
+            ->orderBy(request('sort'), 'ASC')
+            ->paginate(10);
+        }
+        else
+        {
+            $vendorList = Vendor::where([
+                ['VendorName', 'like', '%' . $search . '%'],
+                ['Status', 'Inactive']
+            ])
+            ->orWhere([
+                ['VendorCode', 'like', '%' . $search . '%'],
+                ['Status', 'Inactive']
+            ])
+            ->paginate(10);
+        }
+
+        return view('Vendor/inactiveIndex', compact('vendorList', 'search'));
     }
 }

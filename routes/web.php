@@ -26,6 +26,10 @@ Route::get('/vendor/editVendor/{id}', ['uses' => 'VendorsController@editVendor',
 
 Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsController@updateVendor'));
 
+Route::get('/vendor/searchActive', 'VendorsController@searchActive');
+
+Route::get('/vendor/searchInactive', 'VendorsController@searchInactive');
+
 Route::get('/item/', 'InventoryItemsController@index');
 
 Route::get('/item/index', 'InventoryItemsController@index');
@@ -47,6 +51,8 @@ Route::get('/item/restoreItem/{id}', ['uses' => 'InventoryItemsController@restor
 Route::get('/item/viewItem/{id}', ['uses' => 'InventoryItemsController@viewItem', 'as' => 'viewItem']);
 
 Route::get('/item/searchActive', 'InventoryItemsController@searchActive');
+
+Route::get('/item/searchInactive', 'InventoryItemsController@searchInactive');
 
 Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 Route::get('/order', 'OrdersController@index');

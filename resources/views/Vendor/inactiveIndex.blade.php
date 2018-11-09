@@ -12,11 +12,45 @@
                     </ul>
                 </p>
                 <p>
+                    <form action="{{ action('VendorsController@searchInactive') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <table>
+                                        <tr>
+                                            <?php if($search): ?>
+                                                <td width="300">
+                                                    <input type="text" class="form-control" name="search" id="search" value="{{$search}}" />
+                                                </td>
+                                                <td>
+                                                    <input class="btn btn-primary" type="submit" id="submit" value="Search" />
+                                                </td>
+                                            <?php else: ?>
+                                                <td width="300">
+                                                    <input type="text" class="form-control" name="search" id="search" value="Search by Code or Name" onfocus="this.value='';$('#submit').prop('disabled', false)" />
+                                                </td>
+                                                <td>
+                                                    <input class="btn btn-primary" type="submit" disabled="true" id="submit" value="Search" />
+                                                </td>
+                                            <?php endif; ?>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </p>
+                <p>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Vendor Code</th>
-                            <th><a href="/vendor/inactiveIndex?sort=VendorName">Vendor Name</a></th>
-                            <th><a href="/vendor/inactiveIndex?sort=ContactPersonName">Contact</a></th>
+                            <?php if($search): ?>
+                                <th><a href="/vendor/?search={{$search}}&sort=VendorName">Vendor Name</a></th>
+                                <th><a href="/vendor/?search={{$search}}&sort=ContactPersonName">Contact</a></th>
+                            <?php else: ?>
+                                <th><a href="/vendor/?sort=VendorName">Vendor Name</a></th>
+                                <th><a href="/vendor/?sort=ContactPersonName">Contact</a></th>
+                            <?php endif; ?>
                             <th>Edit</th>
                             <th>Restore</th>
                         </tr>
