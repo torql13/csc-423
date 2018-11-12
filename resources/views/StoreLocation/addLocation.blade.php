@@ -46,7 +46,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label>Phone</label>
+                        <label>Phone (xxx-xxx-xxxx)</label>
                         <input type="text" class="form-control" name="storePhone" id="storePhone" />
                     </div>
                     <div class="form-group col-md-4">
