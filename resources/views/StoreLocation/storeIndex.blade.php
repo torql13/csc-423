@@ -11,6 +11,35 @@
                     </ul>
                 </p>
                 <p>
+                    <form action="{{ action('StoresController@search') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <table>
+                                        <tr>
+                                            <?php if($search): ?>
+                                                <td width="300">
+                                                    <input type="text" class="form-control" name="search" id="search" value="{{$search}}" />
+                                                </td>
+                                                <td>
+                                                    <input class="btn btn-primary" type="submit" id="submit" value="Search" />
+                                                </td>
+                                            <?php else: ?>
+                                                <td width="300">
+                                                    <input type="text" class="form-control" name="search" id="search" value="Search by Code or Name" onfocus="this.value='';$('#submit').prop('disabled', false)" />
+                                                </td>
+                                                <td>
+                                                    <input class="btn btn-primary" type="submit" disabled="true" id="submit" value="Search" />
+                                                </td>
+                                            <?php endif; ?>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </p>
+                <p>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Store Code</th>
