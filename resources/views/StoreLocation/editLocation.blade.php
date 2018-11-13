@@ -42,8 +42,16 @@
                         <input type="text" class="form-control" name="storeCity" id="storeCity" value="{{ $storeLocation->City }}">
                     </div>
                     <div class="form-group col-md-2">
-                        <label>State</label>
-                        <input type="text" class="form-control" name="storeState" id="storeState" value="{{ $storeLocation->State }}">
+                    <label>State</label>
+                    <select class="form-control" name="vendorState" id="vendorState" size="1">
+                    @foreach($states as $state)
+                            @if($defaultState === $state)
+                                <option value="{{$state}}" selected>{{$state}}</option>
+                            @else
+                                <option value="{{$state}}">{{$state}}</option>
+                            @endif
+                        @endforeach
+                    </select>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Zip</label>

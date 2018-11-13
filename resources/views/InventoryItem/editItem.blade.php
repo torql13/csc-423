@@ -31,8 +31,12 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label>Division</label>
-                        <input type="text" class="form-control" name="division" id="division" value="{{ $item->Division }}">
+                    <label>Division</label>
+                        <select class="form-control" name="division" id="division" size="1">
+                            <option value="Bakery"> Bakery </option>
+                            <option value="Grocery"> Grocery </option>
+                            <option value="Deli"> Deli </option>
+                        </select>
                     </div>
                 </div>
 
@@ -42,8 +46,16 @@
                         <input type="text" class="form-control" name="department" id="department" value="{{ $item->Department }}">
                     </div>
                     <div class="form-group col-md-2">
-                        <label>Category</label>
-                        <input type="text" class="form-control" name="category" id="category" value="{{ $item->Category }}">
+                        <<label>Category</label>
+                        <select class="form-control" name="category" id="category" size="1">
+                            <option value="Bread"> Bread </option>
+                            <option value="Donuts"> Donuts </option>
+                            <option value="Coffee"> Coffee </option>
+                            <option value="Meat"> Meat </option>
+                            <option value="Fish"> Fish </option>
+                            <option value="Poultry"> Poultry </option>
+                            <option value="Tea"> Tea </option>
+                        </select>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Cost</label>

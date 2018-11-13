@@ -12,6 +12,8 @@ class OrderDetail extends Model
     //define name of primary key for model's associated table
     protected $primaryKey = 'OrderDetailId';
 
+    public $timestamps = false;
+
     /**
      * gets the order that this order_detail belongs to
      */
