@@ -83,3 +83,10 @@ Route::get('/login', function(){
 });
 
 Route::post('/login', array('as' => 'login', 'uses' => 'VendorsController@login'));
+
+Route::get('logout', function(){
+    session()->flush();
+    return redirect("/");
+});
+
+Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');

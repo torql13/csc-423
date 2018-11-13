@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-
 <div class="container mt-4 offset-md-3">
     <div class="well">
     
@@ -90,5 +89,4 @@
         </div>
     </div>
 </div>
-
 @stop

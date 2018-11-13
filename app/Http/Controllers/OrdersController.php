@@ -37,6 +37,13 @@ class OrdersController extends Controller
         //return redirect()->action('OrderDetailsController@getOrderAndItems');
     }
 
+    public function viewVendorOrders()
+    {
+        $orders = Order::where('VendorId', session('VendorId'))->simplePaginate(10);
+
+        return view('order/viewVendorOrders', compact('orders'));
+    }
+
     /* public function editOrder($id)
     {
         $order = Order::where('OrderId', $id)->first();
