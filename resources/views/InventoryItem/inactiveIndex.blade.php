@@ -18,21 +18,21 @@
                                 <div class="form-group col-md-4">
                                     <table>
                                         <tr>
-                                            <?php if($search): ?>
+                                            @if($search)
                                                 <td width="300">
                                                     <input type="text" class="form-control" name="search" id="search" value="{{$search}}" />
                                                 </td>
                                                 <td>
                                                     <input class="btn btn-primary" type="submit" id="submit" value="Search" />
                                                 </td>
-                                            <?php else: ?>
+                                            @else
                                                 <td width="300">
                                                     <input type="text" class="form-control" name="search" id="search" value="Search by Id, Description, or Vendor" onfocus="this.value='';$('#submit').prop('disabled', false)" />
                                                 </td>
                                                 <td>
                                                     <input class="btn btn-primary" type="submit" disabled="true" id="submit" value="Search" />
                                                 </td>
-                                            <?php endif; ?>
+                                            @endif
                                         </tr>
                                     </table>
                                 </div>
@@ -44,13 +44,13 @@
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Id</th>
-                            <?php if($search): ?>
+                            @if($search)
                                 <th><a href="/item/searchInactive?search={{$search}}&sort=Description">Description</a></th>
                                 <th><a href="/item/searchInactive?search={{$search}}&sort=VendorName">Vendor</a></th>
-                            <?php else: ?>
+                            @else
                                 <th><a href="/item/?sort=Description">Description</a></th>
                                 <th><a href="/item/?sort=VendorName">Vendor</a></th>
-                            <?php endif; ?>
+                            @endif
                             <th>Edit</th>
                             <th>Restore</th>
                         </tr>
