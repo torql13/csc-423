@@ -241,20 +241,22 @@ class InventoryItemsController extends Controller
     public function searchInactive(Request $request)
     {
         $search = $request->input('search');
-
         if(request()->has('sort'))
         {
             $items = InventoryItem::where([
                 ['Description', 'like', '%' . $search . '%'],
-                ['inventory_item.Status', 'Inactive']
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
             ])
             ->orWhere([
                 ['ItemId', 'like', '%' . $search . '%'],
-                ['inventory_item.Status', 'Inactive']
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
             ])
             ->orWhere([
                 ['vendor.VendorName', 'like', '%' . $search . '%'],
-                ['inventory_item.Status', 'Inactive']
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
             ])
             ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
             ->orderBy(request('sort'), 'ASC')
@@ -262,17 +264,23 @@ class InventoryItemsController extends Controller
         }
         else
         {
-            $items = InventoryItem::where([
+            $items = InventoryItem::whereHas('vendor', function($query){
+                $query->where('Status', 'Active');
+            })
+            ->where([
                 ['Description', 'like', '%' . $search . '%'],
-                ['inventory_item.Status', 'Inactive']
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
             ])
             ->orWhere([
                 ['ItemId', 'like', '%' . $search . '%'],
-                ['inventory_item.Status', 'Inactive']
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
             ])
             ->orWhere([
                 ['vendor.VendorName', 'like', '%' . $search . '%'],
-                ['inventory_item.Status', 'Inactive']
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
             ])
             ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
             ->paginate(10);
