@@ -90,8 +90,21 @@
                 </div>
 
                 <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Status</label><br />
+                        @if($item->Status === "Active")
+                            <input type="radio" name="status" value="Active" checked> Active 
+                            <input type="radio" name="status" value="Inactive"> Inactive 
+                        @else
+                            <input type="radio" name="status" value="Active"> Active 
+                            <input type="radio" name="status" value="Inactive" checked> Inactive 
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-row">
                     <div class="btn-toolbar col-md-5">
-                        <input class="btn btn-primary" type="submit" value="Submit" />
+                        <input class="btn btn-primary" onclick="this.disabled=true;this.form.submit();" type="submit" value="Submit" />
                         &nbsp;
                         <input class="btn btn-secondary" onclick="resetForms()" type="reset" value="Reset" />
                     </div>
@@ -101,7 +114,11 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item/">Return to Item Index</a>
+                @if($item->Status === "Active")
+                    <a href="/item/">Return to Active Inventory Items</a>
+                @else
+                    <a href="/item/inactiveIndex">Return to Inactive Inventory Items</a>
+                @endif
             </div>
         </div>
     </div>

@@ -4,11 +4,11 @@
 <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="mt-3">Active Inventory Items</h2>
+                <h2 class="mt-3">Inactive Inventory Items (With Active Vendors)</h2>
                 <p>
                     <ul>
                         <li><a href='/item/addItem'>Add Inventory Item</a></li>
-                        <li><a href='/item/inactiveIndex'>Manage Inactive Inventory Items</a></li>
+                        <li><a href='/item/'>Manage Active Inventory Items</a></li>
                     </ul>
                 </p>
                 <p>
@@ -20,7 +20,7 @@
                             <th>Retail</th>
                             <th>Vendor</th>
                             <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Restore</th>
                         </tr>
                         @foreach ($items as $item)
                         <tr>
@@ -30,7 +30,7 @@
                             <td>{{$item->ItemRetail}}</td>
                             <td>{{$item->vendor->VendorName}}
                             <td><a href="/item/editItem/{{$item->ItemId}}">Edit</a></td>
-                            <td><a href="/item/deleteItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/item/restoreItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');">Restore</a></td>
                         </tr>
                         @endforeach
                     </table>
@@ -39,16 +39,4 @@
             </div>
         </div>
     </div>
-    <?php 
-        if(Session::has('emptyVendor')): ?>
-            <script>
-                alert("Cannot add an Inventory Item. There are no active Vendors.");
-            </script>
-            <?php Session::forget('emptyVendor');
-        elseif(Session::has('noItem')): ?>
-            <script>
-                alert("This Inventory Item does not exist.");
-            </script>
-            <?php Session::forget('noItem');
-        endif; ?>
 @stop

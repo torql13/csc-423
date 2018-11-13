@@ -79,7 +79,7 @@
 
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item/">Return to Store Index</a>
+                <a href="/item/">Return to Inventory Item Index</a>
             </div>
         </div>
     </div>
