@@ -35,7 +35,7 @@
                         <input type="text" class="form-control" name="storeCity" id="storeCity" />
                     </div>
                     <div class="form-group col-md-2">
-                    <select class="form-control" name="vendorState" id="vendorState" size="1">
+                    <select class="form-control" name="storeState" id="storeState" size="1">
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
                             <option value="AZ">AZ</option>	
