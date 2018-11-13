@@ -36,7 +36,7 @@ Route::get('/item/index', 'InventoryItemsController@index');
 
 Route::get('/item/inactiveIndex', 'InventoryItemsController@inactiveIndex');
 
-Route::get('/item/addItem', 'InventoryItemsController@getVendors');
+Route::get('/item/addItem', 'InventoryItemsController@getExtraDetails');
 
 Route::post('/item/addItem', array('as' => 'insert', 'uses' => 'InventoryItemsController@insertNewItem'));
 

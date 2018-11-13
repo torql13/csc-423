@@ -56,7 +56,7 @@ class InventoryItemsController extends Controller
         return view('InventoryItem/inactiveIndex', compact('items', 'search'));
     }
 
-    public function getVendors()
+    public function getExtraDetails()
     {
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
         if(!$vendors->count())
@@ -64,7 +64,10 @@ class InventoryItemsController extends Controller
             session(['emptyVendor' => '1']);
             return $this->index();
         }
-        return view('InventoryItem/addItem', compact('vendors'));
+        //pull divisions and categories from the divisions and categories arrays in inventory item model
+        $divisions = DB::table('divisions')->get();
+        $categories = DB::table('categories')->get();
+        return view('InventoryItem/addItem', compact('vendors', 'divisions', 'categories'));
     }
 
     public function insertNewItem(Request $request)
@@ -98,7 +101,11 @@ class InventoryItemsController extends Controller
         }
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
 
-        return view('/InventoryItem/editItem', compact('item', 'vendors'));
+        //pull divisions and categories data from the divisions and categories tables
+        $divisions = DB::table('divisions')->get();
+        $categories = DB::table('categories')->get();
+
+        return view('/InventoryItem/editItem', compact('item', 'vendors', 'divisions', 'categories'));
     }
 
     public function updateItem(Request $request)
