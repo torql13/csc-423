@@ -14,7 +14,7 @@
                         </tr>
                         @foreach ($orders as $order)
                         <tr>
-                            <td>{{$order->OrderId}}</td>
+                            <td><a href="/order/viewOrder/{$order->OrderId}">{{$order->OrderId}}</a></td>
                             <td>{{$order->DateTimeOfOrder}}</td>
                             <td>{{$order->Status}}</td>
                         </tr>
