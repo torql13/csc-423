@@ -29,6 +29,11 @@ Route::post('/vendor/updateVendor', array('as' => 'update', 'uses' => 'VendorsCo
 Route::get('/vendor/searchActive', 'VendorsController@searchActive');
 
 Route::get('/vendor/searchInactive', 'VendorsController@searchInactive');
+Route::post('/vendor/updatePassword', array('as' => 'update', 'uses' => 'VendorsController@changePassword'));
+
+Route::get('/vendor/changePassword/{id}', function($vendorId){
+    return view('Vendor.changePassword', compact('vendorId'));
+});
 
 Route::get('/item/', 'InventoryItemsController@index');
 
@@ -82,3 +87,17 @@ Route::post('/storeLocation/updateLocation', array('uses' => 'StoresController@u
 Route::get('/storeLocations/deleteLocation/{id}', ['uses' => 'StoresController@deleteLocation', 'as' => 'deleteLocation']);
 
 Route::get('/storeLocations/search', 'StoresController@search');
+Route::get('/login', function(){
+    return view('login');
+});
+
+Route::post('/login', array('as' => 'login', 'uses' => 'VendorsController@login'));
+
+Route::get('logout', function(){
+    session()->flush();
+    return redirect("/");
+});
+
+Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');
+
+Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
