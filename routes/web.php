@@ -90,3 +90,5 @@ Route::get('logout', function(){
 });
 
 Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');
+
+Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');

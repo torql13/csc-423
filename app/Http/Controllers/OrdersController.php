@@ -39,7 +39,7 @@ class OrdersController extends Controller
 
     public function viewVendorOrders()
     {
-        $orders = Order::where('VendorId', session('VendorId'))->simplePaginate(10);
+        $orders = Order::where('VendorId', session('VendorId'))->orderBy('Status', 'DESC')->simplePaginate(10);
 
         return view('order/viewVendorOrders', compact('orders'));
     }
@@ -77,13 +77,13 @@ class OrdersController extends Controller
         return redirect()->action('OrdersController@index');
     } */
 
-    /* public function viewOrder($id)
+    public function viewOrder($id)
     {
         $indOrder = Order::where('OrderId', $id)->first();
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
         $stores = DB::table('retail_store')->get();
         $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
 
-        return view('/Order/viewOrder/', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
-    } */
+        return view('Order/viewOrder', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
+    }
 }

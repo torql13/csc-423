@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-6">
                         <label>Vendor Id</label>
                         <select name="vendorId" id="vendorId" disabled>
                         @foreach($vendors as $vendor):
@@ -31,7 +31,7 @@
                 </div>
 
                  <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-6">
                         <label>Store Id</label>
                         <select name="storeId" id="storeId" disabled>
                         @foreach($stores as $store):
@@ -50,41 +50,48 @@
                         <label>Status</label>
                         <input type="text" class="form-control" name="status" id="status" value="{{ $indOrder->Status }}" disabled />
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Date and Time of Order</label>
                         <input type="text" class="form-control" name="dateTimeOfOrder" id="dateTimeOfOrder" value="{{ $indOrder->DateTimeOfOrder }}" disabled />
                     </div>
                 </div>
 
-                 <table class="table table-bordered table-hover">
-                        <tr>
-                            <th>ItemId</th>
-                            <th>QuantityOrdered</th>
-                        </tr>
-                        @foreach ($orderDetails as $orderDetail)
-                        <tr>
-                            <td>{{$orderDetail->ItemId}}</a></td>
-                            <td>{{$orderDetail->QuantityOrdered}}</td>
-                        </tr>
-                        @endforeach
-                    </table>
-
                 <div class="form-row">
-                <div class="btn-toolbar col-md-5">
-                    <a href="/order/editOrder/{{ $indOrder->OrderId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
-                    &nbsp;
-                    <a href="/order/deleteOrder/{{ $indOrder->OrderId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger" style="width:7vw;">Delete</a>
+                    <div class="form-group col-md-8">
+                        <table class="table table-bordered table-hover">
+                            <tr>
+                                <th>ItemId</th>
+                                <th>QuantityOrdered</th>
+                            </tr>
+                            @foreach ($orderDetails as $orderDetail)
+                            <tr>
+                                <td>{{$orderDetail->ItemId}}</a></td>
+                                <td>{{$orderDetail->QuantityOrdered}}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
                 </div>
-            </div>
+
+                @if(!session()->has('VendorId'))
+                    <div class="form-row">
+                        <div class="btn-toolbar col-md-5">
+                            <a href="/order/editOrder/{{ $indOrder->OrderId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
+                            &nbsp;
+                            <a href="/order/deleteOrder/{{ $indOrder->OrderId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger" style="width:7vw;">Delete</a>
+                        </div>
+                    </div>
+                @endif
         
             </fieldset>
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/order/">Return to Order Index</a>
+                @if(!session()->has('VendorId'))
+                    <a href="/order/">Return to Order Index</a>
+                @else
+                    <a href="/order/viewVendorOrders">Return to Vendor Orders Index</a>
+                @endif
             </div>
         </div>
     </div>

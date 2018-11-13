@@ -1,5 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Nanno's Foods</a>
+      @if(!session()->has('VendorId'))
+        <a class="navbar-brand" href="/">Nanno's Foods</a>
+      @else
+        <a class="navbar-brand" href="/order/viewVendorOrders">Nanno's Foods</a>
+      @endif
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
