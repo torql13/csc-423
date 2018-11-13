@@ -11,9 +11,19 @@ class StoresController extends Controller
 
     public function storeIndex()
     {
-        $locationList = StoreLocation::simplePaginate(10);
+        if(request()->has('sort'))
+        {
+            $locationList = StoreLocation::orderBy(request('sort'), 'ASC')->simplePaginate(10);
+        }
+        else
+        {
+            $locationList = StoreLocation::simplePaginate(10);
+        }
 
-        return view('StoreLocation.storeIndex', compact('locationList'));
+        //fill search variable with empty text
+        $search = "";
+
+        return view('StoreLocation.storeIndex', compact('locationList', 'search'));
 
     }
 
@@ -74,5 +84,25 @@ class StoresController extends Controller
         ]);
         
         return redirect()->action('StoresController@storeIndex');
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        if(request()->has('sort'))
+        {
+            $locationList = StoreLocation::where('StoreCode', 'like', '%' . $search . '%')
+            ->orWhere('StoreName', 'like', '%' . $search . '%')
+            ->orderBy(request('sort'), 'ASC')
+            ->paginate(10);
+        }
+        else
+        {
+            $locationList = StoreLocation::where('StoreCode', 'like', '%' . $search . '%')
+            ->orWhere('StoreName', 'like', '%' . $search . '%')
+            ->paginate(10);
+        }
+        return view('StoreLocation.storeIndex', compact('locationList', 'search'));
     }
 }

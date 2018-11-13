@@ -20,4 +20,12 @@ class InventoryItem extends Model
     {
         return $this->belongsTo('App\Vendor', 'VendorId', 'VendorId');
     }
+
+    /**
+     * gets the order_details that belong to an inventory item
+     */
+    public function orderDetails()
+    {
+        return $this->hasMany('App\OrderDetail', 'ItemId', 'ItemId');
+    }
 }

@@ -68,6 +68,19 @@
             </div>
 
             <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Status</label><br />
+                    @if($indItem->Status === "Active")
+                        <input type="radio" name="status" value="Active" disabled checked> Active 
+                        <input type="radio" name="status" value="Inactive" disabled> Inactive 
+                    @else
+                        <input type="radio" name="status" value="Active" disabled> Active 
+                        <input type="radio" name="status" value="Inactive" disabled checked> Inactive 
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-row">
                 <div class="btn-toolbar col-md-5">
                     <a href="/item/editItem/{{ $indItem->ItemId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
                     &nbsp;

@@ -98,7 +98,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label>Phone</label>
+                        <label>Phone (xxx-xxx-xxxx)</label>
                         <input type="text" class="form-control" name="vendorPhone" id="vendorPhone">
                     </div>
                     <div class="form-group col-md-4">
@@ -110,7 +110,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>Password</label>
-                        <input type="text" class="form-control" name="password" id="password">
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
                 </div>
 

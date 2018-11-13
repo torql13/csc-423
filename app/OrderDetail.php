@@ -21,4 +21,12 @@ class OrderDetail extends Model
     {
         return $this->belongsTo('App\Order', 'OrderId', 'OrderId');
     }
+
+    /**
+     * gets the inventory item that this order_detail belongs to
+     */
+    public function item()
+    {
+        return $this->belongsTo('App\InventoryItem', 'ItemId', 'ItemId');
+    }
 }

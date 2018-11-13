@@ -10,21 +10,53 @@ class InventoryItemsController extends Controller
 {
     public function index()
     {
-        $items = InventoryItem::where('Status', 'Active')->simplePaginate(10);
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where('inventory_item.Status', 'Active')
+                ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+                ->orderBy(request('sort'), 'ASC')
+                ->simplePaginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where('Status', 'Active')->simplePaginate(10);
+        }
 
-        return view('InventoryItem/index', compact('items'));
+        //empty string placeholder for search
+        $search = "";
+        
+        return view('InventoryItem/index', compact('items', 'search'));
     }
 
     public function inactiveIndex()
     {
-        $items = InventoryItem::where('Status', 'Inactive')->whereHas('vendor', function($query){
-            $query->where('Status', 'Active');
-        })->simplePaginate(10);
+
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where('inventory_item.Status', 'Inactive')
+                ->whereHas('vendor', function($query){
+                    $query->where('Status', 'Active');
+                })
+                ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+                ->orderBy(request('sort'), 'ASC')
+                ->simplePaginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where('Status', 'Inactive')
+            ->whereHas('vendor', function($query){
+                $query->where('Status', 'Active');
+            })
+            ->simplePaginate(10);
+        }
         
-        return view('InventoryItem/inactiveIndex', compact('items'));
+        //empty string placeholder for search
+        $search = "";
+
+        return view('InventoryItem/inactiveIndex', compact('items', 'search'));
     }
 
-    public function getVendors()
+    public function getExtraDetails()
     {
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
         if(!$vendors->count())
@@ -32,7 +64,10 @@ class InventoryItemsController extends Controller
             session(['emptyVendor' => '1']);
             return $this->index();
         }
-        return view('InventoryItem/addItem', compact('vendors'));
+        //pull divisions and categories from the divisions and categories arrays in inventory item model
+        $divisions = DB::table('divisions')->get();
+        $categories = DB::table('categories')->get();
+        return view('InventoryItem/addItem', compact('vendors', 'divisions', 'categories'));
     }
 
     public function insertNewItem(Request $request)
@@ -66,7 +101,11 @@ class InventoryItemsController extends Controller
         }
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
 
-        return view('/InventoryItem/editItem', compact('item', 'vendors'));
+        //pull divisions and categories data from the divisions and categories tables
+        $divisions = DB::table('divisions')->get();
+        $categories = DB::table('categories')->get();
+
+        return view('/InventoryItem/editItem', compact('item', 'vendors', 'divisions', 'categories'));
     }
 
     public function updateItem(Request $request)
@@ -155,5 +194,98 @@ class InventoryItemsController extends Controller
         $vendors = DB::table('vendor')->get();
 
         return view('/InventoryItem/viewItem', compact('indItem', 'vendors'));
+    }
+    
+    public function searchActive(Request $request)
+    {
+        $search = $request->input('search');
+
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->orderBy(request('sort'), 'ASC')
+            ->paginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Active']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->paginate(10);
+        }
+        return view('InventoryItem/index', compact('items', 'search'));
+    }
+
+    public function searchInactive(Request $request)
+    {
+        $search = $request->input('search');
+        if(request()->has('sort'))
+        {
+            $items = InventoryItem::where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->orderBy(request('sort'), 'ASC')
+            ->paginate(10);
+        }
+        else
+        {
+            $items = InventoryItem::whereHas('vendor', function($query){
+                $query->where('Status', 'Active');
+            })
+            ->where([
+                ['Description', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
+            ])
+            ->orWhere([
+                ['ItemId', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
+            ])
+            ->orWhere([
+                ['vendor.VendorName', 'like', '%' . $search . '%'],
+                ['inventory_item.Status', 'Inactive'],
+                ['vendor.Status', 'Active']
+            ])
+            ->join('vendor', 'vendor.VendorId', '=', 'inventory_item.VendorId')
+            ->paginate(10);
+        }
+
+        return view('InventoryItem/inactiveIndex', compact('items', 'search'));
     }
 }
