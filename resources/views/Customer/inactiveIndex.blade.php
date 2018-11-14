@@ -62,7 +62,7 @@
                             <td>{{$customer->Phone}}</td>
                             <td>{{$customer->Email}}</td>
                             <td><a href="/customer/editCustomer/{{$customer->CustomerId}}">Edit</a></td>
-                            <td><a href="/customer/deleteCustomer/{{$customer->CustomerId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/customer/restoreCustomer/{{$customer->CustomerId}}" onclick="return confirm('Are you sure?');">Restore</a></td>
                         </tr>
                         @endforeach
                     </table>
