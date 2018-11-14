@@ -26,6 +26,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/order">Orders</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/customer">Customers</a>
+            </li>
           </ul>
         @else
           <ul class="navbar-nav mr-auto">
