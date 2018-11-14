@@ -142,9 +142,8 @@ class InventoryItemsController extends Controller
             return redirect()->action('InventoryItemsController@index');
         }
 
-        InventoryItem::where('ItemId', $id)->update([
-            'Status' => 'Inactive'
-        ]);
+        $item->Status = 'Inactive';
+        $item->save();
 
         return redirect()->action('InventoryItemsController@index');
     }
@@ -156,36 +155,25 @@ class InventoryItemsController extends Controller
             ['ItemId', $id],
             ['Status', 'Inactive']
         ])->firstOrFail();
-        //if item doesn't exist, write noItem as true into session and redirect to index;
-        //   an alert will be shown
-        /*if(!$item)
-        {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
-        }*/
-
-        //get the vendor the item belongs to via model link
-        $vendor = $item->vendor;
 
         //if the vendor for this item is inactive, write noItem as true into session and 
         //   redirect to index; an alert will be shown
-        if($vendor->Status === 'Inactive')
+        if($item->vendor->Status === 'Inactive')
         {
             session(['noItem' => '1']);
             return redirect()->action('InventoryItemsController@index');
         }
 
-        InventoryItem::where('ItemId', $id)->update([
-            'Status' => 'Active'
-        ]);
+        $item->Status = 'Active';
+        $item->save();
 
         return redirect()->action('InventoryItemsController@index');
     }
 
     public function viewItem($id)
     {
-        $indItem = InventoryItem::where('ItemId', $id)->firstOrFail();
-        if($indItem->vendor->Status === 'Inactive')
+        $item = InventoryItem::where('ItemId', $id)->firstOrFail();
+        if($item->vendor->Status === 'Inactive')
         {
             session(['noItem' => '1']);
             return redirect()->action('InventoryItemsController@index');
@@ -193,7 +181,7 @@ class InventoryItemsController extends Controller
 
         $vendors = DB::table('vendor')->get();
 
-        return view('/InventoryItem/viewItem', compact('indItem', 'vendors'));
+        return view('/InventoryItem/viewItem', compact('item', 'vendors'));
     }
     
     public function searchActive(Request $request)
