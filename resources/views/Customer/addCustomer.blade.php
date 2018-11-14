@@ -14,7 +14,6 @@
                     <div class="form-group col-md-4">
                         <label>Name</label>
                         <input type="text" class="form-control" name="name" id="name"/>
-                        </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Address</label>

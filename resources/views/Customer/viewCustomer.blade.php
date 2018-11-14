@@ -11,7 +11,6 @@
                 <div class="form-group col-md-8">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{ $customer->Name }}" disabled>
-                    </select>
                 </div>
             </div>
 
