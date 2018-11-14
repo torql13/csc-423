@@ -25,7 +25,6 @@
                     <div class="form-group col-md-4">
                         <label>Vendor Name</label>
                         <input type="text" class="form-control" name="vendorName" id="vendorName" value="{{ $indVendor->VendorName }}"/>
-                        </select>
                     </div>
                 </div>
 

@@ -25,7 +25,6 @@
                     <div class="form-group col-md-4">
                         <label>Size</label>
                         <input type="text" class="form-control" name="size" id="size" value="{{ $item->Size }}"/>
-                        </select>
                     </div>
                 </div>
 

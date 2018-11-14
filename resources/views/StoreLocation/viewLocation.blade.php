@@ -10,52 +10,51 @@
             <div class="form-row" style="visibility:hidden;position:absolute">
                 <div class="form-group col-md-4">
                     <label>Store Id</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->StoreId }}">
+                    <input type="text" class="form-control" value="{{ $storeLocation->StoreId }}" />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Store Code</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->StoreCode }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->StoreCode }}" disabled />
                 </div>
                 <div class="form-group col-md-4">
                     <label>Store Name</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->StoreName }}" disabled>
-                    </select>
+                    <input type="text" class="form-control" value="{{ $storeLocation->StoreName }}" disabled />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label>Address</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->Address }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->Address }}" disabled />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>City</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->City }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->City }}" disabled />
                 </div>
                 <div class="form-group col-md-2">
                     <label>State</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->State }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->State }}" disabled />
                 </div>
                 <div class="form-group col-md-2">
                     <label>Zip</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->ZIP }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->ZIP }}" disabled />
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Phone</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->Phone }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->Phone }}" disabled />
                 </div>
                 <div class="form-group col-md-4">
                     <label>Manager</label>
-                    <input type="text" class="form-control" value="{{ $storeLocation->ManagerName }}" disabled>
+                    <input type="text" class="form-control" value="{{ $storeLocation->ManagerName }}" disabled />
                 </div>
             </div>
 

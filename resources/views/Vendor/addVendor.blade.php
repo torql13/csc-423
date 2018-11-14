@@ -18,7 +18,6 @@
                     <div class="form-group col-md-4">
                         <label>Vendor Name</label>
                         <input type="text" class="form-control" name="vendorName" id="vendorName"/>
-                        </select>
                     </div>
                 </div>
 
@@ -74,7 +73,7 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/vendor/">Return to Vendor Index</a>
+                <a href="/vendor/">Return to Active Vendors</a>
             </div>
         </div>
     </div>
