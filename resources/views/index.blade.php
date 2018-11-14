@@ -23,7 +23,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="/vendor/" class="btn btn-primary">Vendor Index</a>
+            <a href="/vendor/" class="btn btn-primary">Manage Vendors</a>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="/item/" class="btn btn-primary">Inventory Item Index</a>
+            <a href="/item/" class="btn btn-primary">Manage Inventory Items</a>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="/storeLocations/" class="btn btn-primary">Retail Store Index</a>
+            <a href="/storeLocations/" class="btn btn-primary">Manage Retail Stores</a>
           </div>
         </div>
       </div>
@@ -71,7 +71,23 @@
             </p>
           </div>
           <div class="card-footer">
-            <a href="/order/" class="btn btn-primary">Order Index</a>
+            <a href="/order/" class="btn btn-primary">Manage Orders</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Customers</h2>
+            <p class="card-text">
+            Manage Customers who make purchases at Stores
+            <ul>
+              <li><a href="/customer/addCustomer">Create a new Customer</a></li>
+            </ul>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/customer/" class="btn btn-primary">Manage Customers</a>
           </div>
         </div>
       </div>
