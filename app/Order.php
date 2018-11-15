@@ -12,6 +12,9 @@ class Order extends Model
     //define name of primary key for model's associated table
     protected $primaryKey = 'OrderId';
 
+    //disable timestamps
+    public $timestamps = false;
+
     /**
      * gets the order details that belong to an order
      */

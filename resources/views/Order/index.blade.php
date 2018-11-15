@@ -10,13 +10,13 @@
                         <li><a href='/order/newOrder'>Create New Order</a></li>
                     </ul>
                 </p>
-                <p>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>OrderId</th>
                             <th>DateTimeOfOrder</th>
                             <th>Status</th>
                             <th>Add Items to Order</th>
+                            <th>Delivery</th>
                         </tr>
                         @foreach ($orders as $order)
                         <tr>
@@ -24,6 +24,7 @@
                             <td>{{$order->DateTimeOfOrder}}</td>
                             <td>{{$order->Status}}</td>
                             <td><a href="/order/addDetailsExistingOrder/{{$order->OrderId}}" >Add to Order</a></td>
+                            <td><a href="/order/processDelivery/{{$order->OrderId}}" onclick="return confirm('Process this delivery?');">Process Delivery</a></td>
                         </tr>
                         @endforeach
                     </table>

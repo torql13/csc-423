@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderDetail;
+use App\Inventory;
 use Illuminate\Http\Request;
 use DB;
 use DateTime;
@@ -85,5 +87,45 @@ class OrdersController extends Controller
         $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
 
         return view('Order/viewOrder', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
+    }
+    
+    public function processDelivery($id)
+    {
+        $order = Order::where('OrderId', $id)->first();
+
+        $orderDetails = OrderDetail::where('OrderId', $id)->get();
+
+        foreach($orderDetails as $detail)
+        {
+            $existingItem = Inventory::where('ItemId', $detail['ItemId'])->get();
+
+            if(!count($existingItem))
+            {
+                Inventory::insert([
+                    'StoreId' => $order['StoreId'],
+                    'ItemId' => $detail['ItemId'],
+                    'QuantityInStock' => $detail['QuantityOrdered']
+                ]);
+            }
+            else
+            {
+                $quantity = $existingItem[0]['QuantityInStock'];
+
+                $totalQuantity = $quantity + $detail['QuantityOrdered'];
+
+                Inventory::where('ItemId', $detail['ItemId'])->update([
+                    'QuantityInStock' => $totalQuantity
+                ]);
+            }
+
+            $now = new DateTime();
+
+            Order::where('OrderId', $id)->update([
+                'Status' => 'Delivered',
+                'DateTimeOfFulfillment' => $now
+            ]);
+
+            return redirect('/order');
+        }
     }
 }
