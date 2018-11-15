@@ -13,7 +13,7 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::simplePaginate(10);
+        $orders = Order::where('Status', '!=', "Returned")->orderBy('Status', 'DESC')->simplePaginate(10);
 
         return view('order/index', compact('orders'));
     }
