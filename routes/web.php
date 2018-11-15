@@ -102,7 +102,7 @@ Route::get('/customer/addCustomer', function(){
 
 Route::post('customer/addCustomer', 'CustomersController@addCustomer');
 
-Route::get('customer/editCustomer', 'CustomersController@editCustomer');
+Route::get('customer/editCustomer/{id}', 'CustomersController@editCustomer');
 
 Route::post('customer/editCustomer', 'CustomersController@updateCustomer');
 
