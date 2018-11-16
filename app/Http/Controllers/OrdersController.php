@@ -14,8 +14,9 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::where('Status', '!=', "Returned")->orderBy('Status', 'DESC')->simplePaginate(10);
+        $search = "";
 
-        return view('order/index', compact('orders'));
+        return view('order/index', compact('orders', 'search'));
     }
 
     public function getVendorsAndStores()
@@ -127,5 +128,17 @@ class OrdersController extends Controller
 
             return redirect('/order');
         }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
+        $orders = Order::where('OrderId', 'like', '%' . $search . '%')
+            ->paginate(10);
+        return view('Order.index', compact('orders', 'search'));
     }
 }

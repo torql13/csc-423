@@ -72,6 +72,8 @@ Route::get('/order/addDetailsExistingOrder/{id}', 'OrderDetailsController@addDet
 
 Route::post('/order/updateDetailsExistingOrder', array('as' => 'update', 'uses' => 'OrderDetailsController@updateDetailsExistingOrder'));
 
+Route::get('/order/search', 'OrdersController@search');
+
 Route::get('/storeLocations/', 'StoresController@storeIndex');
 
 Route::get('/storeLocations/addLocation', function(){

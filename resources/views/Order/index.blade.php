@@ -10,6 +10,36 @@
                         <li><a href='/order/newOrder'>Create New Order</a></li>
                     </ul>
                 </p>
+                <p>
+                    <form action="{{ action('OrdersController@search') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
+                        <fieldset>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <table>
+                                        <tr>
+                                            @if($search)
+                                                <td width="300">
+                                                    <input type="text" class="form-control" name="search" id="search" value="{{$search}}" />
+                                                </td>
+                                                <td>
+                                                    <input class="btn btn-primary" type="submit" id="submit" value="Search" />
+                                                </td>
+                                            @else
+                                                <td width="300">
+                                                    <input type="text" class="form-control" name="search" id="search" value="Search by OrderId" onfocus="this.value='';$('#submit').prop('disabled', false)" />
+                                                </td>
+                                                <td>
+                                                    <input class="btn btn-primary" type="submit" disabled="true" id="submit" value="Search" />
+                                                </td>
+                                            @endif
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </p>
+                <p>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>OrderId</th>
