@@ -10,18 +10,28 @@
         
                 <legend>Edit Vendor</legend>
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
                         <label>Vendor Id</label>
                         <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $indVendor->VendorId }}">
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Vendor Code</label>
                         <input type="text" class="form-control" name="vendorCode" id="vendorCode" value="{{ $indVendor->VendorCode }}">
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Vendor Name</label>
                         <input type="text" class="form-control" name="vendorName" id="vendorName" value="{{ $indVendor->VendorName }}"/>
@@ -76,6 +86,13 @@
                         <label>Password</label>
                         <input type="text" class="form-control" name="password" id="password" value="{{ $indVendor->Password }}">
                     </div> -->
+                </div>
+
+                <div class="form-row" style="visibility:hidden;position:absolute">
+                    <div class="form-group col-md-4">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="password" id="password" value="{{ $indVendor->Password }}">
+                    </div>
                 </div>
 
                 <div class="form-row">

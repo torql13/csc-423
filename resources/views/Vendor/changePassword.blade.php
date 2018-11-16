@@ -9,25 +9,37 @@
             <fieldset>
         
                 <legend>Change Password</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @elseif(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
                         <label>Vendor Id</label>
-                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $vendorId }}">
+                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $vendorId }}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Old Password</label>
-                        <input type="password" class="form-control" name="oldPass" id="oldPass">
+                        <input type="password" class="form-control" name="oldPass" id="oldPass" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>New Password</label>
-                        <input type="password" class="form-control" name="newPass" id="newPass">
+                        <input type="password" class="form-control" name="newPass" id="newPass" />
                     </div>
                 </div>
 

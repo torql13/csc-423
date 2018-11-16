@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Vendor;
+use App\Http\Requests\StoreVendor;
+use App\Http\Requests\ChangePassword;
 use Illuminate\Http\Request;
 use DB;
 
@@ -90,12 +92,13 @@ class VendorsController extends Controller
         return view('/Vendor/editVendor', compact('indVendor'));
     }
 
-    public function updateVendor(Request $request)
+    public function updateVendor(StoreVendor $request)
     {
         $vendor = $request->all();
 
         Vendor::where('VendorId', $vendor['vendorId'])
             ->update([
+                'VendorCode' => $vendor['vendorCode'],
                 'VendorName' => $vendor['vendorName'],
                 'Address' => $vendor['vendorAddress'],
                 'City' => $vendor['vendorCity'],
@@ -117,10 +120,10 @@ class VendorsController extends Controller
         return view('/Vendor/viewVendor', compact('indVendor'));
     }
 
-    public function insertNewVendor(Request $request)
+    public function insertNewVendor(StoreVendor $request)
     {
-
-        $newVendor = $request->all();
+        
+        $newVendor = $request->validated();
 
         $hashedPass = $this->hashPassword($newVendor['password']);
 
@@ -204,7 +207,7 @@ class VendorsController extends Controller
 
         return view('Vendor/inactiveIndex', compact('vendorList', 'search'));
     }
-    public function changePassword(Request $request)
+    public function changePassword(ChangePassword $request)
     {
         $newVendor = $request->all();
 
@@ -221,7 +224,8 @@ class VendorsController extends Controller
         }
         else
         {
-            return redirect("vendor/changePassword/" . $newVendor['vendorId']);
+            return redirect("vendor/changePassword/" . $newVendor['vendorId'])
+                ->with('error', 'The old password entered was incorrect.');
         }
     }
 
@@ -231,11 +235,12 @@ class VendorsController extends Controller
 
         $hashedPass = $this->hashPassword($loginData['password']);
 
-        $record = Vendor::where('VendorCode', $loginData['vendorCode'])
-            ->where('Password', $hashedPass)
-            ->first();
-
-        if(count($record))
+        $record = Vendor::where([
+            ['VendorCode', $loginData['vendorCode']],
+            ['Password', $hashedPass]
+        ])->first();
+        
+        if($record)
         {
             //$request->session()->put('VendorId', $record->VendorId);
             session([
@@ -254,8 +259,7 @@ class VendorsController extends Controller
         }
         else
         {
-            $errorMessage = "Username or Password is incorrect";
-            return view('/login', compact('errorMessage'));
+            return view('/login')->with('error', 'Username or Password is incorrect.');
         }
     }
 }

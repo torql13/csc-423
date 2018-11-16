@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mt-4 offset-md-3">
     <div class="well">
-        @if(isset($errorMessage))
-            <div class="alert alert-danger col-md-4" role="alert">
-                {{$errorMessage}}
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
         @endif
     

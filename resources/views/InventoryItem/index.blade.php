@@ -1,9 +1,14 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <h2 class="mt-3">Active Inventory Items</h2>
                 <p>
                     <ul>
@@ -69,15 +74,4 @@
             </div>
         </div>
     </div>
-    @if(Session::has('emptyVendor'))
-        <script>
-            alert("Cannot add an Inventory Item. There are no active Vendors.");
-        </script>
-        @php (Session::forget('emptyVendor'))
-    @elseif(Session::has('noItem'))
-        <script>
-            alert("This Inventory Item does not exist.");
-        </script>
-        @php (Session::forget('noItem'))
-    @endif
 @stop
