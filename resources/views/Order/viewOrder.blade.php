@@ -51,8 +51,13 @@
                         <input type="text" class="form-control" name="status" id="status" value="{{ $indOrder->Status }}" disabled />
                     </div>
                     <div class="form-group col-md-4">
+                    @if($indOrder->DateTimeOfFulfillment)
+                        <label>Date and Time of Delivery</label>
+                        <input type="text" class="form-control" name="dateTimeOfFulfill" id="dateTimeOfFulfill" value="{{ $indOrder->DateTimeOfFulfillment }}" disabled />
+                    @else
                         <label>Date and Time of Order</label>
                         <input type="text" class="form-control" name="dateTimeOfOrder" id="dateTimeOfOrder" value="{{ $indOrder->DateTimeOfOrder }}" disabled />
+                    @endif
                     </div>
                 </div>
 

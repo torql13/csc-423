@@ -61,8 +61,7 @@ class InventoryItemsController extends Controller
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
         if(!$vendors->count())
         {
-            session(['emptyVendor' => '1']);
-            return $this->index();
+            return redirect()->action('InventoryItemsController@index')->with('error', 'Cannot add an Inventory Item. There are no active Vendors.');
         }
         //pull divisions and categories from the divisions and categories arrays in inventory item model
         $divisions = DB::table('divisions')->get();
@@ -96,8 +95,7 @@ class InventoryItemsController extends Controller
         $item = InventoryItem::where('ItemId', $id)->firstOrFail();
         if($item->vendor->Status === 'Inactive')
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
 
@@ -138,8 +136,7 @@ class InventoryItemsController extends Controller
         ])->firstOrFail();
         if($item->vendor->Status === "Inactive")
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
 
         $item->Status = 'Inactive';
@@ -160,8 +157,7 @@ class InventoryItemsController extends Controller
         //   redirect to index; an alert will be shown
         if($item->vendor->Status === 'Inactive')
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
 
         $item->Status = 'Active';
@@ -175,8 +171,7 @@ class InventoryItemsController extends Controller
         $item = InventoryItem::where('ItemId', $id)->firstOrFail();
         if($item->vendor->Status === 'Inactive')
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
 
         $vendors = DB::table('vendor')->get();
