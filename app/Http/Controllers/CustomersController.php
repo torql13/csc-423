@@ -144,6 +144,10 @@ class CustomersController extends Controller
     public function searchActive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
 
         if(request()->has('sort'))
         {
@@ -177,6 +181,10 @@ class CustomersController extends Controller
     public function searchInactive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->inactiveIndex();
+        }
 
         if(request()->has('sort'))
         {

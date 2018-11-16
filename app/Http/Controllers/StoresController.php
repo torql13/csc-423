@@ -86,6 +86,10 @@ class StoresController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->storeIndex();
+        }
 
         if(request()->has('sort'))
         {
