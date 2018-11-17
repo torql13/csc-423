@@ -24,7 +24,7 @@ class StoreVendor extends FormRequest
     public function rules()
     {
         return [
-            'vendorCode' => 'required|unique:vendor,VendorCode,' . $this->vendorId . ',VendorId|numeric|digits_between:1,10',
+            'vendorCode' => 'required_without:vendorId|unique:vendor,VendorCode,' . $this->vendorId . ',VendorId|numeric|digits_between:1,10',
             'vendorName' => 'required|regex:/^[A-Za-z0-9\',\s\.\-\(\)\?]+$/',
             'vendorAddress' => 'required|alpha_dash',
             'vendorCity' => 'required|alpha_dash',
@@ -39,6 +39,7 @@ class StoreVendor extends FormRequest
     public function messages()
     {
         return[
+            'vendorCode.required_without' => 'The vendor code is required.',
             'vendorName.regex' => 'The vendor name must contain only letters, numbers, apostrophes, periods, hyphens, parentheses, and question marks.',
             'vendorPhone.regex' => 'The vendor phone must be in the format XXX-XXX-XXXX, containing only numbers and dashes.',
             'contactPerson.regex' => 'The vendor contact must contain only letters, hyphens, spaces, and apostrophes.'

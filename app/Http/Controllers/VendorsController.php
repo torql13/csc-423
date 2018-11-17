@@ -98,7 +98,6 @@ class VendorsController extends Controller
 
         Vendor::where('VendorId', $vendor['vendorId'])
             ->update([
-                'VendorCode' => $vendor['vendorCode'],
                 'VendorName' => $vendor['vendorName'],
                 'Address' => $vendor['vendorAddress'],
                 'City' => $vendor['vendorCity'],

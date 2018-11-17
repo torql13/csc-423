@@ -25,10 +25,6 @@
                         <label>Vendor Id</label>
                         <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{ $indVendor->VendorId }}">
                     </div>
-                    <div class="form-group col-md-4">
-                        <label>Vendor Code</label>
-                        <input type="text" class="form-control" name="vendorCode" id="vendorCode" value="{{ $indVendor->VendorCode }}">
-                    </div>
                 </div>
 
                 <div class="form-row">
