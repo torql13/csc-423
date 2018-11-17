@@ -9,15 +9,23 @@
             <fieldset>
         
                 <legend>Add Item</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Description</label>
-                        <input type="text" class="form-control" name="description" id="description">
+                        <input type="text" class="form-control" name="description" id="description" value="{{old('description')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Size</label>
-                        <input type="text" class="form-control" name="size" id="size"/>
+                        <input type="text" class="form-control" name="size" id="size" value="{{old('size')}}" />
                     </div>
                 </div>
 
@@ -43,22 +51,22 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Department</label>
-                        <input type="text" class="form-control" name="department" id="department">
+                        <input type="text" class="form-control" name="department" id="department" value="{{old('department')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Cost</label>
-                        <input type="text" class="form-control" name="cost" id="cost">
+                        <input type="text" class="form-control" name="cost" id="cost" value="{{old('cost')}}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Retail</label>
-                        <input type="text" class="form-control" name="retail" id="retail">
+                        <input type="text" class="form-control" name="retail" id="retail" value="{{old('retail')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Image File Name</label>
-                        <input type="text" class="form-control" name="imgFileName" id="imgFileName">
+                        <input type="text" class="form-control" name="imgFileName" id="imgFileName" value="{{old('imgFileName')}}" />
                     </div>
                 </div>
 

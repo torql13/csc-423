@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\InventoryItem;
+use App\Http\Requests\StoreItem;
 use Illuminate\Http\Request;
 use DB;
 
@@ -69,10 +70,19 @@ class InventoryItemsController extends Controller
         return view('InventoryItem/addItem', compact('vendors', 'divisions', 'categories'));
     }
 
-    public function insertNewItem(Request $request)
+    public function insertNewItem(StoreItem $request)
     {
         $newItem = $request->all();
-        
+        $cost = $newItem['cost'];
+        if(!strpos($cost, '.'))
+        {
+            $cost .= ".00";
+        }
+        $retail = $newItem['retail'];
+        if(!strpos($retail, '.'))
+        {
+            $retail .= ".00";
+        }
         InventoryItem::insert(
             [
                 'Description' => $newItem['description'],
@@ -80,8 +90,8 @@ class InventoryItemsController extends Controller
                 'Division' => $newItem['division'],
                 'Department' => $newItem['department'],
                 'Category' => $newItem['category'],
-                'ItemCost' => $newItem['cost'],
-                'ItemRetail' => $newItem['retail'], 
+                'ItemCost' => $cost,
+                'ItemRetail' => $retail, 
                 'ImageFileName' => $newItem['imgFileName'],
                 'VendorId' => $newItem['vendorId']
             ]
@@ -106,7 +116,7 @@ class InventoryItemsController extends Controller
         return view('/InventoryItem/editItem', compact('item', 'vendors', 'divisions', 'categories'));
     }
 
-    public function updateItem(Request $request)
+    public function updateItem(StoreItem $request)
     {
         $item = $request->all();
 
