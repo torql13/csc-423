@@ -20,10 +20,10 @@
                         </tr>
                         @foreach ($orders as $order)
                         <tr>
-                            <td><a href="/order/viewOrder/{{$order->OrderId}}">{{$order->OrderId}}</a></td>
+                            <td>{{$order->OrderId}}</td>
                             <td>{{$order->DateTimeOfOrder}}</td>
                             <td>{{$order->Status}}</td>
-                            <td><a href="/order/addDetailsExistingOrder/{{$order->OrderId}}" >Add to Order</a></td>
+                            <td><a href="/order/addDetailsExistingOrder/{{$order->OrderId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="Add to this Order">add_box</i></a></td>
                         </tr>
                         @endforeach
                     </table>

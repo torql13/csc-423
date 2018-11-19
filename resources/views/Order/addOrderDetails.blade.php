@@ -36,7 +36,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label> Item </label>
-                        <select name="itemId0" id="itemId0" class=".items">
+                        <select class="itemId" name="itemId0" id="itemId0" class=".items">
                         @foreach($items as $item):
                             <option value="{{$item->ItemId}}">{{$item->Description}}</option>
                         @endforeach
@@ -75,10 +75,29 @@
 </div>
 
 <script type="text/javascript">
+var numItems = 1;
+$(".itemId").change(function()
+ {
 
-    
+        $("select option").attr("disabled",""); //enable everything
 
-    var numItems = 1;
+     //collect the values from selected;
+     var  arr = $.map
+     (
+        $("select option:selected"), function(n)
+         {
+              return n.value;
+          }
+      );
+
+    //disable elements
+    $("select option").filter(function()
+    {
+
+        return $.inArray($(this).val(),arr)>-1; //if value is in the array of selected values
+     }).attr("disabled","disabled");   
+
+});
     function addItems()
     {
         console.log("test")
@@ -86,7 +105,7 @@
                 '<div class="form-row">' +
                     '<div class="form-group col-md-8">' +
                         '<label> Item </label>' +
-                            '<select name="itemId' + numItems + '" id="itemId' + numItems + '" class=".items">' +
+                            '<select class="itemId" name="itemId' + numItems + '" id="itemId' + numItems + '" class=".items">' +
                                 '@foreach($items as $item):' +
                                     '<option value="{{$item->ItemId}}">{{$item->Description}}</option>' +
                                 '@endforeach' + 

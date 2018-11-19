@@ -19,9 +19,10 @@ class OrdersController extends Controller
     public function getVendorsAndStores()
     {
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
+        $items = DB::table('inventory_item')->get();
         $stores =  DB::table('retail_store')->get();
 
-        return view('Order/newOrder', compact('vendors', 'stores'));
+        return view('Order/newOrder', compact('vendors', 'stores', 'items'));
     }
 
     public function createNewOrder(Request $request)

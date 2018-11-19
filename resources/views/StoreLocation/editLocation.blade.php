@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group col-md-2">
                     <label>State</label>
-                    <select class="form-control" name="vendorState" id="vendorState" size="1">
+                    <select class="form-control" name="storeState" id="storeState" size="1">
                     @foreach($states as $state)
                             @if($defaultState === $state)
                                 <option value="{{$state}}" selected>{{$state}}</option>
