@@ -51,16 +51,17 @@
                                 <th><a href="/vendor/?sort=VendorName">Vendor Name</a></th>
                                 <th><a href="/vendor/?sort=ContactPersonName">Contact</a></th>
                             @endif
-                            <th>Edit</th>
-                            <th>Restore</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($vendorList as $vendor)
                         <tr>
-                            <td><a href="/vendor/view/{{$vendor->VendorId}}">{{$vendor->VendorCode}}</a></td>
+                            <td>{{$vendor->VendorCode}}</td>
                             <td>{{$vendor->VendorName}}</td>
                             <td>{{$vendor->ContactPersonName}}</td>
-                            <td><a href="/vendor/editVendor/{{$vendor->VendorId}}">Edit</a></td>
-                            <td><a href="/vendor/restoreVendor/{{$vendor->VendorId}}" onclick="return confirm('Are you sure?');">Restore</a></td>
+                            <td><a href="/vendor/view/{{$vendor->VendorId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
+                                <a href="/vendor/editVendor/{{$vendor->VendorId}}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
+                                <a href="/vendor/restoreVendor/{{$vendor->VendorId}}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Restore">restore_from_trash</i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </table>

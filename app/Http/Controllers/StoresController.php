@@ -60,8 +60,13 @@ class StoresController extends Controller
 
     public function editLocation($id)
     {
-        $storeLocation = StoreLocation::where('StoreId', $id)->firstOrFail();       
-        return view('StoreLocation.editLocation', compact('storeLocation'));
+        $storeLocation = StoreLocation::where('StoreId', $id)->first();  
+        $defaultState = $storeLocation->State;
+        $states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI',
+                    'MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+                    'VA','WA','WV','WI','WY'];
+
+        return view('StoreLocation.editLocation', compact('storeLocation', 'defaultState', 'states'));
     }
 
     public function updateLocation(Request $request)

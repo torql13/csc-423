@@ -45,16 +45,23 @@
                             <th>OrderId</th>
                             <th>DateTimeOfOrder</th>
                             <th>Status</th>
-                            <th>Add Items to Order</th>
-                            <th>Delivery</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($orders as $order)
                         <tr>
-                            <td><a href="/order/viewOrder/{{$order->OrderId}}">{{$order->OrderId}}</a></td>
+                            <td>{{$order->OrderId}}</td>
                             <td>{{$order->DateTimeOfOrder}}</td>
                             <td>{{$order->Status}}</td>
-                            <td><a href="/order/addDetailsExistingOrder/{{$order->OrderId}}" >Add to Order</a></td>
-                            <td><a href="/order/processDelivery/{{$order->OrderId}}" onclick="return confirm('Process this delivery?');">Process Delivery</a></td>
+                            <td>
+                            @if($order->Status === 'Pending')
+                                <a href="/order/addDetailsExistingOrder/{{$order->OrderId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="Add to this Order">add_box</i></a>
+                                <a href="/order/processDelivery/{{$order->OrderId}}" onclick="return confirm('Process this delivery?');"><i class="material-icons" style="font-size:36px;color:blue;" title="Process Delivery">airport_shuttle</i></a>
+                            @elseif($order->Status === 'Delivered')
+                                <a href="#" onclick="return confirm('Process this Return?');"><i class="material-icons" style="font-size:36px;color:red;" title="Process Return">keyboard_return</i></a>
+                            @elseif($order->Status === 'Returned')
+                                No Actions
+                            @endif
+                           </td>
                         </tr>
                         @endforeach
                     </table>
