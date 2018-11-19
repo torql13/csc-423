@@ -87,9 +87,13 @@ class VendorsController extends Controller
 
     public function editVendor($id)
     {
-        $indVendor = Vendor::where('VendorId', $id)->firstOrFail();
+        $indVendor = Vendor::where('VendorId', $id)->first();
+        $defaultState = $indVendor->State;
+        $states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI',
+                    'MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+                    'VA','WA','WV','WI','WY'];
         
-        return view('/Vendor/editVendor', compact('indVendor'));
+        return view('/Vendor/editVendor', compact('indVendor', 'defaultState', 'states'));
     }
 
     public function updateVendor(StoreVendor $request)
@@ -144,6 +148,10 @@ class VendorsController extends Controller
     public function searchActive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
 
         if(request()->has('sort'))
         {
@@ -177,6 +185,10 @@ class VendorsController extends Controller
     public function searchInactive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->inactiveIndex();
+        }
 
         if(request()->has('sort'))
         {

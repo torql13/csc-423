@@ -15,16 +15,18 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::where('Status', '!=', "Returned")->orderBy('Status', 'DESC')->simplePaginate(10);
+        $search = "";
 
-        return view('order/index', compact('orders'));
+        return view('order/index', compact('orders', 'search'));
     }
 
     public function getVendorsAndStores()
     {
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
+        $items = DB::table('inventory_item')->get();
         $stores =  DB::table('retail_store')->get();
 
-        return view('Order/newOrder', compact('vendors', 'stores'));
+        return view('Order/newOrder', compact('vendors', 'stores', 'items'));
     }
 
     public function createNewOrder(StoreOrder $request)
@@ -128,5 +130,17 @@ class OrdersController extends Controller
 
             return redirect('/order');
         }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
+        $orders = Order::where('OrderId', 'like', '%' . $search . '%')
+            ->paginate(10);
+        return view('Order.index', compact('orders', 'search'));
     }
 }

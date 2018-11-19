@@ -43,13 +43,13 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label>Item</label>
-                        <select name="itemId0" id="itemId0">
+                        <label> Item </label>
+                        <select class="itemId" name="itemId0" id="itemId0" class=".items">
                         @foreach($items as $item):
                             <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
                         @endforeach
                         </select>
-                        <label>Quantity</label>
+                        <label> Quantity </label>
                         <input type="text" name="quantity0" id="quantity0" />
                     </div>
                 </div>
@@ -83,26 +83,49 @@
 </div>
 
 <script type="text/javascript">
-    var numItems = 1;
+var numItems = 1;
+$(".itemId").change(function()
+ {
+
+        $("select option").attr("disabled",""); //enable everything
+
+     //collect the values from selected;
+     var  arr = $.map
+     (
+        $("select option:selected"), function(n)
+         {
+              return n.value;
+          }
+      );
+
+    //disable elements
+    $("select option").filter(function()
+    {
+
+        return $.inArray($(this).val(),arr)>-1; //if value is in the array of selected values
+     }).attr("disabled","disabled");   
+
+});
     function addItems()
     {
         console.log("test")
-            $("#itemForms").append(
+                $("#itemForms").append(
                 '<div class="form-row">' +
                     '<div class="form-group col-md-8">' +
-                        '<label>Item</label>' +
-                            '<select name="itemId' + numItems + '" id="itemId' + numItems + '">' +
+                        '<label> Item </label>' +
+                            '<select class="itemId" name="itemId' + numItems + '" id="itemId' + numItems + '" class=".items">' +
                                 '@foreach($items as $item):' +
-                                 '<option value="{{$item->ItemId}}">{{$item->ItemId}}</option>' + 
-                                '@endforeach' +
+                                    '<option value="{{$item->ItemId}}">{{$item->Description}}</option>' +
+                                '@endforeach' + 
                             '</select>' +
-                            '<label>Quantity</label>' + 
+                            '<label> Quantity </label>' + 
                             '<input type="text" name="quantity' + numItems + '" id="quantity' + numItems + '" />' +
                     '</div>' + 
                 '</div>'
             );
-            numItems++;
-            document.getElementById('numItems').value = numItems;
+            
+        numItems++;
+        document.getElementById('numItems').value = numItems;
     }   
 </script>
 @stop

@@ -56,16 +56,17 @@
                                 <th><a href="/item/?sort=Description">Description</a></th>
                                 <th><a href="/item/?sort=VendorName">Vendor</a></th>
                             @endif
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($items as $item)
                         <tr>
-                            <td><a href="/item/viewItem/{{$item->ItemId}}">{{$item->ItemId}}</a></td>
+                            <td>{{$item->ItemId}}</td>
                             <td>{{$item->Description}}</td>
                             <td>{{$item->vendor->VendorName}}
-                            <td><a href="/item/editItem/{{$item->ItemId}}">Edit</a></td>
-                            <td><a href="/item/deleteItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/item/viewItem/{{$item->ItemId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
+                                <a href="/item/editItem/{{$item->ItemId}}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
+                                <a href="/item/deleteItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </table>

@@ -24,7 +24,12 @@
                         <label>Vendor</label>
                         <select name="vendorId" id="vendorId">
                         @foreach($vendors as $vendor):
-                            <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @php 
+                                $numItems = DB::table('inventory_item')->get()->where('VendorId', $vendor->VendorId)->count();
+                            @endphp
+                            @if($numItems > 0)
+                                <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @endif
                         @endforeach
                         </select>
                     </div>
