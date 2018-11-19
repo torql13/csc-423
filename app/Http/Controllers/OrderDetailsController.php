@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\OrderDetail;
+use App\Http\Requests\StoreOrder;
 use Illuminate\Http\Request;
 use DB;
 use DateTime;
 
 class OrderDetailsController extends Controller
 {
-    public function insertOrderAndDetails(Request $request)
+    public function insertOrderAndDetails(StoreOrder $request)
     {
         $details = $request->all();
         $now = new DateTime();
@@ -21,8 +22,7 @@ class OrderDetailsController extends Controller
             [
                 'VendorId' => $details['vendorId'],
                 'StoreId' => $details['storeId'],
-                'DateTimeOfOrder' => $now,
-                'Status' => 'Pending'
+                'DateTimeOfOrder' => $now
             ]
         );
 
@@ -31,11 +31,11 @@ class OrderDetailsController extends Controller
         for ($i = 0; $i < $count; $i++)
         {
             OrderDetail::insert(
-            [
-                'OrderId' => $order->OrderId,
-                'ItemId' => $details['itemId'.$i], 
-                'QuantityOrdered' => $details['quantity'.$i]
-            ]
+                [
+                    'OrderId' => $order->OrderId,
+                    'ItemId' => $details['itemId'.$i], 
+                    'QuantityOrdered' => $details['quantity'.$i]
+                ]
             );
         }
         return redirect()->action('OrdersController@index');

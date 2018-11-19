@@ -9,7 +9,15 @@
             <fieldset>
         
                 <legend>Edit Store Location</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
                         <label>Store Id</label>
@@ -18,11 +26,7 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>Store Code</label>
-                        <input type="text" class="form-control" name="storeCode" id="storeCode" value="{{ $storeLocation->StoreCode }}">
-                    </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-8">
                         <label>Store Name</label>
                         <input type="text" class="form-control" name="storeName" id="storeName" value="{{ $storeLocation->StoreName }}"/>
                     </div>

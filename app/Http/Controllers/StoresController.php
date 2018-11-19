@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StoreLocation;
+use App\Http\Requests\StoreRetailStore;
 use DB;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class StoresController extends Controller
         return view('StoreLocation.viewLocation', compact('storeLocation'));
     }
 
-    public function insertNewLocation(Request $request)
+    public function insertNewLocation(StoreRetailStore $request)
     {
         $store = $request->all();
 
@@ -64,13 +65,12 @@ class StoresController extends Controller
         return view('StoreLocation.editLocation', compact('storeLocation'));
     }
 
-    public function updateLocation(Request $request)
+    public function updateLocation(StoreRetailStore $request)
     {
         $store = $request->all();
 
         StoreLocation::where('StoreId', $store['storeId'])
         ->update([
-            'StoreCode' => $store['storeCode'],
             'StoreName' => $store['storeName'],
             'Address' => $store['storeAddress'],
             'City' => $store['storeCity'],

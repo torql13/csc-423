@@ -10,7 +10,15 @@
             <fieldset>
         
                 <legend>Create a New Order</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>Vendor</label>
@@ -30,12 +38,6 @@
                             <option value="{{$store->StoreId}}">{{$store->StoreName}}</option>
                         @endforeach
                         </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>Status</label>
-                        <input type="text" class="form-control" name="status" id="status" value="Pending" disabled />
                     </div>
                 </div>
 

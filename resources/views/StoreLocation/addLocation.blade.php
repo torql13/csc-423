@@ -9,48 +9,56 @@
             <fieldset>
         
                 <legend>Insert a New Store Location</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Store Code</label>
-                        <input type="text" class="form-control" name="storeCode" id="storeCode" />
+                        <input type="text" class="form-control" name="storeCode" id="storeCode" value="{{old('storeCode')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Store Name</label>
-                        <input type="text" class="form-control" name="storeName" id="storeName" />
+                        <input type="text" class="form-control" name="storeName" id="storeName" value="{{old('storName')}}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>Address</label>
-                        <input type="text" class="form-control" name="storeAddress" id="storeAddress" />
+                        <input type="text" class="form-control" name="storeAddress" id="storeAddress" value="{{old('storeAddress')}}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>City</label>
-                        <input type="text" class="form-control" name="storeCity" id="storeCity" />
+                        <input type="text" class="form-control" name="storeCity" id="storeCity" value="{{old('storeCity')}}" />
                     </div>
                     <div class="form-group col-md-2">
                         <label>State</label>
-                        <input type="text" class="form-control" name="storeState" id="storeState" />
+                        <input type="text" class="form-control" name="storeState" id="storeState" value="{{old('storeState')}}" />
                     </div>
                     <div class="form-group col-md-2">
                         <label>Zip</label>
-                        <input type="text" class="form-control" name="storeZip" id="storeZip" />
+                        <input type="text" class="form-control" name="storeZip" id="storeZip" value="{{old('storezip')}}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Phone (xxx-xxx-xxxx)</label>
-                        <input type="text" class="form-control" name="storePhone" id="storePhone" />
+                        <input type="text" class="form-control" name="storePhone" id="storePhone" value="{{old('storePhone')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Manager</label>
-                        <input type="text" class="form-control" name="manager" id="manager" />
+                        <input type="text" class="form-control" name="manager" id="manager" value="{{old('manager')}}" />
                     </div>
                 </div>
 

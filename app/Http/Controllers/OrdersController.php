@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\OrderDetail;
 use App\Inventory;
+use App\Http\Requests\StoreOrder;
 use Illuminate\Http\Request;
 use DB;
 use DateTime;
@@ -26,7 +27,7 @@ class OrdersController extends Controller
         return view('Order/newOrder', compact('vendors', 'stores'));
     }
 
-    public function createNewOrder(Request $request)
+    public function createNewOrder(StoreOrder $request)
     {
         $newOrder = $request->all();
         $now = new DateTime();

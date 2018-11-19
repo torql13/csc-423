@@ -11,7 +11,15 @@
             <fieldset>
         
                 <legend>Add items to Order</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
                         <label>Number of Items</label>
@@ -35,10 +43,10 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label>items</label>
+                        <label>Item</label>
                         <select name="itemId0" id="itemId0">
                         @foreach($items as $item):
-                            <option value="{{$item->ItemId}}">{{$item->Description}}</option>
+                            <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
                         @endforeach
                         </select>
                         <label>Quantity</label>
@@ -85,7 +93,7 @@
                         '<label>Item</label>' +
                             '<select name="itemId' + numItems + '" id="itemId' + numItems + '">' +
                                 '@foreach($items as $item):' +
-                                 '<option value="{{$item->ItemId}}">{{$item->Description}}</option>' + 
+                                 '<option value="{{$item->ItemId}}">{{$item->ItemId}}</option>' + 
                                 '@endforeach' +
                             '</select>' +
                             '<label>Quantity</label>' + 

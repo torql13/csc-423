@@ -9,41 +9,49 @@
             <fieldset>
         
                 <legend>Add Customer</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Name</label>
-                        <input type="text" class="form-control" name="name" id="name"/>
+                        <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Address</label>
-                        <input type="text" class="form-control" name="address" id="address">
+                        <input type="text" class="form-control" name="address" id="address" value="{{old('address')}}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>City</label>
-                        <input type="text" class="form-control" name="city" id="city">
+                        <input type="text" class="form-control" name="city" id="city" value="{{old('city')}}" />
                     </div>
                     <div class="form-group col-md-2">
                         <label>State</label>
-                        <input type="text" class="form-control" name="state" id="state">
+                        <input type="text" class="form-control" name="state" id="state" value="{{old('state')}}" />
                     </div>
                     <div class="form-group col-md-2">
                         <label>Zip</label>
-                        <input type="text" class="form-control" name="zip" id="zip">
+                        <input type="text" class="form-control" name="zip" id="zip" value="{{old('zip')}}" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Phone (xxx-xxx-xxxx)</label>
-                        <input type="text" class="form-control" name="phone" id="phone">
+                        <input type="text" class="form-control" name="phone" id="phone" value="{{old('phone')}}" />
                     </div>
                     <div class="form-group col-md-4">
                         <label>Email</label>
-                        <input type="text" class="form-control" name="email" id="email">
+                        <input type="text" class="form-control" name="email" id="email" value="{{old('email')}}" />
                     </div>
                 </div>
 
