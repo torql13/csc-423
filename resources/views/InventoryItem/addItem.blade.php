@@ -18,7 +18,6 @@
                     <div class="form-group col-md-4">
                         <label>Size</label>
                         <input type="text" class="form-control" name="size" id="size"/>
-                        </select>
                     </div>
                 </div>
 
@@ -86,7 +85,7 @@
         </form>
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item/">Return to Item Index</a>
+                <a href="/item/">Return to Active Items</a>
             </div>
         </div>
     </div>

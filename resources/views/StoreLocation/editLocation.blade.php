@@ -25,7 +25,6 @@
                     <div class="form-group col-md-4">
                         <label>Store Name</label>
                         <input type="text" class="form-control" name="storeName" id="storeName" value="{{ $storeLocation->StoreName }}"/>
-                        </select>
                     </div>
                 </div>
 

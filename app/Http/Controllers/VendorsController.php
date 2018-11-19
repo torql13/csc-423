@@ -43,11 +43,13 @@ class VendorsController extends Controller
 
     public function deleteVendor($id)
     {
-        $vendor = Vendor::find($id);
+        $vendor = Vendor::where([
+            ['VendorId', $id],
+            ['Status', 'Active']
+        ])->firstOrFail();
 
-        Vendor::where('VendorId', $id)->update([
-            'Status' => 'Inactive'
-        ]);
+        $vendor->Status = 'Inactive';
+        $vendor->save();
 
         foreach($vendor->items as $item)
         {
@@ -62,11 +64,13 @@ class VendorsController extends Controller
 
     public function restoreVendor($id)
     {
-        $vendor = Vendor::find($id);
+        $vendor = Vendor::where([
+            ['VendorId', $id],
+            ['Status', 'Inactive']
+        ])->firstOrFail();
 
-        Vendor::where('VendorId', $id)->update([
-            'Status' => 'Active'
-        ]);
+        $vendor->Status = 'Active';
+        $vendor->save();
 
         foreach($vendor->items as $item)
         {
@@ -112,7 +116,7 @@ class VendorsController extends Controller
 
     public function viewVendor($id)
     {
-        $indVendor = Vendor::where('VendorId', $id)->first();
+        $indVendor = Vendor::where('VendorId', $id)->firstOrFail();
 
         return view('/Vendor/viewVendor', compact('indVendor'));
     }

@@ -15,7 +15,6 @@
                 <div class="form-group col-md-4">
                     <label>Vendor Name</label>
                     <input type="text" class="form-control" value="{{ $indVendor->VendorName }}" disabled>
-                    </select>
                 </div>
             </div>
 
@@ -73,7 +72,11 @@
 
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/vendor/">Return to Vendor Index</a>
+                @if($indVendor->Status === "Active")
+                    <a href="/vendor/">Return to Active Vendors</a>
+                @else
+                    <a href="/vendor/inactiveIndex">Return to Inactive Vendors</a>
+                @endif
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@ class StoresController extends Controller
 
     public function viewLocation($id)
     {
-        $storeLocation = StoreLocation::where('StoreId', $id)->first();       
+        $storeLocation = StoreLocation::where('StoreId', $id)->firstOrFail();       
         return view('StoreLocation.viewLocation', compact('storeLocation'));
     }
 
@@ -52,7 +52,9 @@ class StoresController extends Controller
 
     public function deleteLocation($id)
     {
-        StoreLocation::where('StoreId', $id)->delete();
+        $storeLocation = StoreLocation::where('StoreId', $id)->firstOrFail();
+        $storeLocation->delete();
+
         return redirect()->action('StoresController@storeIndex');
     }
 

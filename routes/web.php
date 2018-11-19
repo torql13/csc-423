@@ -89,6 +89,33 @@ Route::post('/storeLocations/updateLocation', array('uses' => 'StoresController@
 Route::get('/storeLocations/deleteLocation/{id}', ['uses' => 'StoresController@deleteLocation', 'as' => 'deleteLocation']);
 
 Route::get('/storeLocations/search', 'StoresController@search');
+
+Route::get('/customer/', 'CustomersController@index');
+
+Route::get('customer/index', 'CustomersController@index');
+
+Route::get('customer/inactiveIndex', 'CustomersController@inactiveIndex');
+
+Route::get('customer/viewCustomer/{id}', 'CustomersController@viewCustomer');
+
+Route::get('/customer/addCustomer', function(){
+    return view('Customer.addCustomer');
+});
+
+Route::post('customer/addCustomer', 'CustomersController@addCustomer');
+
+Route::get('customer/editCustomer/{id}', 'CustomersController@editCustomer');
+
+Route::post('customer/editCustomer', 'CustomersController@updateCustomer');
+
+Route::get('customer/deleteCustomer/{id}', 'CustomersController@deleteCustomer');
+
+Route::get('customer/restoreCustomer/{id}', 'CustomersController@restoreCustomer');
+
+Route::get('customer/searchActive', 'CustomersController@searchActive');
+
+Route::get('customer/searchInactive', 'CustomersController@searchInactive');
+
 Route::get('/login', function(){
     return view('login');
 });
@@ -103,3 +130,5 @@ Route::get('logout', function(){
 Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');
 
 Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
+
+Route::get('/order/processDelivery/{id}', 'OrdersController@processDelivery');

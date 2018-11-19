@@ -10,45 +10,44 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Description</label>
-                    <input type="text" class="form-control" value="{{ $indItem->Description }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->Description }}" disabled>
                 </div>
                 <div class="form-group col-md-4">
                     <label>Size</label>
-                    <input type="text" class="form-control" value="{{ $indItem->Size }}" disabled>
-                    </select>
+                    <input type="text" class="form-control" value="{{ $item->Size }}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label>Division</label>
-                    <input type="text" class="form-control" value="{{ $indItem->Division }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->Division }}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Department</label>
-                    <input type="text" class="form-control" value="{{ $indItem->Department }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->Department }}" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label>Category</label>
-                    <input type="text" class="form-control" value="{{ $indItem->Category }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->Category }}" disabled>
                 </div>
                 <div class="form-group col-md-2">
                     <label>Cost</label>
-                    <input type="text" class="form-control" value="{{ $indItem->ItemCost }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->ItemCost }}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Retail</label>
-                    <input type="text" class="form-control" value="{{ $indItem->ItemRetail }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->ItemRetail }}" disabled>
                 </div>
                 <div class="form-group col-md-4">
                     <label>Image File Name</label>
-                    <input type="text" class="form-control" value="{{ $indItem->ImageFileName }}" disabled>
+                    <input type="text" class="form-control" value="{{ $item->ImageFileName }}" disabled>
                 </div>
             </div>
 
@@ -57,7 +56,7 @@
                     <label>Vendor</label>
                     <select name="vendorId" id="vendorId" disabled>
                     @foreach($vendors as $vendor):
-                        @if($vendor->VendorId == $indItem->VendorId)
+                        @if($vendor->VendorId == $item->VendorId)
                             <option value="{{$vendor->VendorId}}" selected>{{$vendor->VendorName}}</option>
                         @else
                             <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
@@ -70,7 +69,7 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Status</label><br />
-                    @if($indItem->Status === "Active")
+                    @if($item->Status === "Active")
                         <input type="radio" name="status" value="Active" disabled checked> Active 
                         <input type="radio" name="status" value="Inactive" disabled> Inactive 
                     @else
@@ -82,9 +81,9 @@
 
             <div class="form-row">
                 <div class="btn-toolbar col-md-5">
-                    <a href="/item/editItem/{{ $indItem->ItemId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
+                    <a href="/item/editItem/{{ $item->ItemId }}" class="btn btn-secondary">Edit</a>
                     &nbsp;
-                    <a href="/item/deleteItem/{{ $indItem->ItemId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger" style="width:7vw;">Delete</a>
+                    <a href="/item/deleteItem/{{ $item->ItemId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</a>
                 </div>
             </div>
     
@@ -92,7 +91,11 @@
 
         <div class="row mt-2">
             <div class="col-md-4">
-                <a href="/item/">Return to Inventory Item Index</a>
+                @if($item->Status === "Active")
+                    <a href="/item/">Return to Active Inventory Items</a>
+                @else
+                    <a href="/item/inactiveIndex">Return to Inactive Inventory Items</a>
+                @endif
             </div>
         </div>
     </div>
