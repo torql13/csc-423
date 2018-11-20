@@ -22,9 +22,9 @@ class OrdersController extends Controller
 
     public function getVendorsAndStores()
     {
-        $vendors = DB::table('vendor')->get()->where('Status', 'Active');
-        $items = DB::table('inventory_item')->get();
-        $stores =  DB::table('retail_store')->get();
+        $vendors = DB::table('vendor')->where('Status', 'Active')->get();
+        $items = DB::table('inventory_item')->where('Status', 'Active')->get();
+        $stores =  DB::table('retail_store')->where('Status', 'Active')->get();
 
         return view('Order/newOrder', compact('vendors', 'stores', 'items'));
     }
@@ -36,7 +36,10 @@ class OrdersController extends Controller
 
 
         $vendorId = $newOrder['vendorId'];
-        $items = DB::table('inventory_item')->get()->where('VendorId', $vendorId);
+        $items = DB::table('inventory_item')->where([
+            ['VendorId', $vendorId],
+            ['Status', 'Active']
+        ])->get();
         //$order = Order::get()->last();
         return view('Order/addOrderDetails', compact('vendorId', 'items', 'newOrder'));
         //return redirect()->action('OrderDetailsController@getOrderAndItems');

@@ -4,15 +4,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="mt-3">Active Stores</h2>
+                <h2 class="mt-3">Inactive Stores</h2>
                 <p>
                     <ul>
                         <li><a href='/storeLocations/addLocation'>Add Location</a></li>
-                        <li><a href='/storeLocations/inactiveIndex'>Manage Inactive Stores</a></li>
+                        <li><a href='/storeLocations/index'>Manage Active Stores</a></li>
                     </ul>
                 </p>
                 <p>
-                    <form action="{{ action('StoresController@searchActive') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
+                    <form action="{{ action('StoresController@searchInactive') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
                         <fieldset>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
@@ -60,7 +60,7 @@
                             <td>{{$storeLocation->ManagerName}}</td>
                             <td><a href="/storeLocations/view/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
                                 <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
-                                <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                                <a href="/storeLocations/restoreLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Restore">restore_from_trash</i></a>
                             </td>
                         </tr>
                         @endforeach

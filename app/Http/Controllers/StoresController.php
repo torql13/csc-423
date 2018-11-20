@@ -14,11 +14,12 @@ class StoresController extends Controller
     {
         if(request()->has('sort'))
         {
-            $locationList = StoreLocation::orderBy(request('sort'), 'ASC')->simplePaginate(10);
+            $locationList = StoreLocation::where('Status', 'Active')
+                ->orderBy(request('sort'), 'ASC')->simplePaginate(10);
         }
         else
         {
-            $locationList = StoreLocation::simplePaginate(10);
+            $locationList = StoreLocation::where('Status', 'Active')->simplePaginate(10);
         }
 
         //fill search variable with empty text
@@ -26,6 +27,24 @@ class StoresController extends Controller
 
         return view('StoreLocation.storeIndex', compact('locationList', 'search'));
 
+    }
+
+    public function inactiveIndex()
+    {
+        if(request()->has('sort'))
+        {
+            $locationList = StoreLocation::where('Status', 'Inactive')
+                ->orderBy(request('sort'), 'ASC')->simplePaginate(10);
+        }
+        else
+        {
+            $locationList = StoreLocation::where('Status', 'Inactive')->simplePaginate(10);
+        }
+
+        //fill search variable with empty text
+        $search = "";
+
+        return view('StoreLocation.inactiveIndex', compact('locationList', 'search'));
     }
 
     public function viewLocation($id)
@@ -53,8 +72,26 @@ class StoresController extends Controller
 
     public function deleteLocation($id)
     {
-        $storeLocation = StoreLocation::where('StoreId', $id)->firstOrFail();
-        $storeLocation->delete();
+        $store = StoreLocation::where([
+            ['StoreId', $id],
+            ['Status', 'Active']
+        ])->firstOrFail();
+
+        $store->Status = 'Inactive';
+        $store->save();
+
+        return redirect()->action('StoresController@storeIndex');
+    }
+
+    public function restoreLocation($id)
+    {
+        $store = StoreLocation::where([
+            ['StoreId', $id],
+            ['Status', 'Inactive']
+        ])->firstOrFail();
+
+        $store->Status = 'Active';
+        $store->save();
 
         return redirect()->action('StoresController@storeIndex');
     }
@@ -88,7 +125,7 @@ class StoresController extends Controller
         return redirect()->action('StoresController@storeIndex');
     }
 
-    public function search(Request $request)
+    public function searchActive(Request $request)
     {
         $search = $request->input('search');
         if(!$search)
@@ -98,17 +135,65 @@ class StoresController extends Controller
 
         if(request()->has('sort'))
         {
-            $locationList = StoreLocation::where('StoreCode', 'like', '%' . $search . '%')
-            ->orWhere('StoreName', 'like', '%' . $search . '%')
-            ->orderBy(request('sort'), 'ASC')
-            ->paginate(10);
+            $locationList = StoreLocation::where([
+                    ['StoreCode', 'like', '%' . $search . '%'],
+                    ['Status', 'Active']
+                ])
+                ->orWhere([
+                    ['StoreName', 'like', '%' . $search . '%'],
+                    ['Status', 'Active']
+                ])
+                ->orderBy(request('sort'), 'ASC')
+                ->paginate(10);
         }
         else
         {
-            $locationList = StoreLocation::where('StoreCode', 'like', '%' . $search . '%')
-            ->orWhere('StoreName', 'like', '%' . $search . '%')
-            ->paginate(10);
+            $locationList = StoreLocation::where([
+                    ['StoreCode', 'like', '%' . $search . '%'],
+                    ['Status', 'Active']
+                ])
+                ->orWhere([
+                    ['StoreName', 'like', '%' . $search . '%'],
+                    ['Status', 'Active']
+                ])
+                ->paginate(10);
         }
         return view('StoreLocation.storeIndex', compact('locationList', 'search'));
+    }
+
+    public function searchInactive(Request $request)
+    {
+        $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->storeIndex();
+        }
+
+        if(request()->has('sort'))
+        {
+            $locationList = StoreLocation::where([
+                    ['StoreCode', 'like', '%' . $search . '%'],
+                    ['Status', 'Inactive']
+                ])
+                ->orWhere([
+                    ['StoreName', 'like', '%' . $search . '%'],
+                    ['Status', 'Inactive']
+                ])
+                ->orderBy(request('sort'), 'ASC')
+                ->paginate(10);
+        }
+        else
+        {
+            $locationList = StoreLocation::where([
+                    ['StoreCode', 'like', '%' . $search . '%'],
+                    ['Status', 'Inactive']
+                ])
+                ->orWhere([
+                    ['StoreName', 'like', '%' . $search . '%'],
+                    ['Status', 'Inactive']
+                ])
+                ->paginate(10);
+        }
+        return view('StoreLocation.inactiveIndex', compact('locationList', 'search'));
     }
 }

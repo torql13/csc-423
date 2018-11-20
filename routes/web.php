@@ -76,6 +76,10 @@ Route::get('/order/search', 'OrdersController@search');
 
 Route::get('/storeLocations/', 'StoresController@storeIndex');
 
+Route::get('/storeLocations/index', 'StoresController@storeIndex');
+
+Route::get('/storeLocations/inactiveIndex', 'StoresController@inactiveIndex');
+
 Route::get('/storeLocations/addLocation', function(){
     return view('StoreLocation.addLocation');
 });
@@ -90,7 +94,11 @@ Route::post('/storeLocations/updateLocation', array('uses' => 'StoresController@
 
 Route::get('/storeLocations/deleteLocation/{id}', ['uses' => 'StoresController@deleteLocation', 'as' => 'deleteLocation']);
 
-Route::get('/storeLocations/search', 'StoresController@search');
+Route::get('/storeLocations/restoreLocation/{id}', ['uses' => 'StoresController@restoreLocation', 'as' => 'restoreLocation']);
+
+Route::get('/storeLocations/searchActive', 'StoresController@searchActive');
+
+Route::get('/storeLocations/searchInactive', 'StoresController@searchInactive');
 
 Route::get('/customer/', 'CustomersController@index');
 
