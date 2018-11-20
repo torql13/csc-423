@@ -46,7 +46,15 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label>State</label>
-                        <input type="text" class="form-control" name="state" id="state" value="{{ $customer->State }}" />
+                        <select class="form-control" name="state" id="state" size="1">
+                            @foreach($states as $state)
+                                @if($customer->State === $state)
+                                    <option value="{{$state}}" selected>{{$state}}</option>
+                                @else
+                                    <option value="{{$state}}">{{$state}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Zip</label>
