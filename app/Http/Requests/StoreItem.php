@@ -31,7 +31,7 @@ class StoreItem extends FormRequest
             'category' => 'required|regex:/^[A-Za-z\&\-\_\s]+$/|max:30',
             'cost' => 'required|regex:/^\d+(\.\d{2})?$/|max:15',
             'retail' => 'required|regex:/^\d+(\.\d{2})?$/|max:15',
-            'imgFileName' => 'nullable|image',
+            //'imgFileName' => 'nullable|image',
             'vendorId' => 'required|numeric'
         ];
     }
