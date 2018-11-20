@@ -46,7 +46,7 @@
                         <label> Item </label>
                         <select class="itemId" name="itemId0" id="itemId0" class=".items">
                         @foreach($items as $item):
-                            <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
+                            <option value="{{$item->ItemId}}">{{$item->Description}}</option>
                         @endforeach
                         </select>
                         <label> Quantity </label>
