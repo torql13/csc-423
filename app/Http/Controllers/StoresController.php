@@ -119,7 +119,8 @@ class StoresController extends Controller
             'State' => $store['storeState'],
             'ZIP' => $store['storeZip'],
             'Phone' => $store['storePhone'],
-            'ManagerName' => $store['manager']
+            'ManagerName' => $store['manager'],
+            'Status' => $store['status']
         ]);
         
         return redirect()->action('StoresController@storeIndex');
