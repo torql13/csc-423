@@ -75,7 +75,11 @@
                         <label>Vendor</label>
                         <select name="vendorId" id="vendorId">
                         @foreach($vendors as $vendor):
-                            <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @if(old('vendorId') == $vendor->VendorId)
+                                <option selected value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @else
+                                <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @endif
                         @endforeach
                         </select>
                     </div>
