@@ -46,7 +46,7 @@
                         <label>Item</label>
                         <select name="itemId0" id="itemId0">
                         @foreach($items as $item):
-                            <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
+                            <option value="{{$item->ItemId}}">{{$item->Description}}</option>
                         @endforeach
                         </select>
                         <label>Quantity</label>
@@ -113,7 +113,7 @@ $("select").change(function()
                         '<label>Item</label>' +
                             '<select name="itemId' + numItems + '" id="itemId' + numItems + '">' +
                                 '@foreach($items as $item):' +
-                                 '<option value="{{$item->ItemId}}">{{$item->ItemId}}</option>' + 
+                                 '<option value="{{$item->ItemId}}">{{$item->Description}}</option>' + 
                                 '@endforeach' +
                             '</select>' +
                             '<label>Quantity</label>' + 

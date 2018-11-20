@@ -7,7 +7,7 @@
                 <h2 class="mt-3">Active Stores</h2>
                 <p>
                     <ul>
-                        <li><a href='/storeLocations/addLocation'>Add Location</a></li>
+                        <li><a href='/storeLocations/addLocation'>Add Store</a></li>
                         <li><a href='/storeLocations/inactiveIndex'>Manage Inactive Stores</a></li>
                     </ul>
                 </p>
