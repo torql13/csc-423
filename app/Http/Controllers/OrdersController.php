@@ -17,7 +17,7 @@ class OrdersController extends Controller
         $orders = Order::where('Status', '!=', "Returned")->orderBy('Status', 'DESC')->simplePaginate(10);
         $search = "";
 
-        return view('order/index', compact('orders', 'search'));
+        return view('Order/index', compact('orders', 'search'));
     }
 
     public function getVendorsAndStores()
@@ -49,7 +49,7 @@ class OrdersController extends Controller
     {
         $orders = Order::where('VendorId', session('VendorId'))->orderBy('Status', 'DESC')->simplePaginate(10);
 
-        return view('order/viewVendorOrders', compact('orders'));
+        return view('Order/viewVendorOrders', compact('orders'));
     }
 
     /* public function editOrder($id)
