@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Http\Requests\StoreCustomer;
 use Illuminate\Http\Request;
 use DB;
 
@@ -53,7 +54,7 @@ class CustomersController extends Controller
         return view('Customer/viewCustomer', compact('customer'));
     }
 
-    public function addCustomer(Request $request)
+    public function addCustomer(StoreCustomer $request)
     {
         $customer = $request->all();
 
@@ -77,7 +78,7 @@ class CustomersController extends Controller
         return view('Customer/editCustomer', compact('customer'));
     }
 
-    public function updateCustomer(Request $request)
+    public function updateCustomer(StoreCustomer $request)
     {
         $customer = $request->all();
 
@@ -144,6 +145,10 @@ class CustomersController extends Controller
     public function searchActive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
 
         if(request()->has('sort'))
         {
@@ -177,6 +182,10 @@ class CustomersController extends Controller
     public function searchInactive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->inactiveIndex();
+        }
 
         if(request()->has('sort'))
         {

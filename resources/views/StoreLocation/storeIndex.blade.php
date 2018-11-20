@@ -50,16 +50,17 @@
                                 <th><a href="/storeLocations/?sort=StoreName">Store Name</a></th>
                                 <th><a href="/storeLocations/?sort=ManagerName">Manager</a></th>
                             @endif
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($locationList as $storeLocation)
                         <tr>
-                            <td><a href="/storeLocations/view/{{$storeLocation->StoreId}}">{{$storeLocation->StoreCode}}</a></td>
+                            <td>{{$storeLocation->StoreCode}}</a></td>
                             <td>{{$storeLocation->StoreName}}</td>
                             <td>{{$storeLocation->ManagerName}}</td>
-                            <td><a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}">Edit</a></td>
-                            <td><a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/storeLocations/view/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
+                                <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
+                                <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </table>

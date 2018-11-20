@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
+  @if(session('error'))
+      <div class="alert alert-danger">
+          {{ session('error') }}
+      </div>
+  @endif
   <div class="jumbotron">
       <div class="container">
       <h1 class="display-3">Nanno's Foods</h1>

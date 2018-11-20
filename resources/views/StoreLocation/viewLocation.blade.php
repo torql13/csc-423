@@ -60,9 +60,9 @@
 
             <div class="form-row">
                 <div class="btn-toolbar col-md-5">
-                    <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
+                    <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}" class="btn btn-secondary">Edit</a>
                     &nbsp;
-                    <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger" style="width:7vw;">Delete</a>
+                    <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</a>
                 </div>
             </div>
     

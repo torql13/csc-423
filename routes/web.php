@@ -72,17 +72,21 @@ Route::get('/order/addDetailsExistingOrder/{id}', 'OrderDetailsController@addDet
 
 Route::post('/order/updateDetailsExistingOrder', array('as' => 'update', 'uses' => 'OrderDetailsController@updateDetailsExistingOrder'));
 
+Route::get('/order/search', 'OrdersController@search');
+
 Route::get('/storeLocations/', 'StoresController@storeIndex');
 
 Route::get('/storeLocations/addLocation', function(){
     return view('StoreLocation.addLocation');
 });
 
-Route::post('/storeLocation/addLocation', array('uses' => 'StoresController@insertNewLocation', 'as' => 'addLocation'));
+Route::post('/storeLocations/addLocation', array('uses' => 'StoresController@insertNewLocation', 'as' => 'addLocation'));
+
+Route::get('/storeLocations/view/{id}', ['uses' => 'StoresController@viewLocation', 'as' => 'viewLocation']);
 
 Route::get('/storeLocations/editLocation/{id}', 'StoresController@editLocation');
 
-Route::post('/storeLocation/updateLocation', array('uses' => 'StoresController@updateLocation', 'as' => 'updateLocation'));
+Route::post('/storeLocations/updateLocation', array('uses' => 'StoresController@updateLocation', 'as' => 'updateLocation'));
 
 Route::get('/storeLocations/deleteLocation/{id}', ['uses' => 'StoresController@deleteLocation', 'as' => 'deleteLocation']);
 
@@ -122,9 +126,11 @@ Route::post('/login', array('as' => 'login', 'uses' => 'VendorsController@login'
 
 Route::get('logout', function(){
     session()->flush();
-    return redirect("/");
+    return redirect("/login");
 });
 
 Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');
 
 Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
+
+Route::get('/order/processDelivery/{id}', 'OrdersController@processDelivery');

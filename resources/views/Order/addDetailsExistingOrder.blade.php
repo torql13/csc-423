@@ -11,7 +11,15 @@
             <fieldset>
         
                 <legend>Add items to Order</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
                         <label>Number of Items</label>
@@ -35,10 +43,10 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label>items</label>
+                        <label>Item</label>
                         <select name="itemId0" id="itemId0">
                         @foreach($items as $item):
-                            <option value="{{$item->ItemId}}">{{$item->Description}}</option>
+                            <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
                         @endforeach
                         </select>
                         <label>Quantity</label>
@@ -75,6 +83,26 @@
 </div>
 
 <script type="text/javascript">
+
+$("select").change(function()
+{
+    $("select option").attr("disabled",""); //enable everything
+    //collect the values from selected;
+     var  arr = $.map
+    (
+        $("select option:selected"), function(n)
+        {
+            return n.value;
+        }
+    );
+
+    //disable elements
+    $("select option").filter(function()
+    {
+        return $.inArray($(this).val(),arr)>-1; //if value is in the array of selected values
+    }).attr("disabled","disabled");   
+});
+
     var numItems = 1;
     function addItems()
     {
@@ -85,7 +113,7 @@
                         '<label>Item</label>' +
                             '<select name="itemId' + numItems + '" id="itemId' + numItems + '">' +
                                 '@foreach($items as $item):' +
-                                 '<option value="{{$item->ItemId}}">{{$item->Description}}</option>' + 
+                                 '<option value="{{$item->ItemId}}">{{$item->ItemId}}</option>' + 
                                 '@endforeach' +
                             '</select>' +
                             '<label>Quantity</label>' + 

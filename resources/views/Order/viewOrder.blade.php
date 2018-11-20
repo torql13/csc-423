@@ -51,8 +51,13 @@
                         <input type="text" class="form-control" name="status" id="status" value="{{ $indOrder->Status }}" disabled />
                     </div>
                     <div class="form-group col-md-4">
+                    @if($indOrder->DateTimeOfFulfillment)
+                        <label>Date and Time of Delivery</label>
+                        <input type="text" class="form-control" name="dateTimeOfFulfill" id="dateTimeOfFulfill" value="{{ $indOrder->DateTimeOfFulfillment }}" disabled />
+                    @else
                         <label>Date and Time of Order</label>
                         <input type="text" class="form-control" name="dateTimeOfOrder" id="dateTimeOfOrder" value="{{ $indOrder->DateTimeOfOrder }}" disabled />
+                    @endif
                     </div>
                 </div>
 
@@ -76,9 +81,9 @@
                 @if(!session()->has('VendorId'))
                     <div class="form-row">
                         <div class="btn-toolbar col-md-5">
-                            <a href="/order/editOrder/{{ $indOrder->OrderId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
+                            <a href="/order/editOrder/{{ $indOrder->OrderId }}" class="btn btn-secondary">Edit</a>
                             &nbsp;
-                            <a href="/order/deleteOrder/{{ $indOrder->OrderId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger" style="width:7vw;">Delete</a>
+                            <a href="/order/deleteOrder/{{ $indOrder->OrderId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 @endif

@@ -38,13 +38,13 @@
           </ul>
         @endif
         <ul class="navbar-nav navbar-right">
-          @if(!session()->has('VendorId'))
+          @if(session('VendorId'))
             <li class="nav-item">
-              <a href="/login"><i class="material-icons" style="font-size:36px;color:white;">person</i></a>
+              <span style="color:white;">Logged in as {{ session('VendorName') }}. <u><a href='/logout' style="color:white;">Logout</a></u></span>
             </li>
           @else
             <li class="nav-item">
-              <span style="color:white;">Logged in as <a href='/logout' style="color:white;">{{ session('VendorName') }}</a></span>
+              <a href="/login"><i class="material-icons" style="font-size:36px;color:white;">person</i></a>
             </li>
           @endif
         </ul>

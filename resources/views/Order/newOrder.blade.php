@@ -10,13 +10,26 @@
             <fieldset>
         
                 <legend>Create a New Order</legend>
-
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>Vendor</label>
                         <select name="vendorId" id="vendorId">
                         @foreach($vendors as $vendor):
-                            <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @php 
+                                $numItems = DB::table('inventory_item')->get()->where('VendorId', $vendor->VendorId)->count();
+                            @endphp
+                            @if($numItems > 0)
+                                <option value="{{$vendor->VendorId}}">{{$vendor->VendorName}}</option>
+                            @endif
                         @endforeach
                         </select>
                     </div>
@@ -30,12 +43,6 @@
                             <option value="{{$store->StoreId}}">{{$store->StoreName}}</option>
                         @endforeach
                         </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>Status</label>
-                        <input type="text" class="form-control" name="status" id="status" value="Pending" disabled />
                     </div>
                 </div>
 

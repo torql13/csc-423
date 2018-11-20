@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\OrderDetail;
+use App\Http\Requests\StoreOrder;
 use Illuminate\Http\Request;
 use DB;
 use DateTime;
 
 class OrderDetailsController extends Controller
 {
-    public function insertOrderAndDetails(Request $request)
+    public function insertOrderAndDetails(StoreOrder $request)
     {
         $details = $request->all();
         $now = new DateTime();
@@ -21,8 +22,7 @@ class OrderDetailsController extends Controller
             [
                 'VendorId' => $details['vendorId'],
                 'StoreId' => $details['storeId'],
-                'DateTimeOfOrder' => $now,
-                'Status' => 'Pending'
+                'DateTimeOfOrder' => $now
             ]
         );
 
@@ -31,11 +31,11 @@ class OrderDetailsController extends Controller
         for ($i = 0; $i < $count; $i++)
         {
             OrderDetail::insert(
-            [
-                'OrderId' => $order->OrderId,
-                'ItemId' => $details['itemId'.$i], 
-                'QuantityOrdered' => $details['quantity'.$i]
-            ]
+                [
+                    'OrderId' => $order->OrderId,
+                    'ItemId' => $details['itemId'.$i], 
+                    'QuantityOrdered' => $details['quantity'.$i]
+                ]
             );
         }
         return redirect()->action('OrdersController@index');
@@ -44,28 +44,49 @@ class OrderDetailsController extends Controller
     public function addDetailsExistingOrder($id)
     {
         $order = DB::table('order')->where('OrderId', $id)->first();
-       // $vendor = DB::table('vendor')->get()->where('VendorId', $order['VendorId']);
-       $vendorId = $order->VendorId;
+        // $vendor = DB::table('vendor')->get()->where('VendorId', $order['VendorId']);
+        $vendorId = $order->VendorId;
         //$items = DB::table('inventory_item')->get()->where('VendorId', $order['VendorId']);
         $items = DB::table('inventory_item')->get()->where('VendorId', $vendorId);
+        $orderDetails = OrderDetail::get()->where('OrderId', $id);
 
-        return view('/Order/addDetailsExistingOrder', compact('order', 'vendorId', 'items'));
+        return view('/Order/addDetailsExistingOrder', compact('order', 'vendorId', 'items', 'orderDetails'));
     }
 
     public function updateDetailsExistingOrder(Request $request)
     {
+        
         $details = $request->all();
+        $orderDetails = OrderDetail::get()->where('OrderId', $details['orderId']);
         $count = $details['numItems'];
 
         for ($i = 0; $i < $count; $i++)
         {
-            OrderDetail::insert(
-            [
-                'OrderId' => $details['orderId'],
-                'ItemId' => $details['itemId'.$i], 
-                'QuantityOrdered' => $details['quantity'.$i]
-            ]
-            );
+            foreach($orderDetails as $orderDetail)
+            {
+                if($details['itemId'.$i] == ($orderDetail->ItemId))
+                {
+                    $newQuantity = (($orderDetail->QuantityOrdered) + ($details['quantity'.$i]));
+                    OrderDetail::where('OrderId', $details['orderId'])->where('ItemId', $details['itemId'.$i])->update(
+                    [
+                        'OrderDetailId' => $orderDetail->OrderDetailId,
+                        'OrderId' => $details['orderId'],
+                        'ItemId' => $details['itemId'.$i], 
+                        'QuantityOrdered' => $newQuantity
+                    ]
+                    );
+                }
+                else
+                {
+                    OrderDetail::insert(
+                    [
+                        'OrderId' => $details['orderId'],
+                        'ItemId' => $details['itemId'.$i], 
+                        'QuantityOrdered' => $details['quantity'.$i]
+                    ]
+                    );
+                }
+            }
         }
         return redirect()->action('OrdersController@index');
     }

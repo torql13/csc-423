@@ -10,6 +10,16 @@
         
                 <legend>Edit Vendor</legend>
 
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
                         <label>Vendor Id</label>
@@ -18,10 +28,6 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label>Vendor Code</label>
-                        <input type="text" class="form-control" name="vendorCode" id="vendorCode" value="{{ $indVendor->VendorCode }}">
-                    </div>
                     <div class="form-group col-md-4">
                         <label>Vendor Name</label>
                         <input type="text" class="form-control" name="vendorName" id="vendorName" value="{{ $indVendor->VendorName }}"/>
@@ -41,8 +47,16 @@
                         <input type="text" class="form-control" name="vendorCity" id="vendorCity" value="{{ $indVendor->City }}">
                     </div>
                     <div class="form-group col-md-2">
-                        <label>State</label>
-                        <input type="text" class="form-control" name="vendorState" id="vendorState" value="{{ $indVendor->State }}">
+                    <label>State</label>
+                        <select class="form-control" name="vendorState" id="vendorState" size="1">
+                        @foreach($states as $state)
+                            @if($defaultState === $state)
+                                <option value="{{$state}}" selected>{{$state}}</option>
+                            @else
+                                <option value="{{$state}}">{{$state}}</option>
+                            @endif
+                        @endforeach
+                    </select>
                     </div>
                     <div class="form-group col-md-2">
                         <label>Zip</label>
@@ -76,6 +90,13 @@
                         <label>Password</label>
                         <input type="text" class="form-control" name="password" id="password" value="{{ $indVendor->Password }}">
                     </div> -->
+                </div>
+
+                <div class="form-row" style="visibility:hidden;position:absolute">
+                    <div class="form-group col-md-4">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="password" id="password" value="{{ $indVendor->Password }}">
+                    </div>
                 </div>
 
                 <div class="form-row">

@@ -52,18 +52,18 @@
                             @endif
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($customers as $customer)
                         <tr>
-                            <td><a href="/customer/viewCustomer/{{$customer->CustomerId}}">{{$customer->CustomerId}}</a></td>
+                            <td>{{$customer->CustomerId}}</td>
                             <td>{{$customer->Name}}</td>
                             <td>{{$customer->Phone}}</td>
                             <td>{{$customer->Email}}</td>
-                            <td><a href="/customer/editCustomer/{{$customer->CustomerId}}">Edit</a></td>
-                            <td><a href="/customer/restoreCustomer/{{$customer->CustomerId}}" onclick="return confirm('Are you sure?');">Restore</a></td>
-                        </tr>
+                            <td><a href="/customer/viewCustomer/{{$customer->CustomerId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
+                                <a href="/customer/editCustomer/{{$customer->CustomerId}}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
+                                <a href="/customer/restoreCustomer/{{$customer->CustomerId}}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Restore">restore_from_trash</i></a>
+                            </td>
                         @endforeach
                     </table>
                     {{ $customers->links() }}

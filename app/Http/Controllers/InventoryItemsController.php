@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\InventoryItem;
+use App\Http\Requests\StoreItem;
 use Illuminate\Http\Request;
 use DB;
 
@@ -61,8 +62,7 @@ class InventoryItemsController extends Controller
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
         if(!$vendors->count())
         {
-            session(['emptyVendor' => '1']);
-            return $this->index();
+            return redirect()->action('InventoryItemsController@index')->with('error', 'Cannot add an Inventory Item. There are no active Vendors.');
         }
         //pull divisions and categories from the divisions and categories arrays in inventory item model
         $divisions = DB::table('divisions')->get();
@@ -70,10 +70,19 @@ class InventoryItemsController extends Controller
         return view('InventoryItem/addItem', compact('vendors', 'divisions', 'categories'));
     }
 
-    public function insertNewItem(Request $request)
+    public function insertNewItem(StoreItem $request)
     {
         $newItem = $request->all();
-        
+        $cost = $newItem['cost'];
+        if(!strpos($cost, '.'))
+        {
+            $cost .= ".00";
+        }
+        $retail = $newItem['retail'];
+        if(!strpos($retail, '.'))
+        {
+            $retail .= ".00";
+        }
         InventoryItem::insert(
             [
                 'Description' => $newItem['description'],
@@ -81,8 +90,8 @@ class InventoryItemsController extends Controller
                 'Division' => $newItem['division'],
                 'Department' => $newItem['department'],
                 'Category' => $newItem['category'],
-                'ItemCost' => $newItem['cost'],
-                'ItemRetail' => $newItem['retail'], 
+                'ItemCost' => $cost,
+                'ItemRetail' => $retail, 
                 'ImageFileName' => $newItem['imgFileName'],
                 'VendorId' => $newItem['vendorId']
             ]
@@ -96,8 +105,7 @@ class InventoryItemsController extends Controller
         $item = InventoryItem::where('ItemId', $id)->firstOrFail();
         if($item->vendor->Status === 'Inactive')
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
         $vendors = DB::table('vendor')->where('Status', 'Active')->get();
 
@@ -108,7 +116,7 @@ class InventoryItemsController extends Controller
         return view('/InventoryItem/editItem', compact('item', 'vendors', 'divisions', 'categories'));
     }
 
-    public function updateItem(Request $request)
+    public function updateItem(StoreItem $request)
     {
         $item = $request->all();
 
@@ -138,8 +146,7 @@ class InventoryItemsController extends Controller
         ])->firstOrFail();
         if($item->vendor->Status === "Inactive")
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
 
         $item->Status = 'Inactive';
@@ -160,8 +167,7 @@ class InventoryItemsController extends Controller
         //   redirect to index; an alert will be shown
         if($item->vendor->Status === 'Inactive')
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
 
         $item->Status = 'Active';
@@ -175,8 +181,7 @@ class InventoryItemsController extends Controller
         $item = InventoryItem::where('ItemId', $id)->firstOrFail();
         if($item->vendor->Status === 'Inactive')
         {
-            session(['noItem' => '1']);
-            return redirect()->action('InventoryItemsController@index');
+            return redirect()->action('InventoryItemsController@index')->with('error', 'This Inventory Item does not exist.');
         }
 
         $vendors = DB::table('vendor')->get();
@@ -187,6 +192,10 @@ class InventoryItemsController extends Controller
     public function searchActive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
 
         if(request()->has('sort'))
         {
@@ -229,6 +238,11 @@ class InventoryItemsController extends Controller
     public function searchInactive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->inactiveIndex();
+        }
+        
         if(request()->has('sort'))
         {
             $items = InventoryItem::where([

@@ -1,9 +1,14 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <h2 class="mt-3">Active Inventory Items</h2>
                 <p>
                     <ul>
@@ -51,16 +56,17 @@
                                 <th><a href="/item/?sort=Description">Description</a></th>
                                 <th><a href="/item/?sort=VendorName">Vendor</a></th>
                             @endif
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>Actions</th>
                         </tr>
                         @foreach ($items as $item)
                         <tr>
-                            <td><a href="/item/viewItem/{{$item->ItemId}}">{{$item->ItemId}}</a></td>
+                            <td>{{$item->ItemId}}</td>
                             <td>{{$item->Description}}</td>
                             <td>{{$item->vendor->VendorName}}
-                            <td><a href="/item/editItem/{{$item->ItemId}}">Edit</a></td>
-                            <td><a href="/item/deleteItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');">Delete</a></td>
+                            <td><a href="/item/viewItem/{{$item->ItemId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
+                                <a href="/item/editItem/{{$item->ItemId}}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
+                                <a href="/item/deleteItem/{{$item->ItemId}}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </table>
@@ -69,15 +75,4 @@
             </div>
         </div>
     </div>
-    @if(Session::has('emptyVendor'))
-        <script>
-            alert("Cannot add an Inventory Item. There are no active Vendors.");
-        </script>
-        @php (Session::forget('emptyVendor'))
-    @elseif(Session::has('noItem'))
-        <script>
-            alert("This Inventory Item does not exist.");
-        </script>
-        @php (Session::forget('noItem'))
-    @endif
 @stop

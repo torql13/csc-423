@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Vendor;
+use App\Http\Requests\StoreVendor;
+use App\Http\Requests\ChangePassword;
 use Illuminate\Http\Request;
 use DB;
 
@@ -85,12 +87,16 @@ class VendorsController extends Controller
 
     public function editVendor($id)
     {
-        $indVendor = Vendor::where('VendorId', $id)->firstOrFail();
+        $indVendor = Vendor::where('VendorId', $id)->first();
+        $defaultState = $indVendor->State;
+        $states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI',
+                    'MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+                    'VA','WA','WV','WI','WY'];
         
-        return view('/Vendor/editVendor', compact('indVendor'));
+        return view('/Vendor/editVendor', compact('indVendor', 'defaultState', 'states'));
     }
 
-    public function updateVendor(Request $request)
+    public function updateVendor(StoreVendor $request)
     {
         $vendor = $request->all();
 
@@ -117,10 +123,10 @@ class VendorsController extends Controller
         return view('/Vendor/viewVendor', compact('indVendor'));
     }
 
-    public function insertNewVendor(Request $request)
+    public function insertNewVendor(StoreVendor $request)
     {
-
-        $newVendor = $request->all();
+        
+        $newVendor = $request->validated();
 
         $hashedPass = $this->hashPassword($newVendor['password']);
 
@@ -142,6 +148,10 @@ class VendorsController extends Controller
     public function searchActive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
 
         if(request()->has('sort'))
         {
@@ -175,6 +185,10 @@ class VendorsController extends Controller
     public function searchInactive(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->inactiveIndex();
+        }
 
         if(request()->has('sort'))
         {
@@ -204,7 +218,7 @@ class VendorsController extends Controller
 
         return view('Vendor/inactiveIndex', compact('vendorList', 'search'));
     }
-    public function changePassword(Request $request)
+    public function changePassword(ChangePassword $request)
     {
         $newVendor = $request->all();
 
@@ -221,7 +235,8 @@ class VendorsController extends Controller
         }
         else
         {
-            return redirect("vendor/changePassword/" . $newVendor['vendorId']);
+            return redirect("vendor/changePassword/" . $newVendor['vendorId'])
+                ->with('error', 'The old password entered was incorrect.');
         }
     }
 
@@ -231,11 +246,12 @@ class VendorsController extends Controller
 
         $hashedPass = $this->hashPassword($loginData['password']);
 
-        $record = Vendor::where('VendorCode', $loginData['vendorCode'])
-            ->where('Password', $hashedPass)
-            ->first();
-
-        if(count($record))
+        $record = Vendor::where([
+            ['VendorCode', $loginData['vendorCode']],
+            ['Password', $hashedPass]
+        ])->first();
+        
+        if($record)
         {
             //$request->session()->put('VendorId', $record->VendorId);
             session([
@@ -254,8 +270,7 @@ class VendorsController extends Controller
         }
         else
         {
-            $errorMessage = "Username or Password is incorrect";
-            return view('/login', compact('errorMessage'));
+            return view('/login')->with('error', 'Username or Password is incorrect.');
         }
     }
 }

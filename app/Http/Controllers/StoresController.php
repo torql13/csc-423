@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StoreLocation;
+use App\Http\Requests\StoreRetailStore;
 use DB;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class StoresController extends Controller
         return view('StoreLocation.viewLocation', compact('storeLocation'));
     }
 
-    public function insertNewLocation(Request $request)
+    public function insertNewLocation(StoreRetailStore $request)
     {
         $store = $request->all();
 
@@ -60,17 +61,21 @@ class StoresController extends Controller
 
     public function editLocation($id)
     {
-        $storeLocation = StoreLocation::where('StoreId', $id)->firstOrFail();       
-        return view('StoreLocation.editLocation', compact('storeLocation'));
+        $storeLocation = StoreLocation::where('StoreId', $id)->first();  
+        $defaultState = $storeLocation->State;
+        $states = ['AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI',
+                    'MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT',
+                    'VA','WA','WV','WI','WY'];
+
+        return view('StoreLocation.editLocation', compact('storeLocation', 'defaultState', 'states'));
     }
 
-    public function updateLocation(Request $request)
+    public function updateLocation(StoreRetailStore $request)
     {
         $store = $request->all();
 
         StoreLocation::where('StoreId', $store['storeId'])
         ->update([
-            'StoreCode' => $store['storeCode'],
             'StoreName' => $store['storeName'],
             'Address' => $store['storeAddress'],
             'City' => $store['storeCity'],
@@ -86,6 +91,10 @@ class StoresController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->storeIndex();
+        }
 
         if(request()->has('sort'))
         {

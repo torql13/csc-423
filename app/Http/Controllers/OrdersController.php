@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderDetail;
+use App\Inventory;
+use App\Http\Requests\StoreOrder;
 use Illuminate\Http\Request;
 use DB;
 use DateTime;
@@ -11,20 +14,22 @@ class OrdersController extends Controller
 {
     public function index()
     {
-        $orders = Order::simplePaginate(10);
+        $orders = Order::where('Status', '!=', "Returned")->orderBy('Status', 'DESC')->simplePaginate(10);
+        $search = "";
 
-        return view('order/index', compact('orders'));
+        return view('order/index', compact('orders', 'search'));
     }
 
     public function getVendorsAndStores()
     {
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
+        $items = DB::table('inventory_item')->get();
         $stores =  DB::table('retail_store')->get();
 
-        return view('Order/newOrder', compact('vendors', 'stores'));
+        return view('Order/newOrder', compact('vendors', 'stores', 'items'));
     }
 
-    public function createNewOrder(Request $request)
+    public function createNewOrder(StoreOrder $request)
     {
         $newOrder = $request->all();
         $now = new DateTime();
@@ -85,5 +90,57 @@ class OrdersController extends Controller
         $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
 
         return view('Order/viewOrder', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
+    }
+    
+    public function processDelivery($id)
+    {
+        $order = Order::where('OrderId', $id)->first();
+
+        $orderDetails = OrderDetail::where('OrderId', $id)->get();
+
+        foreach($orderDetails as $detail)
+        {
+            $existingItem = Inventory::where('ItemId', $detail['ItemId'])->get();
+
+            if(!count($existingItem))
+            {
+                Inventory::insert([
+                    'StoreId' => $order['StoreId'],
+                    'ItemId' => $detail['ItemId'],
+                    'QuantityInStock' => $detail['QuantityOrdered']
+                ]);
+            }
+            else
+            {
+                $quantity = $existingItem[0]['QuantityInStock'];
+
+                $totalQuantity = $quantity + $detail['QuantityOrdered'];
+
+                Inventory::where('ItemId', $detail['ItemId'])->update([
+                    'QuantityInStock' => $totalQuantity
+                ]);
+            }
+
+            $now = new DateTime();
+
+            Order::where('OrderId', $id)->update([
+                'Status' => 'Delivered',
+                'DateTimeOfFulfillment' => $now
+            ]);
+
+            return redirect('/order');
+        }
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        if(!$search)
+        {
+            return $this->index();
+        }
+        $orders = Order::where('OrderId', 'like', '%' . $search . '%')
+            ->paginate(10);
+        return view('Order.index', compact('orders', 'search'));
     }
 }

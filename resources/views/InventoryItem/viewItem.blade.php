@@ -81,9 +81,9 @@
 
             <div class="form-row">
                 <div class="btn-toolbar col-md-5">
-                    <a href="/item/editItem/{{ $item->ItemId }}" class="btn btn-secondary" style="width:7vw;">Edit</a>
+                    <a href="/item/editItem/{{ $item->ItemId }}" class="btn btn-secondary">Edit</a>
                     &nbsp;
-                    <a href="/item/deleteItem/{{ $item->ItemId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger" style="width:7vw;">Delete</a>
+                    <a href="/item/deleteItem/{{ $item->ItemId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</a>
                 </div>
             </div>
     
