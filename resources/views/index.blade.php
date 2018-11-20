@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="mt-2 mb-2">
-        <h2 class="display-3">Nanno's Foods</h2>
+        <h2 class="display-4">Homepage</h2>
       </div>
     </div>
   </div>
