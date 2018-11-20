@@ -77,16 +77,6 @@
                         </table>
                     </div>
                 </div>
-
-                @if(!session()->has('VendorId'))
-                    <div class="form-row">
-                        <div class="btn-toolbar col-md-5">
-                            <a href="/order/editOrder/{{ $indOrder->OrderId }}" class="btn btn-secondary">Edit</a>
-                            &nbsp;
-                            <a href="/order/deleteOrder/{{ $indOrder->OrderId }}" onclick="return confirm('Are you sure?');" class="btn btn-danger">Delete</a>
-                        </div>
-                    </div>
-                @endif
         
             </fieldset>
         </form>
