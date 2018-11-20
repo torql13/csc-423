@@ -6,12 +6,12 @@
           {{ session('error') }}
       </div>
   @endif
-  <div class="jumbotron">
-      <div class="container">
-      <h1 class="display-3">Nanno's Foods</h1>
-      <p>Nanno's Foods is a system that is meant to help executives manage their inventory items, 
-      order more from vendors, and generate reports</p>
+  <div class="container">
+    <div class="row">
+      <div class="mt-2 mb-2">
+        <h2 class="display-3">Nanno's Foods</h2>
       </div>
+    </div>
   </div>
 
   <div class="container">
