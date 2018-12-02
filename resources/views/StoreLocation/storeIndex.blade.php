@@ -61,6 +61,7 @@
                             <td><a href="/storeLocations/view/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
                                 <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
                                 <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                                <a href="/report/inventoryReport/{{$storeLocation->StoreId}}"> View Inventory </a>
                             </td>
                         </tr>
                         @endforeach
