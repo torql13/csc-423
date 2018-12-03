@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label>Store Name</label>
-                        <input type="text" class="form-control" name="storeName" id="storeName" value="{{old('storName')}}" />
+                        <input type="text" class="form-control" name="storeName" id="storeName" value="{{old('storeName')}}" />
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <label>Zip</label>
-                        <input type="text" class="form-control" name="storeZip" id="storeZip" value="{{old('storezip')}}" />
+                        <input type="text" class="form-control" name="storeZip" id="storeZip" value="{{old('storeZip')}}" />
                     </div>
                 </div>
 

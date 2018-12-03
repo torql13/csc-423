@@ -144,3 +144,7 @@ Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
 Route::get('/order/processDelivery/{id}', 'OrdersController@processDelivery');
 
 Route::get('/report/inventoryReport/{id}', 'ReportsController@inventoryReport');
+
+Route::get('/report/overstockedInventory/{id}', 'ReportsController@enterOverstockThreshold');
+
+Route::post('/report/overstockedReport', 'ReportsController@overstockedReport');
