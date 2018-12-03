@@ -24,6 +24,11 @@
                             @endforeach
                         @endforeach
                     </table>
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <a href="/storeLocations/">Return to Store Index</a>
+                        </div>
+                    </div>
                 </p>
             </div>
         </div>
