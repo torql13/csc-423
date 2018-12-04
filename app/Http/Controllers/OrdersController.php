@@ -126,12 +126,11 @@ class OrdersController extends Controller
 
             $now = new DateTime();
 
-            Order::where('OrderId', $id)->update([
-                'Status' => 'Delivered',
-                'DateTimeOfFulfillment' => $now
-            ]);
+            $order->Status = 'Delivered';
+            $order->DateTimeOfFulfillment = $now;
+            $order->save();
 
-            return redirect('/order');
+            return redirect()->action('OrdersController@index')->with('success', 'Order #' . $order->OrderId . ' has been delivered.');
         }
     }
 
