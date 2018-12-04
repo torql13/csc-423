@@ -142,3 +142,5 @@ Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');
 Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
 
 Route::get('/order/processDelivery/{id}', 'OrdersController@processDelivery');
+
+Route::get('/order/processReturn/{{$order->OrderId}}', 'OrdersController@singleOrderReturn');

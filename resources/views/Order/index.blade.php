@@ -59,7 +59,7 @@
                                 <a href="/order/processDelivery/{{$order->OrderId}}" onclick="return confirm('Process this delivery?');"><i class="material-icons" style="font-size:36px;color:blue;" title="Process Delivery">airport_shuttle</i></a>
                             @elseif($order->Status === 'Delivered')
                                 <a href="/order/viewOrder/{{$order->OrderId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
-                                <a href="#" onclick="return confirm('Process this Return?');"><i class="material-icons" style="font-size:36px;color:red;" title="Process Return">keyboard_return</i></a>
+                                <a href="/order/processReturn/{{$order->OrderId}}" onclick="return confirm('Process this Return?');"><i class="material-icons" style="font-size:36px;color:red;" title="Process Return">keyboard_return</i></a>
                             @elseif($order->Status === 'Returned')
                                 <a href="/order/viewOrder/{{$order->OrderId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
                             @endif

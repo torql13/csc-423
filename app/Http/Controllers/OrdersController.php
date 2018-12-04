@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\OrderDetail;
 use App\Inventory;
+use App\ReturnToVendor;
 use App\Http\Requests\StoreOrder;
 use Illuminate\Http\Request;
 use DB;
@@ -145,5 +146,41 @@ class OrdersController extends Controller
         $orders = Order::where('OrderId', 'like', '%' . $search . '%')
             ->paginate(10);
         return view('Order.index', compact('orders', 'search'));
+    }
+
+    public function singleOrderReturn($id)
+    {
+        $now = new DateTime();
+
+        $order = Order::where('OrderId', $id)->first();
+
+        $orderDetails = OrderDetail::where('OrderId', $id)->get();
+        
+        foreach($orderDetails as $detail)
+        {
+            $inventory = Inventory::where('StoreId', $order['StoreId'])->where('ItemId', $detail['ItemId'])->first();
+
+            $tempQuantity = $inventory['QuantityInStock'] - $detail['QuantityOrdered'];
+
+            if($tempQuantity < 0)
+            {
+                //error
+            }
+            else
+            {
+                Inventory::where('StoreId', $order['StoreId'])->where('ItemId', $detail['ItemId'])->update([
+                    'QuantityInStock' => $tempQuantity
+                ]);
+            }
+        }
+        Order::where('OrderId', $id)->update([
+            'status' => 'Returned'
+        ]);
+
+        ReturnToVendor::insert([
+            'VendorId' => $order['VendorId'],
+            'StoreId' => $order['StoreId'],
+            'DateTimeOfReturn' => $now
+        ]);
     }
 }
