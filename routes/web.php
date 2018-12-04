@@ -126,6 +126,10 @@ Route::get('customer/searchActive', 'CustomersController@searchActive');
 
 Route::get('customer/searchInactive', 'CustomersController@searchInactive');
 
+Route::get('customer/makePurchase/{custId?}/{storeId?}', 'CustomersController@makePurchase');
+
+Route::post('customer/makePurchase', 'CustomersController@insertPurchase');
+
 Route::get('/login', function(){
     return view('login');
 });

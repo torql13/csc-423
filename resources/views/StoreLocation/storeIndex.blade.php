@@ -4,10 +4,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <h2 class="mt-3">Active Stores</h2>
                 <p>
                     <ul>
                         <li><a href='/storeLocations/addLocation'>Add Store</a></li>
+                        <li><a href='/customer/makePurchase'>Log a Customer's Purchase</a></li>
                         <li><a href='/storeLocations/inactiveIndex'>Manage Inactive Stores</a></li>
                     </ul>
                 </p>
@@ -58,7 +64,9 @@
                             <td>{{$storeLocation->StoreCode}}</a></td>
                             <td>{{$storeLocation->StoreName}}</td>
                             <td>{{$storeLocation->ManagerName}}</td>
-                            <td><a href="/storeLocations/view/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
+                            <td>
+                                <a href="/storeLocations/view/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:purple;" title="View">visibility</i></a>
+                                <a href="/customer/makePurchase/0/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="Log Purchase">payment</i></a>
                                 <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
                                 <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
                             </td>
