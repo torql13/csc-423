@@ -93,7 +93,6 @@ class OrdersController extends Controller
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
         $stores = DB::table('retail_store')->get();
         $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
-
         return view('Order/viewOrder', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
     }
     
@@ -105,7 +104,7 @@ class OrdersController extends Controller
 
         foreach($orderDetails as $detail)
         {
-            $existingItem = Inventory::where('ItemId', $detail['ItemId'])->get();
+            $existingItem = Inventory::where('ItemId', $detail['ItemId'])->where('StoreId', $order['StoreId'])->get();
 
             if(!count($existingItem))
             {
@@ -133,8 +132,9 @@ class OrdersController extends Controller
                 'DateTimeOfFulfillment' => $now
             ]);
 
-            return redirect('/order');
         }
+
+        return redirect('/order');
     }
 
     public function search(Request $request)

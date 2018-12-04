@@ -54,15 +54,14 @@
                     </div>
                 </div>
 
+                <div id="itemForms"> </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label>Add another Item to this Order</label>
                         <input class="btn btn-primary" onclick="addItems()" type="button" value="Add" />
                     </div>
                 </div>
-
-                <div id="itemForms"> </div>
-
 
                 <div class="form-row">
                     <div class="btn-toolbar col-md-5">
