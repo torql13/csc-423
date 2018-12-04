@@ -28,7 +28,7 @@
                         @if($customer)
                             <input type="text" class="form-control" name="custId" id="custId" value="{{$customer->CustomerId}}" readonly />
                         @else
-                            <select class="form-control" name="custId" id="custId" value="{{old('custId')}}">
+                            <select class="form-control" name="custId" id="custId">
                                 @foreach($customers as $customer)
                                     <option value="{{$customer->CustomerId}}">{{$customer->CustomerId}}</option>
                                 @endforeach
@@ -47,7 +47,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Item</label>
-                            <select class="form-control" name="itemId" id="itemId" value="{{old('itemId')}}">
+                            <select class="form-control" name="itemId" id="itemId">
                                 @foreach($store->items as $item)
                                     <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
                                 @endforeach
@@ -69,7 +69,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Store</label>
-                            <select class="form-control" name="storeId" id="storeId" value="{{old('storeId')}}">
+                            <select class="form-control" name="storeId" id="storeId">
                                 @foreach($stores as $store)
                                     <option value="{{$store->StoreId}}">{{$store->StoreName}}</option>
                                 @endforeach
