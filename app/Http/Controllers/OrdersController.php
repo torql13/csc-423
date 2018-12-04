@@ -91,7 +91,6 @@ class OrdersController extends Controller
         $vendors = DB::table('vendor')->get()->where('Status', 'Active');
         $stores = DB::table('retail_store')->get();
         $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
-
         return view('Order/viewOrder', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
     }
     
@@ -103,7 +102,7 @@ class OrdersController extends Controller
 
         foreach($orderDetails as $detail)
         {
-            $existingItem = Inventory::where('ItemId', $detail['ItemId'])->get();
+            $existingItem = Inventory::where('ItemId', $detail['ItemId'])->where('StoreId', $order['StoreId'])->get();
 
             if(!count($existingItem))
             {
@@ -129,9 +128,9 @@ class OrdersController extends Controller
             $order->Status = 'Delivered';
             $order->DateTimeOfFulfillment = $now;
             $order->save();
-
-            return redirect()->action('OrdersController@index')->with('success', 'Order #' . $order->OrderId . ' has been delivered.');
         }
+
+        return redirect()->action('OrdersController@index')->with('success', 'Order #' . $order->OrderId . ' has been delivered.');
     }
 
     public function search(Request $request)

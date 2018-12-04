@@ -69,6 +69,8 @@
                                 <a href="/customer/makePurchase/0/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="Log Purchase">payment</i></a>
                                 <a href="/storeLocations/editLocation/{{ $storeLocation->StoreId }}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
                                 <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                                <a href="/report/inventoryReport/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:orange;" title="Inventory">shopping_cart</i> </a>
+                                <a href="/report/overstockedInventory/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:black;" title="Overstock">reorder</i> </a>
                             </td>
                         </tr>
                         @endforeach
