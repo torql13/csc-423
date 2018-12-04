@@ -6,6 +6,7 @@ use App\Order;
 use App\OrderDetail;
 use App\Inventory;
 use App\ReturnToVendor;
+use App\ReturnToVendorDetail;
 use App\Http\Requests\StoreOrder;
 use Illuminate\Http\Request;
 use DB;
@@ -150,6 +151,7 @@ class OrdersController extends Controller
 
     public function singleOrderReturn($id)
     {
+        $returnToVendorDetail = [];
         $now = new DateTime();
 
         $order = Order::where('OrderId', $id)->first();
@@ -165,9 +167,13 @@ class OrdersController extends Controller
             if($tempQuantity < 0)
             {
                 //error
+                dd("ya fucked it");
             }
             else
             {
+                $returnDetail[0] = $detail['ItemId'];
+                $returnDetail[1] = $detail['QuantityOrdered'];
+                array_push($returnToVendorDetail, $returnDetail);
                 Inventory::where('StoreId', $order['StoreId'])->where('ItemId', $detail['ItemId'])->update([
                     'QuantityInStock' => $tempQuantity
                 ]);
@@ -182,5 +188,20 @@ class OrdersController extends Controller
             'StoreId' => $order['StoreId'],
             'DateTimeOfReturn' => $now
         ]);
+
+        $returnId = ReturnToVendor::where('VendorId', $order['VendorId'])
+            ->where('StoreId', $order['StoreId'])
+            ->where('DateTimeOfReturn', $now)
+            ->first()
+            ->pluck('ReturnToVendorId');
+dd($returnId);
+        foreach($returnToVendorDetail as $insert)
+        {
+            ReturnToVendorDetail::insert([
+                'ReturnToVendorId' => $returnId,
+                'ItemId' => $insert[0],
+                'QuantityReturned' => $insert[1]
+            ]);
+        }
     }
 }

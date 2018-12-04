@@ -143,4 +143,4 @@ Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
 
 Route::get('/order/processDelivery/{id}', 'OrdersController@processDelivery');
 
-Route::get('/order/processReturn/{{$order->OrderId}}', 'OrdersController@singleOrderReturn');
+Route::get('/order/processReturn/{id}', 'OrdersController@singleOrderReturn');
