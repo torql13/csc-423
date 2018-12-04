@@ -299,6 +299,6 @@ class CustomersController extends Controller
             'DateTimeOfPurchase' => $now
         ]);
         
-        return redirect()->back()->with('success', 'Customer purchase has been logged.');
+        return redirect()->action('CustomersController@index')->with('success', 'Customer purchase has been logged.');
     }
 }

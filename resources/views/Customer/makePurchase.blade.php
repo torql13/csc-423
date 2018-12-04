@@ -49,7 +49,11 @@
                             <label>Item</label>
                             <select class="form-control" name="itemId" id="itemId">
                                 @foreach($store->items as $item)
-                                    <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
+                                    @if($item->ItemId == old('itemId'))
+                                        <option value="{{$item->ItemId}}" selected>{{$item->ItemId}}</option>
+                                    @else
+                                        <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
