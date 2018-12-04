@@ -20,4 +20,21 @@ class StoreLocation extends Model
     {
         return $this->hasMany('App\Order', 'StoreId', 'StoreId');
     }
+
+    /**
+     * gets the customer purchases that belong to a store location
+     */
+    public function purchases()
+    {
+        return $this->hasMany('App\CustomerPurchase', 'StoreId', 'StoreId');
+    }
+
+    /**
+     * gets the items belonging to the store in the inventory table
+     */
+    public function items()
+    {
+        return $this->belongsToMany('App\InventoryItem', 'inventory', 'StoreId', 'ItemId')
+            ->withPivot('QuantityInStock');
+    }
 }
