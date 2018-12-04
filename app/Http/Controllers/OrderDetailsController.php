@@ -26,7 +26,11 @@ class OrderDetailsController extends Controller
             ]
         );
 
-        $order = DB::table('order')->get()->last();
+        $order = DB::table('order')
+            ->where('DateTimeOfOrder', $now)
+            ->where('StoreId', $details['storeId'])
+            ->where('VendorId', $details['vendorId'])
+            ->first();
         
         for ($i = 0; $i < $count; $i++)
         {

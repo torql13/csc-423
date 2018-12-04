@@ -152,12 +152,18 @@ class OrdersController extends Controller
     public function singleOrderReturn($id)
     {
         $returnToVendorDetail = [];
+        $inventoryUpdate = [];
+
         $now = new DateTime();
 
         $order = Order::where('OrderId', $id)->first();
 
         $orderDetails = OrderDetail::where('OrderId', $id)->get();
         
+        $notEnough = false;
+
+        
+
         foreach($orderDetails as $detail)
         {
             $inventory = Inventory::where('StoreId', $order['StoreId'])->where('ItemId', $detail['ItemId'])->first();
@@ -167,41 +173,65 @@ class OrdersController extends Controller
             if($tempQuantity < 0)
             {
                 //error
-                dd("ya fucked it");
+                $notEnough = true;
             }
             else
             {
+
                 $returnDetail[0] = $detail['ItemId'];
                 $returnDetail[1] = $detail['QuantityOrdered'];
                 array_push($returnToVendorDetail, $returnDetail);
-                Inventory::where('StoreId', $order['StoreId'])->where('ItemId', $detail['ItemId'])->update([
-                    'QuantityInStock' => $tempQuantity
-                ]);
+
+                $inventoryDetail[0] = $order['StoreId'];
+                $inventoryDetail[1] = $detail['ItemId'];
+                $inventoryDetail[2] = $tempQuantity;
+                array_push($inventoryUpdate, $inventoryDetail);
+                // Inventory::where('StoreId', $order['StoreId'])->where('ItemId', $detail['ItemId'])->update([
+                //     'QuantityInStock' => $tempQuantity
+                // ]);
             }
         }
-        Order::where('OrderId', $id)->update([
-            'status' => 'Returned'
-        ]);
 
-        ReturnToVendor::insert([
-            'VendorId' => $order['VendorId'],
-            'StoreId' => $order['StoreId'],
-            'DateTimeOfReturn' => $now
-        ]);
-
-        $returnId = ReturnToVendor::where('VendorId', $order['VendorId'])
-            ->where('StoreId', $order['StoreId'])
-            ->where('DateTimeOfReturn', $now)
-            ->first()
-            ->pluck('ReturnToVendorId');
-dd($returnId);
-        foreach($returnToVendorDetail as $insert)
+        if(!$notEnough)
         {
-            ReturnToVendorDetail::insert([
-                'ReturnToVendorId' => $returnId,
-                'ItemId' => $insert[0],
-                'QuantityReturned' => $insert[1]
+            foreach($inventoryUpdate as $update)
+            {
+                Inventory::where('StoreId', $update[0])->where('ItemId', $update[1])->update([
+                    'QuantityInStock' => $update[2]
+                ]);
+            }
+
+            Order::where('OrderId', $id)->update([
+                'status' => 'Returned'
             ]);
+    
+            ReturnToVendor::insert([
+                'VendorId' => $order['VendorId'],
+                'StoreId' => $order['StoreId'],
+                'DateTimeOfReturn' => $now
+            ]);
+    
+            $returnId = ReturnToVendor::where('VendorId', $order['VendorId'])
+                ->where('StoreId', $order['StoreId'])
+                ->where('DateTimeOfReturn', $now)
+                ->first();
+                
+            foreach($returnToVendorDetail as $insert)
+            {
+                ReturnToVendorDetail::insert([
+                    'ReturnToVendorId' => $returnId->ReturnToVendorId,
+                    'ItemId' => $insert[0],
+                    'QuantityReturned' => $insert[1]
+                ]);
+
+            }
+            
+            return redirect()->back()->with("success", "Order Successfully Returned");
         }
+        else
+        {
+            return redirect()->back()->with("error", "Not Enough Inventory to Return");
+        }
+        
     }
 }

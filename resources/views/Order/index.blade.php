@@ -4,6 +4,16 @@
 <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if(session("error"))
+                    <div class="alert alert-danger">
+                        {{session('error')}}
+                    </div>
+                @endif
+                @if(session("success"))
+                    <div class="alert alert-success">
+                        {{session('success')}}
+                    </div>
+                @endif
                 <h2 class="mt-3">All Orders</h2>
                 <p>
                     <ul>
