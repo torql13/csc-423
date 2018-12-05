@@ -114,8 +114,13 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-4">
                         <label>Password</label>
+                        <input type="password" class="form-control" name="password" id="password" />
+                </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Confirm Password</label>
                         <input type="password" class="form-control" name="password" id="password" />
                     </div>
                 </div>
