@@ -148,3 +148,7 @@ Route::get('/report/inventoryReport/{id}', 'ReportsController@inventoryReport');
 Route::get('/report/overstockedInventory/{id}', 'ReportsController@enterOverstockThreshold');
 
 Route::post('/report/overstockedReport', 'ReportsController@overstockedReport');
+
+Route::get('/report/itemsDeliveredInTimeFrame/{id}', 'ReportsController@enterStartAndEndDates');
+
+Route::post('/report/itemsDeliveredInTimeFrameReport', 'ReportsController@itemsDeliveredInTimeFrameReport');
