@@ -4,25 +4,15 @@
 <div class="container">
         <div class="row">
             <div class="col-md-12">
-                @if(session("error"))
-                    <div class="alert alert-danger">
-                        {{session('error')}}
-                    </div>
-                @endif
-                @if(session("success"))
-                    <div class="alert alert-success">
-                        {{session('success')}}
-                    </div>
-                @endif
                 <h2 class="mt-3">All Orders</h2>
                 <p>
                     <ul>
                         <li><a href='/order/newOrder'>Create New Order</a></li>
-                        <li><a href='/order/returnedOrders'>View Returned Orders</a></li>
+                        <li><a href='/order'>Manage Pending/Successful Orders</a></li>
                     </ul>
                 </p>
                 <p>
-                    <form action="{{ action('OrdersController@search') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
+                    <form action="{{ action('OrdersController@searchReturned') }}" method="get" id="searchForm" onsubmit="$('#submit').prop('disabled', true);">
                         <fieldset>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
