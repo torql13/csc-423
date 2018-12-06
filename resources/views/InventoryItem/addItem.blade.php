@@ -32,17 +32,25 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label>Division</label>
-                        <select name="division" id="division">
-                        @foreach($divisions as $div):
-                            <option value="{{$div->Name}}">{{$div->Name}}</option>
+                        <select class="form-control" name="division" id="division">
+                        @foreach($divisions as $div)
+                            @if($div->Name == old('division'))
+                                <option value="{{$div->Name}}" selected>{{$div->Name}}</option>
+                            @else
+                                <option value="{{$div->Name}}">{{$div->Name}}</option>
+                            @endif
                         @endforeach
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Category</label>
-                        <select name="category" id="category">
-                        @foreach($categories as $cat):
-                            <option value="{{$cat->Name}}">{{$cat->Name}}</option>
+                        <select class="form-control" name="category" id="category">
+                        @foreach($categories as $cat)
+                            @if($cat->Name == old('category'))
+                                <option value="{{$cat->Name}}" selected>{{$cat->Name}}</option>
+                            @else
+                                <option value="{{$cat->Name}}">{{$cat->Name}}</option>
+                            @endif
                         @endforeach
                         </select>
                     </div>
@@ -66,7 +74,15 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label>Image File Name</label>
-                        <input type="text" class="form-control" name="imgFileName" id="imgFileName" value="{{old('imgFileName')}}" />
+                        <select class="form-control" name="imgFileName" id="imgFileName">
+                            @foreach($images as $image)
+                                @if($image->Path == old('imgFileName'))
+                                    <option value="images/{{$image->Path}}" selected>{{$image->Path}}</option>
+                                @else
+                                    <option value="images/{{$image->Path}}">{{$image->Path}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 

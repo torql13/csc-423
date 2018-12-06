@@ -1,12 +1,17 @@
 @extends('layouts.main')
 
 @section('content')
+
+<a style="float:left; margin:30px;" href="{{asset($item->ImageFileName)}}" target="_blank">
+    <img src="{{asset($item->ImageFileName)}}" width="250" />
+</a>
+
 <div class="container mt-4 offset-md-3">
     <div class="well">
         <fieldset>
     
             <legend>View Item Information</legend>
-
+            
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>Description</label>
@@ -19,9 +24,13 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-4">
                     <label>Division</label>
                     <input type="text" class="form-control" value="{{ $item->Division }}" disabled>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Category</label>
+                    <input type="text" class="form-control" value="{{ $item->Category }}" disabled>
                 </div>
             </div>
 
@@ -30,11 +39,7 @@
                     <label>Department</label>
                     <input type="text" class="form-control" value="{{ $item->Department }}" disabled>
                 </div>
-                <div class="form-group col-md-2">
-                    <label>Category</label>
-                    <input type="text" class="form-control" value="{{ $item->Category }}" disabled>
-                </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label>Cost</label>
                     <input type="text" class="form-control" value="{{ $item->ItemCost }}" disabled>
                 </div>

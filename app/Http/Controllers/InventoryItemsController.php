@@ -67,33 +67,36 @@ class InventoryItemsController extends Controller
         //pull divisions and categories from the divisions and categories arrays in inventory item model
         $divisions = DB::table('divisions')->get();
         $categories = DB::table('categories')->get();
-        return view('InventoryItem/addItem', compact('vendors', 'divisions', 'categories'));
+        $images = DB::table('image_paths')->get();
+        return view('InventoryItem/addItem', compact('vendors', 'divisions', 'categories', 'images'));
     }
 
     public function insertNewItem(StoreItem $request)
     {
-        $newItem = $request->all();
-        $cost = $newItem['cost'];
-        if(!strpos($cost, '.'))
-        {
-            $cost .= ".00";
-        }
-        $retail = $newItem['retail'];
-        if(!strpos($retail, '.'))
-        {
-            $retail .= ".00";
-        }
+        $item = $request->all();
+        $cost = $item['cost'];
+        $retail = $item['retail'];
+
+        if(strpos($cost, '$') === false)
+            $cost = '$' . $cost;
+        if(strpos($retail, '$') === false)
+            $retail = '$' . $retail;
+        if(strpos($cost, '.') === false)
+            $cost .= '.00';
+        if(strpos($retail, '.') === false)
+            $retail .= '.00';
+        
         InventoryItem::insert(
             [
-                'Description' => $newItem['description'],
-                'Size' => $newItem['size'],
-                'Division' => $newItem['division'],
-                'Department' => $newItem['department'],
-                'Category' => $newItem['category'],
+                'Description' => $item['description'],
+                'Size' => $item['size'],
+                'Division' => $item['division'],
+                'Department' => $item['department'],
+                'Category' => $item['category'],
                 'ItemCost' => $cost,
                 'ItemRetail' => $retail, 
-                'ImageFileName' => $newItem['imgFileName'],
-                'VendorId' => $newItem['vendorId']
+                'ImageFileName' => $item['imgFileName'],
+                'VendorId' => $item['vendorId']
             ]
         );
 
@@ -112,13 +115,25 @@ class InventoryItemsController extends Controller
         //pull divisions and categories data from the divisions and categories tables
         $divisions = DB::table('divisions')->get();
         $categories = DB::table('categories')->get();
+        $images = DB::table('image_paths')->get();
 
-        return view('/InventoryItem/editItem', compact('item', 'vendors', 'divisions', 'categories'));
+        return view('/InventoryItem/editItem', compact('item', 'vendors', 'divisions', 'categories', 'images'));
     }
 
     public function updateItem(StoreItem $request)
     {
         $item = $request->all();
+        $cost = $item['cost'];
+        $retail = $item['retail'];
+
+        if(strpos($cost, '$') === false)
+            $cost = '$' . $cost;
+        if(strpos($retail, '$') === false)
+            $retail = '$' . $retail;
+        if(strpos($cost, '.') === false)
+            $cost .= '.00';
+        if(strpos($retail, '.') === false)
+            $retail .= '.00';
 
         InventoryItem::where('ItemId', $item['itemId'])->update(
             [
@@ -127,8 +142,8 @@ class InventoryItemsController extends Controller
                 'Division' => $item['division'],
                 'Department' => $item['department'],
                 'Category' => $item['category'],
-                'ItemCost' => $item['cost'],
-                'ItemRetail' => $item['retail'], 
+                'ItemCost' => $cost,
+                'ItemRetail' => $retail, 
                 'ImageFileName' => $item['imgFileName'],
                 'VendorId' => $item['vendorId'],
                 'Status' => $item['status']
