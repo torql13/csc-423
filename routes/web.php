@@ -74,6 +74,8 @@ Route::post('/order/updateDetailsExistingOrder', array('as' => 'update', 'uses' 
 
 Route::get('/order/search', 'OrdersController@search');
 
+Route::get('/order/searchReturned', 'OrdersController@searchReturned');
+
 Route::get('/storeLocations/', 'StoresController@storeIndex');
 
 Route::get('/storeLocations/index', 'StoresController@storeIndex');
@@ -146,6 +148,10 @@ Route::get('/order/viewVendorOrders', 'OrdersController@viewVendorOrders');
 Route::get('/order/viewOrder/{id}', 'OrdersController@viewOrder');
 
 Route::get('/order/processDelivery/{id}', 'OrdersController@processDelivery');
+
+Route::get('/order/processReturn/{id}', 'OrdersController@singleOrderReturn');
+
+Route::get('/order/returnedOrders', 'OrdersController@returnedIndex');
 
 Route::get('/report/inventoryReport/{id}', 'ReportsController@inventoryReport');
 
