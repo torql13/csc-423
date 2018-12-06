@@ -60,7 +60,6 @@ class ReportsController extends Controller
         $items = [];
         $quantity = [];
         $final = [];
-        $narrowFinal = [];
         
         $returnToVendor = ReturnToVendor::where('DateTimeOfReturn', '<=', $datepicker['endDate'])
             ->where('DateTimeOfReturn', '>=', $datepicker['startDate'])
@@ -94,6 +93,12 @@ class ReportsController extends Controller
             $final[$data['itemId']]['ItemCost'] = $itemData['ItemCost'];
             $final[$data['itemId']]['ItemRetail'] = $itemData['ItemRetail'];
         }
+
+        usort($final, function($a, $b) {
+            return $b['quantity'] <=> $a['quantity'];
+        });
+
+        $final = array_slice($final, 0, 10);
 
         return view('Reports.returnedItemsTopTen', compact('final', 'datepicker'));
         

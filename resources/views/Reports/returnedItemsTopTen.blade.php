@@ -4,8 +4,8 @@
 <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- <h2 class="mt-3">Items Returned to blah  between blah and blah</h2>
--->             <p>
+                <h3 class="mt-3">Top Ten Items Returned between {{$datepicker['startDate']}} and {{$datepicker['endDate']}}</h2>
+                <p>
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>ItemId</th>
