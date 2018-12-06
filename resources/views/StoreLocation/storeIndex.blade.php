@@ -71,7 +71,6 @@
                                 <a href="/storeLocations/deleteLocation/{{ $storeLocation->StoreId }}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
                                 <a href="/report/inventoryReport/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:orange;" title="Inventory">shopping_cart</i></a>
                                 <a href="/report/overstockedInventory/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:black;" title="Overstock">reorder</i> </a>
-                                <a href="/report/itemsDeliveredInTimeFrame/{{$storeLocation->StoreId}}"><i class="material-icons" style="font-size:36px;color:black;" title="Delivered During Timeframe">schedule</i></a>
                                 <a href="/report/itemsDeliveredInTimeFrame/{{$storeLocation->StoreId}}"> <i class="material-icons" style="font-size:36px;color:purple;" title="Delivered In Time Frame">query_builder</i> </a>
                             </td>
                         </tr>
