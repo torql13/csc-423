@@ -72,6 +72,7 @@
                             <td>{{$customer->Email}}</td>
                             <td>
                                 <a href="/customer/viewCustomer/{{$customer->CustomerId}}"> <i class="material-icons" style="font-size:36px;color:purple;" title="View">visibility</i></a>
+                                <a href="/customer/viewPurchases/{{$customer->CustomerId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View All Purchases">shopping_cart</i></a>
                                 <a href="/customer/makePurchase/{{$customer->CustomerId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="Log Purchase">payment</i></a>
                                 <a href="/customer/editCustomer/{{$customer->CustomerId}}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
                                 <a href="/customer/deleteCustomer/{{$customer->CustomerId}}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>

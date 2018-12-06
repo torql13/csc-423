@@ -301,4 +301,18 @@ class CustomersController extends Controller
         
         return redirect()->action('CustomersController@index')->with('success', 'Customer purchase has been logged.');
     }
+
+    public function viewPurchases($id)
+    {
+        $customer = Customer::where([
+            ['CustomerId', $id],
+            ['Status', 'Active']
+        ])->firstOrFail();
+
+        $purchases = DB::table('customer_purchase')->where('CustomerId', $id)->simplePaginate(10);
+
+        $stores = StoreLocation::get();
+
+        return view('Customer/viewPurchases', compact('customer', 'purchases', 'stores'));
+    }
 }
