@@ -16,9 +16,8 @@ class Customer extends Model
     /**
      * Gets the customer purchases belonging to this customer
      */
-    //public function purchases()
-    //{
-    //    return $this->hasMany('App\CustomerPurchase', 'CustomerId', 'CustomerId');
-    //}
-    //uncomment once customer purchase model is created
+    public function purchases()
+    {
+        return $this->hasMany('App\CustomerPurchase', 'CustomerId', 'CustomerId');
+    }
 }

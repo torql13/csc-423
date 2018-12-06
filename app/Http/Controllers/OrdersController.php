@@ -98,17 +98,15 @@ class OrdersController extends Controller
                     'QuantityInStock' => $totalQuantity
                 ]);
             }
-
-            $now = new DateTime();
-
-            Order::where('OrderId', $id)->update([
-                'Status' => 'Delivered',
-                'DateTimeOfFulfillment' => $now
-            ]);
-
         }
 
-        return redirect('/order');
+        $now = new DateTime();
+
+        $order->Status = 'Delivered';
+        $order->DateTimeOfFulfillment = $now;
+        $order->save();
+
+        return redirect()->action('OrdersController@index')->with('success', 'Order #' . $order->OrderId . ' has been delivered.');
     }
 
     public function search(Request $request)

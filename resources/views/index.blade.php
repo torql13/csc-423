@@ -71,7 +71,7 @@
             <p class="card-text">
             Manage Orders from Stores to be delivered
             <ul>
-              <li><a href="/order/newOrder">Create a new Order</a></li>
+              <li><a href="/order/newOrder">Create a New Order</a></li>
             </ul>
             </p>
           </div>
@@ -87,7 +87,8 @@
             <p class="card-text">
             Manage Customers who make purchases at Stores
             <ul>
-              <li><a href="/customer/addCustomer">Create a new Customer</a></li>
+              <li><a href="/customer/addCustomer">Create a New Customer</a></li>
+              <li><a href="/customer/makePurchase">Log a Customer's Purchase</a></li>
             </ul>
             </p>
           </div>
