@@ -125,8 +125,14 @@ class VendorsController extends Controller
 
     public function insertNewVendor(StoreVendor $request)
     {
-        
+
         $newVendor = $request->validated();
+        
+        $confirm = $request->input('confirmPassword');
+
+        if($newVendor['password'] != $confirm)
+            return redirect()->back()->withInput()
+                ->with('confirmError', 'New and Confirmed passwords do not match.');
 
         $hashedPass = $this->hashPassword($newVendor['password']);
 
@@ -218,26 +224,26 @@ class VendorsController extends Controller
 
         return view('Vendor/inactiveIndex', compact('vendorList', 'search'));
     }
-    public function changePassword(ChangePassword $request)
+    public function changePassword(Request $request)
     {
         $newVendor = $request->all();
 
         $storedPass = Vendor::where('VendorId', $newVendor['vendorId'])->pluck('Password')[0];
         
-        if($this->hashPassword($newVendor['oldPass']) == $storedPass)
-        {
-            Vendor::where('VendorId', $newVendor['vendorId'])
-                ->update([
-                    'Password' => $this->hashPassword($newVendor['newPass'])
-                ]
-            );
-            return redirect()->action('VendorsController@index');
-        }
-        else
-        {
+        if($this->hashPassword($newVendor['oldPass']) != $storedPass)
             return redirect("vendor/changePassword/" . $newVendor['vendorId'])
                 ->with('error', 'The old password entered was incorrect.');
-        }
+
+        if($newVendor['newPass'] != $newVendor['confirmPass'])
+            return redirect("vendor/changePassword/" . $newVendor['vendorId'])
+                ->with('error', 'New and Confirmed passwords do not match.');
+
+        Vendor::where('VendorId', $newVendor['vendorId'])
+            ->update([
+                'Password' => $this->hashPassword($newVendor['newPass'])
+            ]
+        );
+        return redirect()->action('VendorsController@index');
     }
 
     public function login(Request $request)

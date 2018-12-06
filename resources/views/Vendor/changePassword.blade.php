@@ -7,7 +7,6 @@
         <form action="{{ action('VendorsController@changePassword') }}" method="post" id="changePassword">
     
             <fieldset>
-        
                 <legend>Change Password</legend>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -40,6 +39,13 @@
                     <div class="form-group col-md-4">
                         <label>New Password</label>
                         <input type="password" class="form-control" name="newPass" id="newPass" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control" name="confirmPass" id="confirmPass" />
                     </div>
                 </div>
 
