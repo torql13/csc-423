@@ -27,7 +27,7 @@
                     </table>
                     <div class="row mt-2">
                         <div class="col-md-4">
-                            <a href="/storeLocations/">Return to Store Index</a>
+                            <a href="/vendor/">Return to Vendor Index</a>
                         </div>
                     </div>
                 </p>

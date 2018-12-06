@@ -170,7 +170,7 @@ Route::post('/report/topTenItemsReturned', 'ReportsController@topTenItemsReturne
 Route::get('/report/itemsDeliveredInTimeFrame/{id}', function($id)
 {
     $storeId = $id;
-    return view('Reports.enterOverstockThreshold', compact('storeId'));
+    return view('Reports.enterStartAndEndDates', compact('storeId'));
 });
 
 Route::post('/report/itemsDeliveredInTimeFrameReport', 'ReportsController@itemsDeliveredInTimeFrameReport');
