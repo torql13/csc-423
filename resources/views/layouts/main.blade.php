@@ -232,7 +232,12 @@
             return true;
         }
 
-        
+        $('#getItems').on('click', function(){
+            var custId = $('#custId').val();
+            var storeId = $('#storeId').val();
+            var url = "/customer/makePurchase/" + custId + "/" + storeId;
+            window.location=url;
+        });
         
     </script>
    
