@@ -7,6 +7,8 @@ use App\StoreLocation;
 use App\InventoryItem;
 use App\Order;
 use App\OrderDetail;
+use App\ReturnToVendor;
+use App\ReturnToVendorDetail;
 use Illuminate\Http\Request;
 use DB;
 
@@ -38,12 +40,6 @@ class ReportsController extends Controller
         return view('Reports.overstockedReport', compact('inventoryItems', 'store', 'items', 'overstockThreshold', 'id'));
     }
 
-    public function enterStartAndEndDates($id)
-    {
-        $storeId = $id;
-        return view('Reports.enterStartAndEndDates', compact('storeId'));
-    }
-
     public function itemsDeliveredInTimeFrameReport(Request $request)
     {
         $id = $request['storeId'];
@@ -56,5 +52,52 @@ class ReportsController extends Controller
         $orderDetails = OrderDetail::get();
 
         return view('Reports.itemsDeliveredInTimeFrame', compact('id', 'startDate', 'endDate', 'inventoryItems', 'orders', 'orderDetails', 'items', 'store'));
+    }
+
+    public function topTenItemsReturned(Request $request)
+    {
+        $datepicker = $request->all();
+        $items = [];
+        $quantity = [];
+        $final = [];
+        $keys = [];
+        
+        $returnToVendor = ReturnToVendor::where('DateTimeOfReturn', '<=', $datepicker['endDate'])
+            ->where('DateTimeOfReturn', '>=', $datepicker['startDate'])
+            ->where('VendorId', $datepicker['vendorId'])
+            ->get();
+        
+        foreach($returnToVendor as $row)
+            array_push($items, ReturnToVendorDetail::where('ReturnToVendorId', $row['ReturnToVendorId'])->get());
+        
+        foreach($items as $item)
+        {
+            foreach($item as $subItem)
+            {
+                if(isset($quantity[$subItem['ItemId']]) && $quantity[$subItem['ItemId']])
+                {
+                    $quantity[$subItem['ItemId']] += $subItem['QuantityReturned'];
+                }
+                else
+                {
+                    $quantity[$subItem['ItemId']] = $subItem['QuantityReturned'];
+                }
+
+                array_push($keys, $subItem['ItemId']);
+                
+            }
+        }
+
+        for($i=0; $i<$quantity.length; $i++)
+        {
+            $item = InventoryItem::where('ItemId', $keys[$i])->first();
+        }
+            dd($num);
+            
+            array_push($final, $item);
+        
+
+       dd($final);
+        
     }
 }

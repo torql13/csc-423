@@ -159,10 +159,18 @@ Route::get('/report/overstockedInventory/{id}', 'ReportsController@enterOverstoc
 
 Route::post('/report/overstockedReport', 'ReportsController@overstockedReport');
 
-Route::post('/report/topTenReturned', function(){
-    return view('Report.returnedTimeframe');
+Route::get('/report/topTenReturned/{id}', function($id)
+{
+    $vendorId = $id;
+    return view('Reports.enterStartAndEndDates', compact('vendorId'));
 });
 
-Route::get('/report/itemsDeliveredInTimeFrame/{id}', 'ReportsController@enterStartAndEndDates');
+Route::post('/report/topTenItemsReturned', 'ReportsController@topTenItemsReturned');
+
+Route::get('/report/itemsDeliveredInTimeFrame/{id}', function($id)
+{
+    $storeId = $id;
+    return view('Reports.enterOverstockThreshold', compact('storeId'));
+});
 
 Route::post('/report/itemsDeliveredInTimeFrameReport', 'ReportsController@itemsDeliveredInTimeFrameReport');

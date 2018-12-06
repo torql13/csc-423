@@ -3,17 +3,24 @@
 @section('content')
 <div class="container mt-4 offset-md-3">
     <div class="well">
-    
-        <form action="{{ action('ReportsController@itemsDeliveredInTimeFrameReport') }}" method="post" id="itemsDeliveredInTimeFrameForm">
-    
+        @if(isset($storeId))
+            <form action="{{ action('ReportsController@itemsDeliveredInTimeFrameReport') }}" method="post" id="itemsDeliveredInTimeFrameForm">
+        @elseif(isset($vendorId))
+            <form action="{{ action('ReportsController@topTenItemsReturned') }}" method="post" id="topTenItemsReturned">
+        @endif
             <fieldset>
         
-                <legend>Enter a Start and End Date to see items delivered during this period</legend>
+                <legend>Enter a Start and End Date to see report during this period</legend>
 
                 <div class="form-row" style="visibility:hidden;position:absolute">
                     <div class="form-group col-md-4">
+                    @if(isset($storeId))
                         <label>StoreId</label>
                         <input type="text" class="form-control" name="storeId" id="storeId" value="{{$storeId}}">
+                    @elseif(isset($vendorId))
+                        <label>VendorId</label>
+                        <input type="text" class="form-control" name="vendorId" id="vendorId" value="{{$vendorId}}">
+                    @endif
                     </div>
                 </div>
                 

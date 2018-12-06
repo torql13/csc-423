@@ -61,6 +61,7 @@
                             <td><a href="/vendor/view/{{$vendor->VendorId}}"> <i class="material-icons" style="font-size:36px;color:green;" title="View">visibility</i></a>
                                 <a href="/vendor/editVendor/{{$vendor->VendorId}}"> <i class="material-icons" style="font-size:36px;color:blue;" title="Edit">edit</i></a>
                                 <a href="/vendor/deleteVendor/{{$vendor->VendorId}}" onclick="return confirm('Are you sure?');"> <i class="material-icons" style="font-size:36px;color:red;" title="Delete">delete</i></a>
+                                <a href="/report/topTenReturned/{{$vendor->VendorId}}">Top Ten</a>
                             </td>
                         </tr>
                         @endforeach
