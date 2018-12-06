@@ -27,10 +27,10 @@ class ReportsController extends Controller
         return view('Reports.enterOverstockThreshold', compact('storeId'));
     }
 
-    public function overstockedReport()
+    public function overstockedReport(Request $request)
     {
-        $id = $_POST['storeId'];
-        $overstockThreshold = $_POST['overstockThreshold'];
+        $id = $request['storeId'];
+        $overstockThreshold = $request['overstockThreshold'];
         $inventoryItems = Inventory::where('StoreId', $id)->get();
         $store = StoreLocation::where('StoreId', $id)->first();
         $items = InventoryItem::get();
@@ -44,11 +44,11 @@ class ReportsController extends Controller
         return view('Reports.enterStartAndEndDates', compact('storeId'));
     }
 
-    public function itemsDeliveredInTimeFrameReport()
+    public function itemsDeliveredInTimeFrameReport(Request $request)
     {
-        $id = $_POST['storeId'];
-        $startDate = $_POST['startDate'];
-        $endDate = $_POST['endDate'];
+        $id = $request['storeId'];
+        $startDate = $request['startDate'];
+        $endDate = $request['endDate'];
         $inventoryItems = Inventory::where('StoreId', $id)->get();
         $store = StoreLocation::where('StoreId', $id)->first();
         $items = InventoryItem::get();
