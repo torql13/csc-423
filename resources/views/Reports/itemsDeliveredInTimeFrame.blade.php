@@ -14,8 +14,6 @@
                             <th>Date Delivered</th>
                         </tr>
                         @foreach($orders as $order)
-                            @if($order->Status === 'Delivered')
-                                @if(($order->DateTimeOfFulfillment >= $startDate) && ($order->DateTimeOfFulfillment <= $endDate))
                                     @foreach ($orderDetails as $orderDetail)
                                         @if($order->OrderId == $orderDetail->OrderId)
                                             @foreach($items as $item)
@@ -30,8 +28,6 @@
                                             @endforeach
                                         @endif
                                     @endforeach
-                                @endif
-                            @endif
                         @endforeach
                     </table>
                     <div class="row mt-2">
