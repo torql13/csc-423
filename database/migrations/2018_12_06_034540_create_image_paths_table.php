@@ -19,12 +19,9 @@ class CreateImagePathsTable extends Migration
         });
 
         DB::table('image_paths')->insert([
-            ['Path' => '$1-15.jpg'],
-            ['Path' => '$1-65.jpg'],
-            ['Path' => '$1-65_sale.jpg'],
+            ['Path' => 'no_image_found.jpg'],
             ['Path' => '1_subject_note.jpg'],
             ['Path' => '10_pk_washable.jpg'],
-            ['Path' => '40_off.jpg'],
             ['Path' => 'apricots.jpg'],
             ['Path' => 'barbie_fashionistas.jpg'],
             ['Path' => 'bass_pro.jpg'],
@@ -111,7 +108,6 @@ class CreateImagePathsTable extends Migration
             ['Path' => 'moon_pie_vertical.jpg'],
             ['Path' => 'mountain_racer_toy_car.jpg'],
             ['Path' => 'ninja_turtles_golf_set.jpg'],
-            ['Path' => 'no_image_found.jpg'],
             ['Path' => 'notebook_01.jpg'],
             ['Path' => 'notebook_02.jpg'],
             ['Path' => 'notebooks.jpg'],
@@ -158,7 +154,11 @@ class CreateImagePathsTable extends Migration
             ['Path' => 'western_union_gift_card.jpg'],
             ['Path' => 'western_union_reloadable.jpg'],
             ['Path' => 'wise_tortilla.jpg'],
-            ['Path' => 'yogurt_raisin.jpg']
+            ['Path' => 'yogurt_raisin.jpg'],
+            ['Path' => '$1-15.jpg'],
+            ['Path' => '$1-65.jpg'],
+            ['Path' => '$1-65_sale.jpg'],
+            ['Path' => '40_off.jpg']
         ]);
     }
 
