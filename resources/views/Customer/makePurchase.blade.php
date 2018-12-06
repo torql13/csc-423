@@ -38,10 +38,16 @@
                 </div>
 
                 @if($store)
+                    <div class="form-row" style="visibility:hidden;position:absolute">
+                        <div class="form-group col-md-4">
+                            <label>Store Id</label>
+                            <input type="text" class="form-control" name="storeId" id="storeId" value="{{ $store->StoreId }}" readonly />
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Store</label>
-                            <input type="text" class="form-control" name="storeId" id="storeId" value="{{$store->StoreId}}" readonly />
+                            <input type="text" class="form-control" value="{{$store->StoreName}}" readonly />
                         </div>
                     </div>
                     <div class="form-row">
@@ -49,7 +55,11 @@
                             <label>Item</label>
                             <select class="form-control" name="itemId" id="itemId">
                                 @foreach($store->items as $item)
-                                    <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
+                                    @if($item->ItemId == old('itemId'))
+                                        <option value="{{$item->ItemId}}" selected>{{$item->ItemId}}</option>
+                                    @else
+                                        <option value="{{$item->ItemId}}">{{$item->ItemId}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

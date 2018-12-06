@@ -132,6 +132,8 @@ Route::get('customer/makePurchase/{custId?}/{storeId?}', 'CustomersController@ma
 
 Route::post('customer/makePurchase', 'CustomersController@insertPurchase');
 
+Route::get('customer/viewPurchases/{id}', 'CustomersController@viewPurchases');
+
 Route::get('/login', function(){
     return view('login');
 });
