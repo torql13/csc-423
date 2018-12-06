@@ -60,7 +60,7 @@ class ReportsController extends Controller
         $items = [];
         $quantity = [];
         $final = [];
-        $keys = [];
+        $narrowFinal = [];
         
         $returnToVendor = ReturnToVendor::where('DateTimeOfReturn', '<=', $datepicker['endDate'])
             ->where('DateTimeOfReturn', '>=', $datepicker['startDate'])
@@ -74,30 +74,28 @@ class ReportsController extends Controller
         {
             foreach($item as $subItem)
             {
-                if(isset($quantity[$subItem['ItemId']]) && $quantity[$subItem['ItemId']])
+                if(isset($final[$subItem['ItemId']]['quantity']) && $final[$subItem['ItemId']]['quantity'])
                 {
-                    $quantity[$subItem['ItemId']] += $subItem['QuantityReturned'];
+                    $final[$subItem['ItemId']]['quantity'] += $subItem['QuantityReturned'];
                 }
                 else
                 {
-                    $quantity[$subItem['ItemId']] = $subItem['QuantityReturned'];
-                }
-
-                array_push($keys, $subItem['ItemId']);
-                
+                    $final[$subItem['ItemId']]['quantity'] = $subItem['QuantityReturned'];
+                    $final[$subItem['ItemId']]['itemId'] = $subItem['ItemId'];
+                }                
             }
         }
 
-        for($i=0; $i<$quantity.length; $i++)
+        foreach($final as $data)
         {
-            $item = InventoryItem::where('ItemId', $keys[$i])->first();
-        }
-            dd($num);
-            
-            array_push($final, $item);
-        
+            $itemData = InventoryItem::where('ItemId', $data['itemId'])->first();
 
-       dd($final);
+            $final[$data['itemId']]['Description'] = $itemData['Description'];
+            $final[$data['itemId']]['ItemCost'] = $itemData['ItemCost'];
+            $final[$data['itemId']]['ItemRetail'] = $itemData['ItemRetail'];
+        }
+
+        return view('Reports.returnedItemsTopTen', compact('final', 'datepicker'));
         
     }
 }
