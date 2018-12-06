@@ -253,18 +253,12 @@ class VendorsController extends Controller
         
         if($record)
         {
-            //$request->session()->put('VendorId', $record->VendorId);
             session([
                 'VendorId' => $record->VendorId,
                 'VendorName' => $record->VendorName,
                 'VendorCode' => $record->VendorCode,
                 'Password' => $record->Password
             ]);
-
-            // echo session('VendorId');
-
-            //temperary so I dont overfill the session
-            // $request->session()->flush();
 
             return redirect('/order/viewVendorOrders');
         }

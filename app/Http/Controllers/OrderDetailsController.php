@@ -26,7 +26,11 @@ class OrderDetailsController extends Controller
             ]
         );
 
-        $order = DB::table('order')->get()->last();
+        $order = DB::table('order')
+            ->where('DateTimeOfOrder', $now)
+            ->where('StoreId', $details['storeId'])
+            ->where('VendorId', $details['vendorId'])
+            ->first();
         
         for ($i = 0; $i < $count; $i++)
         {
@@ -90,14 +94,4 @@ class OrderDetailsController extends Controller
         }
         return redirect()->action('OrdersController@index');
     }
-
-   /*  public function viewOrder($id)
-    {
-        $indOrder = Order::where('OrderId', $id)->first();
-        $vendors = DB::table('vendor')->get()->where('Status', 'Active');
-        $stores = DB::table('retail_store')->get();
-        $orderDetails = DB::table('order_detail')->get()->where('OrderId', $id);
-
-        return view('/Order/viewOrder/', compact('indOrder', 'vendors', 'stores', 'orderDetails'));
-    } */
 }
