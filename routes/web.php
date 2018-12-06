@@ -162,3 +162,7 @@ Route::post('/report/overstockedReport', 'ReportsController@overstockedReport');
 Route::post('/report/topTenReturned', function(){
     return view('Report.returnedTimeframe');
 });
+
+Route::get('/report/itemsDeliveredInTimeFrame/{id}', 'ReportsController@enterStartAndEndDates');
+
+Route::post('/report/itemsDeliveredInTimeFrameReport', 'ReportsController@itemsDeliveredInTimeFrameReport');
