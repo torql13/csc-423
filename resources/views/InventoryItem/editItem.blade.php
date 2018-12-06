@@ -83,7 +83,7 @@
                         <label>Image File Name</label>
                         <select class="form-control" name="imgFileName" id="imgFileName">
                             @foreach($images as $image)
-                                @if($image->Path === $item->ImageFileName)
+                                @if($image->Path === substr($item->ImageFileName,7))
                                     <option value="images/{{$image->Path}}" selected>{{$image->Path}}</option>
                                 @else
                                     <option value="images/{{$image->Path}}">{{$image->Path}}</option>

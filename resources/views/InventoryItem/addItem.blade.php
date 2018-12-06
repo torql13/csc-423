@@ -34,7 +34,7 @@
                         <label>Division</label>
                         <select class="form-control" name="division" id="division">
                         @foreach($divisions as $div)
-                            @if($div->Name == old('division'))
+                            @if($div->Name === old('division'))
                                 <option value="{{$div->Name}}" selected>{{$div->Name}}</option>
                             @else
                                 <option value="{{$div->Name}}">{{$div->Name}}</option>
@@ -46,7 +46,7 @@
                         <label>Category</label>
                         <select class="form-control" name="category" id="category">
                         @foreach($categories as $cat)
-                            @if($cat->Name == old('category'))
+                            @if($cat->Name === old('category'))
                                 <option value="{{$cat->Name}}" selected>{{$cat->Name}}</option>
                             @else
                                 <option value="{{$cat->Name}}">{{$cat->Name}}</option>
@@ -76,7 +76,7 @@
                         <label>Image File Name</label>
                         <select class="form-control" name="imgFileName" id="imgFileName">
                             @foreach($images as $image)
-                                @if($image->Path == old('imgFileName'))
+                                @if($image->Path === substr(old('imgFileName'),7))
                                     <option value="images/{{$image->Path}}" selected>{{$image->Path}}</option>
                                 @else
                                     <option value="images/{{$image->Path}}">{{$image->Path}}</option>

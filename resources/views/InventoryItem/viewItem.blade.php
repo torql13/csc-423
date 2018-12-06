@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Image File Name</label>
-                    <input type="text" class="form-control" value="{{ $item->ImageFileName }}" disabled>
+                    <input type="text" class="form-control" value="{{ substr($item->ImageFileName,7) }}" disabled>
                 </div>
             </div>
 
