@@ -97,6 +97,19 @@
           </div>
         </div>
       </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Reports</h2>
+              <li><a href="/report/topTenReturned">Top Ten Items Returned Within Timeframe</a></li>
+            </ul>
+            </p>
+          </div>
+          <div class="card-footer">
+            <a href="/customer/" class="btn btn-primary">Manage Customers</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 @stop
