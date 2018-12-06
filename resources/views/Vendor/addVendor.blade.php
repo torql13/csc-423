@@ -16,6 +16,12 @@
                             @endforeach
                         </ul>
                     </div>
+                @elseif(session('confirmError'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ session('confirmError') }}</li>
+                        </ul>
+                    </div>
                 @endif
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -121,7 +127,7 @@
 
                     <div class="form-group col-md-4">
                         <label>Confirm Password</label>
-                        <input type="password" class="form-control" name="password" id="password" />
+                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" />
                     </div>
                 </div>
 

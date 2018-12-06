@@ -125,11 +125,14 @@ class VendorsController extends Controller
 
     public function insertNewVendor(StoreVendor $request)
     {
-        if($newVendor['password'] != $newVendor['confirmPassword'])
-            return redirect("vendor/addVendor/")
-             ->with('error', 'New and Confirmed passwords do not match.');
 
         $newVendor = $request->validated();
+        
+        $confirm = $request->input('confirmPassword');
+
+        if($newVendor['password'] != $confirm)
+            return redirect("vendor/addVendor/")
+             ->with('confirmError', 'New and Confirmed passwords do not match.');
 
         $hashedPass = $this->hashPassword($newVendor['password']);
 
