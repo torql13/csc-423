@@ -48,7 +48,8 @@ class ReportsController extends Controller
         $inventoryItems = Inventory::where('StoreId', $id)->get();
         $store = StoreLocation::where('StoreId', $id)->first();
         $items = InventoryItem::get();
-        $orders = Order::where('StoreId', $id)->get();
+        $orders = Order::where('StoreId', $id)->where('Status', 'Delivered')->where('DateTimeOfFulfillment', '>=', $startDate)
+                        ->where('DateTimeOfFulfillment', '<=', $endDate)->get();
         $orderDetails = OrderDetail::get();
 
         return view('Reports.itemsDeliveredInTimeFrame', compact('id', 'startDate', 'endDate', 'inventoryItems', 'orders', 'orderDetails', 'items', 'store'));
